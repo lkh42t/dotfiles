@@ -1,0 +1,35 @@
+#
+# ~/.zshrc
+#
+
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US
+
+bindkey -e
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+
+setopt autocd
+setopt auto_pushd
+setopt pushd_ignore_dups
+
+autoload -Uz compinit
+compinit
+
+highlight_src=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f "$highlight_src" ]] && . "$highlight_src"
+unset highlight_src
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[globbing]='none'
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+[[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
+
+[[ -f ~/.zsh_keys ]] && . ~/.zsh_keys
+
+[[ -f ~/.zsh_prompt ]] && . ~/.zsh_prompt
