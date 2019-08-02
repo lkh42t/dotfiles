@@ -6,6 +6,7 @@ filetype plugin indent on
 syntax enable
 
 set termguicolors
+colorscheme codedark
 
 set encoding=utf-8
 set fileencoding=utf-8
