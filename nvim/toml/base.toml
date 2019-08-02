@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+source ~/.config/nvim/plugins/nerdtree.rc.vim
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+hook_add = '''
+source ~/.config/nvim/plugins/nerdcommenter.rc.vim
+'''

@@ -1,3 +1,5 @@
+all: zsh nvim
+
 zsh:
 	ln -sf "$(abspath zsh/zshrc)" "$(HOME)/.zshrc"
 	ln -sf "$(abspath zsh/zsh_aliases)" "$(HOME)/.zsh_aliases"
@@ -7,4 +9,4 @@ zsh:
 nvim:
 	ln -sf "$(abspath nvim)" "$(HOME)/.config"
 
-.PHONY: zsh nvim
+.PHONY: all zsh nvim
