@@ -29,7 +29,6 @@ ZSH_HIGHLIGHT_STYLES[globbing]='none'
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
-
 [[ -f ~/.zsh_keys ]] && . ~/.zsh_keys
-
 [[ -f ~/.zsh_prompt ]] && . ~/.zsh_prompt
+[[ -d ~/.local/bin ]] && path=(~/.local/bin $path)
