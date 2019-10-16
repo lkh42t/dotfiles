@@ -22,3 +22,18 @@ source ~/.config/nvim/plugins/nerdcommenter.rc.vim
 [[plugins]]
 repo = 'cohama/lexima.vim'
 on_i = 1
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+source ~/.config/nvim/plugins/deoplete.rc.vim
+'''
+on_i = 1
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = './install.sh'
+hook_add = '''
+source ~/.config/nvim/plugins/LanguageClient-neovim.rc.vim
+'''
