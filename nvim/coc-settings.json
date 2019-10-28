@@ -1,0 +1,51 @@
+{
+  "languageserver": {
+    "clangd": {
+      "command": "clangd",
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        "compile_flags.txt",
+        "compile_commands.json",
+        ".git/"
+      ]
+    },
+    "latex": {
+      "command": "texlab",
+      "ignoredRootPaths": [
+        "~"
+      ],
+      "filetypes": [
+        "tex",
+        "bib",
+        "plaintex",
+        "context"
+      ]
+    },
+    "python": {
+      "command": "pyls",
+      "args": [
+        "-vv",
+        "--log-file",
+        "/tmp/lsp_python.log"
+      ],
+      "trace.server": "verbose",
+      "filetypes": [
+        "python"
+      ]
+    },
+    "rust": {
+      "command": "/usr/bin/rls",
+      "filetypes": [
+        "rust"
+      ],
+      "rootPatterns": [
+        "Cargo.toml"
+      ]
+    }
+  }
+}

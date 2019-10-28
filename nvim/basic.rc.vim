@@ -53,4 +53,5 @@ augroup FileTypeIndent
     autocmd FileType html setlocal tabstop=2
     autocmd FileType css setlocal tabstop=2
     autocmd FileType javascript setlocal tabstop=2
+    autocmd FileType json setlocal tabstop=2
 augroup END
