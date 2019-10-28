@@ -8,5 +8,7 @@ zsh:
 
 nvim:
 	ln -sf "$(abspath nvim)" "$(HOME)/.config"
+	curl -fL "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
+		-o "$(HOME)/.local/share/nvim/site/autoload/plug.vim" --create-dirs
 
 .PHONY: all zsh nvim
