@@ -1,3 +1,6 @@
+XDG_CONFIG_HOME ?= $(HOME)/.config
+XDG_DATA_HOME ?= $(HOME)/.local/share
+
 all: zsh nvim
 
 zsh:
@@ -7,8 +10,8 @@ zsh:
 	ln -sf "$(abspath zsh/zsh_prompt)"  "$(HOME)/.zsh_prompt"
 
 nvim:
-	ln -sf "$(abspath nvim)" "$(HOME)/.config"
+	ln -sf "$(abspath nvim)" "$(XDG_CONFIG_HOME)"
 	curl -fL "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
-		-o "$(HOME)/.local/share/nvim/site/autoload/plug.vim" --create-dirs
+		-o "$(XDG_DATA_HOME)/share/nvim/site/autoload/plug.vim" --create-dirs
 
 .PHONY: all zsh nvim
