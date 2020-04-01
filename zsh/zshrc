@@ -10,7 +10,10 @@ bindkey -e
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-HISTORY_IGNORE="(cd|la|ll|ls|lla|popd|man) *"
+HISTORY_IGNORE="((la|ll|ls|lla|popd)|(cd|la|ll|ls|lla|man|scp|ssh|sudo|rm) *)"
+zshaddhistory() {
+    whence ${${(z)1}[1]} >| /dev/null || return 1
+}
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
