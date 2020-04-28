@@ -27,6 +27,7 @@ setopt pushd_ignore_dups
 fpath=(~/.zfunc $fpath)
 autoload -Uz compinit
 compinit
+eval "$(pip completion --zsh)"
 
 autoload -Uz select-word-style
 select-word-style bash
