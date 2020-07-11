@@ -54,4 +54,7 @@ augroup FileTypeIndent
     autocmd FileType css setlocal tabstop=2
     autocmd FileType javascript setlocal tabstop=2
     autocmd FileType json setlocal tabstop=2
+    autocmd FileType sh setlocal tabstop=8 noexpandtab
 augroup END
+
+let g:tex_flavor = 'latex'
