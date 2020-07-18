@@ -5,6 +5,8 @@ call plug#begin('~/.cache/nvim-plugins')
 Plug 'tomasiser/vim-code-dark'
 Plug 'itchyny/lightline.vim'
 
+Plug 'cespare/vim-toml'
+
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'scrooloose/nerdtree'
