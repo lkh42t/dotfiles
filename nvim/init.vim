@@ -62,9 +62,9 @@ set list
 set listchars=tab:→\ ,space:･,
 
 " spacing
-set expandtab    " use spaces instead of tabs
-set shiftwidth=0 " use value of tabstop instead
-set tabstop=2    " use 2 spaces for indentation
+set expandtab     " use spaces instead of tabs
+set shiftwidth=2  " indent width is 2
+set softtabstop=2 " 2-space when <Tab> is pressed
 
 " search
 set hlsearch
@@ -82,10 +82,10 @@ autocmd BufWritePre * :%s/\s\+$//ge
 augroup FileTypeIndent
   autocmd!
   " indent with 4-space
-  autocmd FileType python setlocal ts=4
+  autocmd FileType python setlocal sts=4 sw=4
   " indent with tab
-  autocmd FileType sh setlocal ts=8 noet
-  autocmd FileType make setlocal ts=8 noet
+  autocmd FileType sh setlocal sts& sw& noet
+  autocmd FileType make setlocal sts& sw& noet
 augroup END
 
 " color scheme
