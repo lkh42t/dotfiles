@@ -110,4 +110,5 @@ nnoremap <M-k>     <C-w>k
 nnoremap <M-Up>    <C-w>k
 nnoremap <M-l>     <C-w>l
 nnoremap <M-Right> <C-w>l
+tnoremap <Esc> <C-\><C-n>
 " }}}
