@@ -2,9 +2,15 @@
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
     },
     "clangd": {
       "command": "clangd",
@@ -19,6 +25,16 @@
         "compile_commands.json",
         ".git/"
       ]
+    },
+    "golang": {
+      "command": "gopls",
+      "filetypes": [
+        "go"
+      ],
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "disableWorkspaceFolders": true
     },
     "latex": {
       "command": "texlab",

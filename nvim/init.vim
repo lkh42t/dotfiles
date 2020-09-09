@@ -6,7 +6,7 @@ let mapleader = "\<space>"
 call plug#begin('~/.cache/nvim-plugins')
 
 " editor schemes
-Plug 'tomasiser/vim-code-dark'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 
 " languages support
@@ -26,6 +26,7 @@ call plug#end()
 
 " load setting per plugin
 source <sfile>:h/plugins/coc.rc.vim
+source <sfile>:h/plugins/lightline.rc.vim
 source <sfile>:h/plugins/lexima.rc.vim
 source <sfile>:h/plugins/nerdtree.rc.vim
 source <sfile>:h/plugins/nerdcommenter.rc.vim
@@ -59,7 +60,7 @@ set splitright
 set foldmethod=marker
 
 set list
-set listchars=tab:→\ ,space:･,
+set listchars=tab:→\ ,space:·,
 
 " spacing
 set expandtab     " use spaces instead of tabs
@@ -84,13 +85,14 @@ augroup FileTypeIndent
   " indent with 4-space
   autocmd FileType python setlocal sts=4 sw=4
   " indent with tab
+  autocmd FileType go setlocal sts& sw& noet
   autocmd FileType sh setlocal sts& sw& noet
   autocmd FileType make setlocal sts& sw& noet
 augroup END
 
 " color scheme
 set termguicolors " use 24-bit true color
-colorscheme codedark
+colorscheme onedark
 " }}}
 
 " {{{ Keymaps
