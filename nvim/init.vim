@@ -6,7 +6,7 @@ let mapleader = "\<space>"
 call plug#begin('~/.cache/nvim-plugins')
 
 " editor schemes
-Plug 'joshdick/onedark.vim'
+Plug 'kaicataldo/material.vim'
 Plug 'itchyny/lightline.vim'
 
 " languages support
@@ -92,7 +92,9 @@ augroup END
 
 " color scheme
 set termguicolors " use 24-bit true color
-colorscheme onedark
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'darker'
+colorscheme material
 " }}}
 
 " {{{ Keymaps
