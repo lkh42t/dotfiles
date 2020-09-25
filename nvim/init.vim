@@ -1,5 +1,4 @@
 " init.vim
-
 let mapleader = "\<space>"
 
 " {{{ Plugins
@@ -23,13 +22,6 @@ Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 call plug#end()
-
-" load setting per plugin
-source <sfile>:h/plugins/coc.rc.vim
-source <sfile>:h/plugins/lightline.rc.vim
-source <sfile>:h/plugins/lexima.rc.vim
-source <sfile>:h/plugins/nerdtree.rc.vim
-source <sfile>:h/plugins/nerdcommenter.rc.vim
 " }}}
 
 " {{{ Editor Settings
