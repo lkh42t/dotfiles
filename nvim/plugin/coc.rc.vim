@@ -3,10 +3,20 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1] =~ '\s'
 endfunction
 
+function! s:show_documentation()
+  if (index(['vim', 'help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+
+nnoremap <silent>K :call <SID>show_documentation()<CR>
 
 nmap <silent><F2> <Plug>(coc-rename)
 nmap <silent><leader>f <Plug>(coc-format)
