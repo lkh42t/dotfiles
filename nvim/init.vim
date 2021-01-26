@@ -5,18 +5,19 @@ let mapleader = "\<space>"
 call plug#begin('~/.cache/nvim-plugins')
 
 " editor schemes
-Plug 'kaicataldo/material.vim'
+Plug 'fneu/breezy'
 Plug 'itchyny/lightline.vim'
 
 " languages support
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'JuliaEditorSupport/julia-vim'
 
 " editor enhancement
 Plug 'editorconfig/editorconfig-vim'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/nerdcommenter'
 Plug 'cohama/lexima.vim'
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+" Plug 'mattn/emmet-vim', { 'for': 'html' }
 
 " language server
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -52,9 +53,11 @@ set splitright
 set foldmethod=marker
 
 set list
-set listchars=tab:→\ ,space:·,
+set listchars=tab:>\ ,space:·,
 
 " spacing
+set autoindent
+set smartindent
 set expandtab     " use spaces instead of tabs
 set shiftwidth=2  " indent width is 2
 set softtabstop=2 " 2-space when <Tab> is pressed
@@ -66,27 +69,19 @@ set ignorecase " case-insensitive search when all characters is small
 set smartcase  " case-sensitive when capitals are used
 set inccommand=split
 
+" disable netrw history
+let g:netrw_dirhistmax = 0
+
 " LaTeX
 let g:tex_flavor = 'latex'
 
 " trim trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//ge
 
-augroup FileTypeIndent
-  autocmd!
-  " indent with 4-space
-  autocmd FileType python setlocal sts=4 sw=4
-  " indent with tab
-  autocmd FileType go setlocal sts& sw& noet
-  autocmd FileType sh setlocal sts& sw& noet
-  autocmd FileType make setlocal sts& sw& noet
-augroup END
-
 " color scheme
 set termguicolors " use 24-bit true color
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'darker'
-colorscheme material
+set background=dark
+colorscheme breezy
 " }}}
 
 " {{{ Keymaps

@@ -18,8 +18,8 @@ inoremap <silent><expr> <Tab>
 
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 
-nmap <silent><F2> <Plug>(coc-rename)
-nmap <silent><leader>f <Plug>(coc-format)
+nmap <silent><leader>rn <Plug>(coc-rename)
+nmap <silent><leader>f  <Plug>(coc-format)
 nmap <silent><leader>gd <Plug>(coc-definition)
 nmap <silent><leader>gi <Plug>(coc-implementation)
 nmap <silent><leader>gr <Plug>(coc-references)
