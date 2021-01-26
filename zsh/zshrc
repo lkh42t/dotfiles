@@ -8,12 +8,12 @@ export LANGUAGE=en_US
 bindkey -e
 
 # {{{ command history
-HISTFILE=~/.histfile
+HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=50000
-HISTORY_IGNORE="((la|ll|ls|lla|popd)|(cd|la|ll|ls|lla|man|scp|ssh|sudo|rm) *)"
+HISTORY_IGNORE="((la|ll|ls|lla|popd)|(cd|la|ll|ls|lla|man|scp|sftp|ssh|sudo|rm) *)"
 zshaddhistory() {
-    whence ${${(z)1}[1]} >| /dev/null || return 1
+	whence ${${(z)1}[1]} >| /dev/null || return 1
 }
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -30,13 +30,6 @@ setopt no_beep
 
 autoload -Uz select-word-style && select-word-style bash
 
-# {{{ auto completion
-fpath+=~/.zfunc
-autoload -Uz compinit
-compinit
-hash pip 2>/dev/null && eval "$(pip completion --zsh)"
-# }}}
-
 # {{{ syntax highlight
 highlight_src=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -f $highlight_src ]] && . "$highlight_src"
@@ -51,6 +44,19 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 [[ -f ~/.zsh_keys ]] && . ~/.zsh_keys
 [[ -f ~/.zsh_prompt ]] && . ~/.zsh_prompt
 
+if [[ -d ~/.asdf ]]; then
+	. ~/.asdf/asdf.sh
+        fpath=(~/.asdf/completions $fpath)
+fi
+
 # settings for PATH
+[[ -d ~/development/flutter ]] && path=(~/development/flutter/bin $path)
 hash go 2>/dev/null && path=($(go env GOPATH)/bin $path)
 [[ -d ~/.local/bin ]] && path=(~/.local/bin $path)
+
+# {{{ auto completion
+fpath+=~/.zfunc
+autoload -Uz compinit
+compinit
+hash pip 2>/dev/null && eval "$(pip completion --zsh)"
+# }}}
