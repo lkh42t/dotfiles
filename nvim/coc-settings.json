@@ -26,6 +26,18 @@
         ".git/"
       ]
     },
+    "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": [
+        "cmake"
+      ],
+      "rootPatterns": [
+        "build/"
+      ],
+      "initializationOptions": {
+        "buildDirectory": "build"
+      }
+    },
     "golang": {
       "command": "gopls",
       "filetypes": [
@@ -61,7 +73,7 @@
       ]
     },
     "rust": {
-      "command": "/usr/bin/rls",
+      "command": "rls",
       "filetypes": [
         "rust"
       ],
