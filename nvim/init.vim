@@ -11,6 +11,7 @@ Plug 'itchyny/lightline.vim'
 " languages support
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'JuliaEditorSupport/julia-vim'
+Plug 'dart-lang/dart-vim-plugin'
 
 " editor enhancement
 Plug 'editorconfig/editorconfig-vim'
