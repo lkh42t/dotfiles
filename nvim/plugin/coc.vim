@@ -1,6 +1,6 @@
 function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~ '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~ '\s'
 endfunction
 
 function! s:show_documentation()
