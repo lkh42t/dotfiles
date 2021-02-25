@@ -39,20 +39,22 @@ ZSH_HIGHLIGHT_STYLES[globbing]='none'
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # }}}
 
-# load other files
+# {{{ load other files
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 [[ -f ~/.zsh_keys ]] && . ~/.zsh_keys
 [[ -f ~/.zsh_prompt ]] && . ~/.zsh_prompt
 
 if [[ -d ~/.asdf ]]; then
 	. ~/.asdf/asdf.sh
-        fpath=(~/.asdf/completions $fpath)
+	fpath=(~/.asdf/completions $fpath)
 fi
+# }}}
 
-# settings for PATH
+# {{{ PATH setting
 [[ -d ~/development/flutter ]] && path=(~/development/flutter/bin $path)
 hash go 2>/dev/null && path=($(go env GOPATH)/bin $path)
 [[ -d ~/.local/bin ]] && path=(~/.local/bin $path)
+# }}}
 
 # {{{ auto completion
 fpath+=~/.zfunc
