@@ -15,6 +15,8 @@ Plug 'dart-lang/dart-vim-plugin'
 
 " editor enhancement
 Plug 'editorconfig/editorconfig-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/nerdcommenter'
 Plug 'cohama/lexima.vim'
@@ -48,6 +50,7 @@ set cursorline
 set colorcolumn=80,100,120
 set laststatus=2
 set showcmd
+set noshowmode
 set scrolloff=3
 set showmatch
 set splitright
