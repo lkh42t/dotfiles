@@ -51,9 +51,25 @@ fi
 # }}}
 
 # {{{ PATH setting
-[[ -d ~/development/flutter ]] && path=(~/development/flutter/bin $path)
+[[ -d ~/.local/flutter ]] && path=(~/.local/flutter/default/bin $path)
 hash go 2>/dev/null && path=($(go env GOPATH)/bin $path)
 [[ -d ~/.local/bin ]] && path=(~/.local/bin $path)
+
+# flutter version switcher
+swflutter() {
+	if [[ $# -eq 0 ]]; then
+		echo missing version >&2
+		return 1
+	fi
+	local flutter_dir=~/.local/flutter
+	local new_ver="$1"
+	if [[ ! -d $flutter_dir/$new_ver ]]; then
+		echo unknown version >&2
+		return 1
+	fi
+	rm "$flutter_dir/default"
+	ln -sf "$new_ver" "$flutter_dir/default"
+}
 # }}}
 
 # {{{ auto completion
