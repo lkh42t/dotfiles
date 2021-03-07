@@ -2,7 +2,7 @@
 let mapleader = "\<space>"
 
 " {{{ Plugins
-call plug#begin('~/.cache/nvim-plugins')
+call plug#begin(stdpath('data') . '/plugged')
 
 " editor schemes
 Plug 'fneu/breezy'
