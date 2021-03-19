@@ -60,8 +60,6 @@ set list
 set listchars=tab:>\ ,space:·,
 
 " spacing
-set autoindent
-set smartindent
 set expandtab     " use spaces instead of tabs
 set shiftwidth=2  " indent width is 2
 set softtabstop=2 " 2-space when <Tab> is pressed
