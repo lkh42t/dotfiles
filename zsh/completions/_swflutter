@@ -1,0 +1,37 @@
+#compdef swflutter
+
+_swflutter() {
+	_sub_commands() {
+		local -a commands
+		commands=(
+			'get:show current version'
+			'list:show available versions'
+			'set:switch flutter to the specified version'
+			'help:show usage'
+		)
+		_describe -t commands 'commands' commands "$@"
+	}
+
+	_versions() {
+		local versions
+		versions=($(swflutter list))
+		_describe -t versions 'version' versions "$@"
+	}
+
+	_arguments -C \
+		'1: :_sub_commands' \
+		'*:: :->args'
+
+	case "$state" in
+	(args)
+		case $words[1] in
+		(set)
+			_arguments -C \
+				'1: :_versions'
+			;;
+		esac
+		;;
+	esac
+}
+
+_swflutter "$@"
