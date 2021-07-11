@@ -18,10 +18,10 @@ return require'packer'.startup(function()
   use 'editorconfig/editorconfig-vim'
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
-  use { 'preservim/nerdtree' }
   use 'preservim/nerdcommenter'
   use 'cohama/lexima.vim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'ctrlpvim/ctrlp.vim'
 
   -- language server
   use 'neovim/nvim-lspconfig'

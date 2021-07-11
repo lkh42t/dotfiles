@@ -1,4 +1,3 @@
-lua <<EOF
 require'compe'.setup {
   enabled = true,
   autocomplete = true,
@@ -19,6 +18,7 @@ require'compe'.setup {
     calc = true,
     nvim_lsp = true,
     nvim_lua = true,
+    treesitter = true,
   },
 }
 
@@ -63,12 +63,13 @@ vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.tab_complete()', {expr = true})
 vim.api.nvim_set_keymap('s', '<Tab>', 'v:lua.tab_complete()', {expr = true})
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'v:lua.s_tab_complete()', {expr = true})
 vim.api.nvim_set_keymap('s', '<S-Tab>', 'v:lua.s_tab_complete()', {expr = true})
-EOF
 
-let g:lexima_no_default_rules = v:true
-call lexima#set_default_rules()
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR> compe#confirm(lexima#expand('<LT>CR>', 'i'))
-inoremap <silent><expr> <C-e> compe#close('<C-e>')
-inoremap <silent><expr> <C-f> compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })
+-- settings for lexima
+vim.g.lexima_no_default_rules = true
+vim.fn['lexima#set_default_rules']()
+local opts = {expr = true, silent = true, noremap = true}
+vim.api.nvim_set_keymap('i', '<C-Space>', [[compe#complete()]], opts)
+vim.api.nvim_set_keymap('i', '<CR>', [[compe#confirm(lexima#expand('<LT>CR>', 'i'))]], opts)
+vim.api.nvim_set_keymap('i', '<C-e>', [[compe#close('<C-e>')]], opts)
+vim.api.nvim_set_keymap('i', '<C-f>', [[compe#scroll({ 'delta': +4 })]], opts)
+vim.api.nvim_set_keymap('i', '<C-d>', [[compe#scroll({ 'delta': -4 })]], opts)

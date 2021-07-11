@@ -1,4 +1,3 @@
-lua <<EOF
 local lspconfig = require'lspconfig'
 
 local on_attach = function(client, bufnr)
@@ -80,4 +79,3 @@ lspconfig.diagnosticls.setup {
     },
   },
 }
-EOF
