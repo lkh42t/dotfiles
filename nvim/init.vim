@@ -2,30 +2,32 @@
 let mapleader = "\<space>"
 
 " {{{ Plugins
-call plug#begin(stdpath('data') . '/plugged')
+lua <<EOF
+return require'packer'.startup(function()
+  use 'wbthomason/packer.nvim'
 
-" editor schemes
-Plug 'fneu/breezy'
-Plug 'itchyny/lightline.vim'
+  -- editor scheme
+  use 'fneu/breezy'
+  use 'itchyny/lightline.vim'
 
-" languages support
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'JuliaEditorSupport/julia-vim'
-Plug 'dart-lang/dart-vim-plugin'
+  -- language support
+  use 'JuliaEditorSupport/julia-vim'
+  use 'dart-lang/dart-vim-plugin'
 
-" editor enhancement
-Plug 'editorconfig/editorconfig-vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'preservim/nerdcommenter'
-Plug 'cohama/lexima.vim'
-" Plug 'mattn/emmet-vim', { 'for': 'html' }
+  -- editor enhancement
+  use 'editorconfig/editorconfig-vim'
+  use 'airblade/vim-gitgutter'
+  use 'tpope/vim-fugitive'
+  use { 'preservim/nerdtree' }
+  use 'preservim/nerdcommenter'
+  use 'cohama/lexima.vim'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
-" language server
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
-call plug#end()
+  -- language server
+  use 'neovim/nvim-lspconfig'
+  use { 'hrsh7th/nvim-compe', requires = {'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'} }
+end)
+EOF
 " }}}
 
 " {{{ Editor Settings
@@ -58,6 +60,9 @@ set foldmethod=marker
 
 set list
 set listchars=tab:>\ ,space:·,
+
+set shortmess+=c
+set completeopt=menuone,noselect
 
 " spacing
 set expandtab     " use spaces instead of tabs
@@ -92,8 +97,6 @@ nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
-nnoremap <leader>h ^
-nnoremap <leader>l $
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 nnoremap <M-h>     <C-w>h
 nnoremap <M-Left>  <C-w>h

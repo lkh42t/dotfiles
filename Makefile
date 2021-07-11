@@ -12,8 +12,9 @@ zsh:
 		"$(HOME)/.zsh"
 
 nvim:
+	mkdir -p "$(XDG_CONFIG_HOME)"
 	ln -sf "$(abspath nvim)" "$(XDG_CONFIG_HOME)"
-	curl -fL "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
-		-o "$(XDG_DATA_HOME)/nvim/site/autoload/plug.vim" --create-dirs
+	git clone https://github.com/wbthomason/packer.nvim \
+		"$(XDG_DATA_HOME)/nvim/site/pack/packer/start/packer.nvim"
 
 .PHONY: all zsh nvim
