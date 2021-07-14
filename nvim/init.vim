@@ -1,34 +1,8 @@
 " init.vim
 let mapleader = "\<space>"
 
-" {{{ Plugins
-lua <<EOF
-return require'packer'.startup(function()
-  use 'wbthomason/packer.nvim'
-
-  -- editor scheme
-  use 'fneu/breezy'
-  use 'itchyny/lightline.vim'
-
-  -- language support
-  use 'JuliaEditorSupport/julia-vim'
-  use 'dart-lang/dart-vim-plugin'
-
-  -- editor enhancement
-  use 'editorconfig/editorconfig-vim'
-  use 'airblade/vim-gitgutter'
-  use 'tpope/vim-fugitive'
-  use 'preservim/nerdcommenter'
-  use 'cohama/lexima.vim'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'ctrlpvim/ctrlp.vim'
-
-  -- language server
-  use 'neovim/nvim-lspconfig'
-  use { 'hrsh7th/nvim-compe', requires = {'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'} }
-end)
-EOF
-" }}}
+" plugins
+lua require'plugins'
 
 " {{{ Editor Settings
 filetype plugin indent on
@@ -38,7 +12,7 @@ set noswapfile
 set nobackup
 
 " utf-8 as default
-set encoding=utf-8
+" set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,cp932,default
 " use `<LF>` for line ending
@@ -47,10 +21,10 @@ set fileformat=unix
 " general
 set number
 set hidden
-set autoread
+" set autoread
 set cursorline
 set colorcolumn=80,100,120
-set laststatus=2
+" set laststatus=2
 set showcmd
 set noshowmode
 set scrolloff=3
@@ -70,8 +44,8 @@ set shiftwidth=2  " indent width is 2
 set softtabstop=2 " 2-space when <Tab> is pressed
 
 " search
-set hlsearch
-set incsearch  " enable incremental search
+" set hlsearch
+" set incsearch
 set ignorecase " case-insensitive search when all characters is small
 set smartcase  " case-sensitive when capitals are used
 set inccommand=split
@@ -87,7 +61,7 @@ autocmd BufWritePre * :%s/\s\+$//ge
 
 " color scheme
 set termguicolors " use 24-bit true color
-set background=dark
+" set background=dark
 colorscheme breezy
 " }}}
 
