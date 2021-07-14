@@ -31,6 +31,7 @@ set scrolloff=3
 set showmatch
 set splitright
 set foldmethod=marker
+set updatetime=100
 
 set list
 set listchars=tab:>\ ,space:·,
