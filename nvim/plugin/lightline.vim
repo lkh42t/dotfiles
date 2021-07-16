@@ -1,3 +1,3 @@
 let g:lightline = {
-  \ 'colorscheme': 'breezy',
-  \ }
+      \ 'colorscheme': 'breezy',
+      \ }

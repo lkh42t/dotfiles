@@ -1,5 +1,10 @@
-" init.vim
-let mapleader = "\<space>"
+let g:mapleader = "\<space>"
+
+" disable some built-in plugins
+let s:disabled_builtins = ['gzip', 'netrw', 'netrwPlugin', 'tarPlugin', 'zipPlugin']
+for s:el in s:disabled_builtins
+  exe 'let g:loaded_' . s:el . '=1'
+endfo
 
 " plugins
 lua require'plugins'
@@ -32,6 +37,7 @@ set showmatch
 set splitright
 set foldmethod=marker
 set updatetime=100
+set clipboard=unnamedplus
 
 " invisible characters
 set list
@@ -53,9 +59,6 @@ set ignorecase " case-insensitive search when all characters is small
 set smartcase  " case-sensitive when capitals are used
 set inccommand=split
 
-" disable netrw history
-let g:netrw_dirhistmax = 0
-
 " LaTeX
 let g:tex_flavor = 'latex'
 
@@ -69,12 +72,15 @@ colorscheme breezy
 " }}}
 
 " {{{ Keymaps
+" more logical
 nnoremap Y y$
 nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
+
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
+
 nnoremap <M-h>     <C-w>h
 nnoremap <M-Left>  <C-w>h
 nnoremap <M-j>     <C-w>j
@@ -83,5 +89,6 @@ nnoremap <M-k>     <C-w>k
 nnoremap <M-Up>    <C-w>k
 nnoremap <M-l>     <C-w>l
 nnoremap <M-Right> <C-w>l
+
 tnoremap <Esc> <C-\><C-n>
 " }}}
