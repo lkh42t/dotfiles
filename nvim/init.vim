@@ -12,7 +12,7 @@ set noswapfile
 set nobackup
 
 " utf-8 as default
-" set encoding=utf-8
+set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,cp932,default
 " use `<LF>` for line ending
@@ -21,10 +21,10 @@ set fileformat=unix
 " general
 set number
 set hidden
-" set autoread
+set autoread
 set cursorline
 set colorcolumn=80,100,120
-" set laststatus=2
+set laststatus=2
 set showcmd
 set noshowmode
 set scrolloff=3
@@ -33,9 +33,11 @@ set splitright
 set foldmethod=marker
 set updatetime=100
 
+" invisible characters
 set list
-set listchars=tab:>\ ,space:·,
+set listchars=tab:>\ ,space:·
 
+" completion
 set shortmess+=c
 set completeopt=menuone,noselect
 
@@ -45,8 +47,8 @@ set shiftwidth=2  " indent width is 2
 set softtabstop=2 " 2-space when <Tab> is pressed
 
 " search
-" set hlsearch
-" set incsearch
+set hlsearch
+set incsearch
 set ignorecase " case-insensitive search when all characters is small
 set smartcase  " case-sensitive when capitals are used
 set inccommand=split
