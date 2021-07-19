@@ -1,11 +1,8 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
-if fn.empty(fn.glob(install_path)) then
-  fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
-  execute("packadd packer.nvim")
+if vim.fn.empty(vim.fn.glob(install_path)) then
+  vim.fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
+  vim.cmd([[packadd packer.nvim]])
 end
 
 require("packer").startup(function(use)
@@ -23,7 +20,8 @@ require("packer").startup(function(use)
   use("editorconfig/editorconfig-vim")
   use("airblade/vim-gitgutter")
   use("tpope/vim-fugitive")
-  use("preservim/nerdcommenter")
+  use("tpope/vim-surround")
+  use("tpope/vim-commentary")
   use("cohama/lexima.vim")
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("ctrlpvim/ctrlp.vim")
@@ -35,7 +33,7 @@ require("packer").startup(function(use)
   use("hrsh7th/vim-vsnip-integ")
 end)
 
-if fn.empty(fn.glob(fn.stdpath("config") .. "/plugin/packer_compiled.lua")) then
+if vim.fn.empty(vim.fn.glob(vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua")) then
   vim.cmd([[PackerCompile]])
 end
 

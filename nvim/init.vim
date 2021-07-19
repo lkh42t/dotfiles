@@ -30,11 +30,13 @@ set autoread
 set cursorline
 set colorcolumn=80,100,120
 set laststatus=2
+set showtabline=2
 set showcmd
 set noshowmode
 set scrolloff=3
 set showmatch
 set splitright
+set splitbelow
 set foldmethod=marker
 set updatetime=100
 set clipboard=unnamedplus
@@ -79,7 +81,7 @@ vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 
-nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> <Cmd>nohlsearch<CR>
 
 nnoremap <M-h>     <C-w>h
 nnoremap <M-Left>  <C-w>h

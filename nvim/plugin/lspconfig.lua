@@ -10,9 +10,10 @@ local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
 
   buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  buf_set_keymap("n", "<leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  buf_set_keymap("n", "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  buf_set_keymap("n", "<leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  buf_set_keymap("n", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  buf_set_keymap("n", "<Leader>gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  buf_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -29,8 +30,8 @@ local servers = {
   "dartls",
   "gopls",
   "jedi_language_server",
-  "texlab",
   "rust_analyzer",
+  "texlab",
 }
 for _, server in ipairs(servers) do
   lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities })
@@ -67,11 +68,11 @@ lspconfig.diagnosticls.setup({
     formatters = {
       black = {
         command = "black",
-        args = { "--quiet", "-" },
+        args = { "-q", "-" },
       },
       isort = {
         command = "isort",
-        args = { "--quiet", "-" },
+        args = { "-q", "-" },
       },
       shfmt = {
         command = "shfmt",
@@ -97,6 +98,8 @@ if vim.fn.has("mac") > 0 then
   system_name = "macOS"
 elseif vim.fn.has("unix") > 0 then
   system_name = "Linux"
+else
+  system_name = "Windows"
 end
 
 local sumneko_root = vim.fn.stdpath("cache") .. "/lspconfig/sumneko_lua/lua-language-server"
