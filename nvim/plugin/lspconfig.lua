@@ -93,17 +93,24 @@ lspconfig.diagnosticls.setup({
 -- }}}
 
 -- {{{ Lua language server
-local system_name
-if vim.fn.has("mac") > 0 then
-  system_name = "macOS"
-elseif vim.fn.has("unix") > 0 then
-  system_name = "Linux"
+local cmd
+if vim.fn.executable("lua-language-server") > 0 then
+  cmd = { "lua-language-server" }
 else
-  system_name = "Windows"
-end
+  local system_name
+  if vim.fn.has("mac") > 0 then
+    system_name = "macOS"
+  elseif vim.fn.has("unix") > 0 then
+    system_name = "Linux"
+  else
+    system_name = "Windows"
+  end
 
-local sumneko_root = vim.fn.stdpath("cache") .. "/lspconfig/sumneko_lua/lua-language-server"
-local sumneko_bin = sumneko_root .. "/bin/" .. system_name .. "/lua-language-server"
+  local sumneko_root = vim.fn.stdpath("cache") .. "/lspconfig/sumneko_lua/lua-language-server"
+  local sumneko_bin = sumneko_root .. "/bin/" .. system_name .. "/lua-language-server"
+
+  cmd = { sumneko_bin, "-E", sumneko_root .. "/main.lua" }
+end
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
@@ -112,7 +119,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 lspconfig.sumneko_lua.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { sumneko_bin, "-E", sumneko_root .. "/main.lua" },
+  cmd = cmd,
   settings = {
     Lua = {
       runtime = { version = "LuaJIT", path = runtime_path },
