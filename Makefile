@@ -1,7 +1,11 @@
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_DATA_HOME ?= $(HOME)/.local/share
 
-all: nvim zsh
+all: fontconfig nvim zsh
+
+fontconfig:
+	mkdir -p "$(XDG_CONFIG_HOME)"
+	ln -sf "$(abspath fontconfig)" "$(XDG_CONFIG_HOME)"
 
 nvim:
 	mkdir -p "$(XDG_CONFIG_HOME)"
@@ -17,4 +21,4 @@ zsh:
 		"$(abspath zsh/completions)" \
 		"$(HOME)/.zsh"
 
-.PHONY: all nvim zsh
+.PHONY: all fontconfig nvim zsh
