@@ -1,5 +1,5 @@
 # dotfiles
 Settings for
 
-- Zsh
 - Neovim
+- Zsh
