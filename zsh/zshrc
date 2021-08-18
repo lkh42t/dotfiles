@@ -111,10 +111,20 @@ __prepend_path_with_check ~/.local/bin
 # }}}
 
 # {{{ auto completion
-fpath=(~/.zfunc ~/.zsh/completions $fpath)
+fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
-# force evaluate completion of pip
-hash pip 2>/dev/null && eval "$(pip completion --zsh)"
+
+# completion of pip
+function _pip_completion {
+	local words cword
+	read -Ac words
+	read -cn cword
+	reply=($(COMP_WORDS="$words[*]" \
+		COMP_CWORD=$((cword - 1)) \
+		PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null))
+}
+hash pip 2>/dev/null && compctl -K _pip_completion pip
+hash pip3 2>/dev/null && compctl -K _pip_completion pip3
 # }}}
 
 # {{{ key setting
