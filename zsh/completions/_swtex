@@ -23,9 +23,9 @@ _swtex() {
 		'*:: :->args'
 
 	case "$state" in
-	(args)
+	args)
 		case $words[1] in
-		(set)
+		set)
 			_arguments -C \
 				'1: :_versions'
 			;;

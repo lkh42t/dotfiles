@@ -19,19 +19,19 @@ __swtex_usage() {
 swtex() {
 	local cmd="$1"
 	case $cmd in
-	(get)
+	get)
 		__switcher_base_get_version "$(__swtex_get_dir)"
 		;;
-	(help)
+	help)
 		__swtex_usage
 		;;
-	(list)
+	list)
 		__swtex_list_versions
 		;;
-	(set)
+	set)
 		__switcher_base_set_version "$(__swtex_get_dir)" "$2"
 		;;
-	(*)
+	*)
 		echo unknown command: \'$cmd\' >&2
 		__swtex_usage
 		return 1
