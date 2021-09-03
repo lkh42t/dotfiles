@@ -43,4 +43,9 @@ if vim.fn.empty(vim.fn.glob(vim.fn.stdpath("config") .. "/plugin/packer_compiled
   vim.cmd([[PackerCompile]])
 end
 
-vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
