@@ -28,15 +28,19 @@ require("packer").startup(function(use)
 
   -- language server and completion
   use("neovim/nvim-lspconfig")
-  use("hrsh7th/nvim-cmp")
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-calc")
-  use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-nvim-lua")
-  use("hrsh7th/cmp-path")
-  use("hrsh7th/cmp-vsnip")
-  use("hrsh7th/vim-vsnip")
-  use("hrsh7th/vim-vsnip-integ")
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-calc",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/vim-vsnip-integ",
+    },
+  })
 end)
 
 if vim.fn.empty(vim.fn.glob(vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua")) then
