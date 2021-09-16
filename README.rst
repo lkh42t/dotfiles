@@ -1,4 +1,7 @@
-# dotfiles
+========
+dotfiles
+========
+
 Settings for
 
 - Fontconfig
