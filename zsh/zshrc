@@ -183,3 +183,7 @@ bindkey "^U" backward-kill-line
 	done
 }
 # }}}
+
+unset -f __source
+unset -f __prepend_path
+unset -f __prepend_path_with_check
