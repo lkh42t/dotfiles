@@ -17,7 +17,7 @@ __prepend_path_with_check() {
 }
 # }}}
 
-# {{{ command history
+# {{{ command history settings
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=50000
@@ -34,7 +34,7 @@ setopt hist_save_no_dups
 setopt share_history
 # }}}
 
-# {{{ miscellaneous
+# {{{ general zsh settings
 setopt autocd
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -43,7 +43,9 @@ setopt no_beep
 
 setopt correct
 
-autoload -Uz select-word-style && select-word-style bash
+# make '/' as word seperator
+autoload -Uz select-word-style
+select-word-style bash
 # }}}
 
 # {{{ aliases
@@ -57,7 +59,11 @@ alias diff='diff --color=auto'
 
 alias mkdir='mkdir -p'
 
-export LESS=-R
+alias v='nvim'
+# }}}
+
+# {{{ environment variables
+export LESS=-RF
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
@@ -66,8 +72,6 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESSHISTFILE=-
-
-alias v='nvim'
 # }}}
 
 # {{{ syntax highlight
@@ -104,15 +108,22 @@ fi
 # }}}
 
 # {{{ PATH setting
+# flutter
 [[ -d ~/.local/flutter ]] && __prepend_path ~/.local/flutter/default/bin
+
+# texlive
 [[ -d ~/.local/texlive ]] && __prepend_path ~/.local/texlive/default/bin/x86_64-linux
+
+# golang
 hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
+
 __prepend_path_with_check ~/.local/bin
 # }}}
 
 # {{{ auto completion
 fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+compinit
 
 # completion of pip
 function _pip_completion {
@@ -127,7 +138,7 @@ hash pip 2>/dev/null && compctl -K _pip_completion pip
 hash pip3 2>/dev/null && compctl -K _pip_completion pip3
 # }}}
 
-# {{{ key setting
+# {{{ key settings
 () {
 	local -A key
 	key[Home]=${terminfo[khome]}
@@ -184,6 +195,8 @@ bindkey "^U" backward-kill-line
 }
 # }}}
 
+# {{{ unset utility functions
 unset -f __source
 unset -f __prepend_path
 unset -f __prepend_path_with_check
+# }}}
