@@ -7,7 +7,10 @@ bindkey -e
 
 # {{{ utility functions
 __source() {
-	[[ -f $1 ]] && . "$1"
+	while [[ -n $1 ]]; do
+		[[ -f $1 ]] && . "$1"
+		shift
+	done
 }
 __prepend_path() {
 	path=($1 $path)
@@ -17,11 +20,14 @@ __prepend_path_with_check() {
 }
 # }}}
 
+# load platform specific variables
+__source ~/.zsh/platforms/"${$(uname):l}".zsh
+
 # {{{ command history settings
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=50000
-HISTORY_IGNORE="((la|ll|ls|lla|popd)|(cd|la|ll|ls|lla|man|scp|sftp|ssh|sudo|rm) *)"
+HISTORY_IGNORE="((l[als]|lla|popd)|(cd|l[als]|lla|man|scp|sftp|ssh|sudo|rm) *)"
 zshaddhistory() {
 	whence ${${(z)1}[1]} >| /dev/null || return 1
 }
@@ -49,17 +55,17 @@ select-word-style bash
 # }}}
 
 # {{{ aliases
-alias ls='ls -h --color=auto'
+[[ -n $LS_COLOR_OPT ]] && alias ls="ls -h $LS_COLOR_OPT" || alias ls='ls -h'
 alias la='ls -A'
 alias ll='ls -l'
 alias lla='ls -lA'
 
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
+[[ -n $GREP_COLOR_OPT ]] && alias grep="grep $GREP_COLOR_OPT"
+[[ -n $DIFF_COLOR_OPT ]] && alias diff="diff $DIFF_COLOR_OPT"
 
 alias mkdir='mkdir -p'
 
-alias v='nvim'
+hash nvim 2>/dev/null && alias v='nvim'
 # }}}
 
 # {{{ environment variables
@@ -75,13 +81,12 @@ export LESSHISTFILE=-
 # }}}
 
 # {{{ syntax highlight
-() {
-	local highlight_src=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-	__source "$highlight_src"
+if [[ -n $SYNTAX_HIGHLIGHT_SRC ]]; then
+	__source "$SYNTAX_HIGHLIGHT_SRC"
 	typeset -A ZSH_HIGHLIGHT_STYLES
 	ZSH_HIGHLIGHT_STYLES[globbing]='none'
 	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-}
+fi
 # }}}
 
 # {{{ prompt
@@ -89,15 +94,14 @@ autoload -Uz colors
 colors
 
 setopt prompt_subst
-() {
-	PROMPT=$'\n''[%{$fg_bold[magenta]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%c%{$reset_color%}]'
 
-	local git_ps1_src=/usr/share/git/completion/git-prompt.sh
-	__source "$git_ps1_src" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
+PROMPT=$'\n''[%{$fg_bold[magenta]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%c%{$reset_color%}]'
+if [[ -n $GIT_PS1_SRC ]]; then
+	__source "$GIT_PS1_SRC" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
 	GIT_PS1_SHOWDIRTYSTATE=1
 	GIT_PS1_SHOWUNTRACKEDFILES=1
-	PROMPT="$PROMPT"$'\n''%# '
-}
+fi
+PROMPT="$PROMPT"$'\n''%# '
 # }}}
 
 # {{{ setup asdf
@@ -126,6 +130,7 @@ autoload -Uz compinit
 compinit
 
 # completion of pip
+# $ pip completions --zsh
 function _pip_completion {
 	local words cword
 	read -Ac words
@@ -188,15 +193,12 @@ bindkey "^U" backward-kill-line
 # }}}
 
 # {{{ load functions
-() {
-	for f in ~/.zsh/functions/*.zsh; do
-		__source "$f"
-	done
-}
+__source ~/.zsh/functions/*.zsh
 # }}}
 
 # {{{ unset utility functions
 unset -f __source
 unset -f __prepend_path
 unset -f __prepend_path_with_check
+unload_variables
 # }}}

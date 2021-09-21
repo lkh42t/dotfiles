@@ -19,6 +19,7 @@ zsh:
 	ln -sf \
 		"$(abspath zsh/functions)" \
 		"$(abspath zsh/completions)" \
+		"$(abspath zsh/platforms)" \
 		"$(HOME)/.zsh"
 
 .PHONY: all fontconfig nvim zsh
