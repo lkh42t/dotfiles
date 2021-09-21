@@ -60,11 +60,28 @@ local servers = {
             [[(\d+),(\d+),([A-Z]),(.*)(\r|\n)*$]],
             { line = 1, column = 2, security = 3, message = 4 },
           },
-          security = { W = "warning", E = "error", F = "error", C = "error", N = "error" },
+          securities = { W = "warning", E = "error", F = "error", C = "error", N = "error" },
+        },
+        shellcheck = {
+          command = "shellcheck",
+          debounce = 100,
+          args = { "-f", "json", "-s", "bash", "-" },
+          sourceName = "shellcheck",
+          parseJson = {
+            line = "line",
+            command = "command",
+            endLine = "endLine",
+            endColumn = "endColumn",
+            message = "${message} [${code}]",
+            security = "level",
+          },
+          securities = { error = "error", warning = "warning", info = "info", style = "hint" },
         },
       },
       filetypes = {
         python = "flake8",
+        sh = "shellcheck",
+        zsh = "shellcheck",
       },
       -- https://github.com/iamcco/diagnostic-languageserver/wiki/Formatters
       formatters = {
