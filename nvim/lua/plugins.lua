@@ -47,8 +47,8 @@ if vim.fn.empty(vim.fn.glob(vim.fn.stdpath("config") .. "/plugin/packer_compiled
 end
 
 vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
+  aug packer_user_config
+    au!
+    au BufWritePost plugins.lua source <afile> | PackerCompile
+  aug end
 ]])
