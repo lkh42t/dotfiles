@@ -1,22 +1,20 @@
 __switcher_base_get_version() {
-	local dir="$1"
+	local dir=$1
 	readlink "$dir/default"
 }
 
 __switcher_base_list_versions() {
-	local dir="$1"
-	local find_opts='-mindepth 1 -maxdepth 1 -type d'
-
+	local dir=$1
 	local -a versions
 	versions=($(find "$dir" -mindepth 1 -maxdepth 1 -type d | sed 's@^.*/@@'))
-	for ver in "$versions[@]"; do
-		echo $ver
+	for ver in "${versions[@]}"; do
+		echo "$ver"
 	done
 }
 
 __switcher_base_set_version() {
-	local dir="$1"
-	local newver="$2"
+	local dir=$1
+	local newver=$2
 	if [[ ! $newver ]]; then
 		echo missing version >&2
 		return 1
@@ -29,8 +27,8 @@ __switcher_base_set_version() {
 }
 
 __switcher_base_usage() {
-	local progname="$1"
-	local verbose_name="${2:-${progname#sw}}"
+	local progname=$1
+	local verbose_name=${2:-${progname#sw}}
 	cat <<EOF
 Usage: $progname COMMAND
 
