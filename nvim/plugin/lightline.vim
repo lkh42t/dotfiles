@@ -3,12 +3,13 @@ let g:lightline = {
       \ }
 
 let g:lightline.active = {
-      \ 'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'relativepath', 'modified']]
+      \ 'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']]
       \ }
 
 let g:lightline.component_function = {
       \ 'fileencoding': 'LightlineFileencoding',
       \ 'fileformat': 'LightlineFileformat',
+      \ 'filename': 'LightlineFilename',
       \ 'filetype': 'LightlineFiletype',
       \ 'gitbranch': 'FugitiveHead',
       \ }
@@ -37,6 +38,15 @@ endf
 
 fu! LightlineFileformat()
   retu s:is_window_narrow() ? '' : &ff
+endf
+
+fu! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root) - 1] ==# root
+    retu path[len(root) + 1:]
+  en
+  retu expand('%')
 endf
 
 fu! LightlineFiletype()
