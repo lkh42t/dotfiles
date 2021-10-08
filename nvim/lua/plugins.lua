@@ -1,7 +1,8 @@
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
+local packer_bootstrap
 if vim.fn.isdirectory(install_path) == 0 then
-  vim.fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
+  packer_bootstrap = vim.fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
   vim.cmd([[packadd packer.nvim]])
 end
 
@@ -40,11 +41,11 @@ require("packer").startup(function(use)
       "hrsh7th/vim-vsnip-integ",
     },
   })
-end)
 
-if vim.fn.empty(vim.fn.glob(vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua")) > 0 then
-  vim.cmd([[PackerCompile]])
-end
+  if packer_bootstrap then
+    require("packer").sync()
+  end
+end)
 
 vim.cmd([[
   aug packer_user_config
