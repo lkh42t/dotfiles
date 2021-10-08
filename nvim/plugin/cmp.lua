@@ -1,7 +1,3 @@
-local function t(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 local cmp = require("cmp")
 cmp.setup({
   sources = {
@@ -18,8 +14,6 @@ cmp.setup({
     end,
   },
   mapping = {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-e>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
@@ -28,8 +22,6 @@ cmp.setup({
     ["<Tab>"] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif vim.fn["vsnip#jumpable"]({ 1 }) > 0 then
-        vim.fn.feedkeys(t("<Plug>(vsnip-expand-or-jump)"), "")
       else
         fallback()
       end
@@ -37,8 +29,6 @@ cmp.setup({
     ["<S-Tab>"] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"]({ -1 }) > 0 then
-        vim.fn.feedkeys(t("<Plug>(vsnip-jump-prev)"), "")
       else
         fallback()
       end
