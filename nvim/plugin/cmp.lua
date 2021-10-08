@@ -26,18 +26,18 @@ cmp.setup({
       select = true,
     }),
     ["<Tab>"] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t("<C-n>"), "n")
-      elseif vim.fn["vsnip#jumpable"]({ 1 }) == 1 then
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif vim.fn["vsnip#jumpable"]({ 1 }) > 0 then
         vim.fn.feedkeys(t("<Plug>(vsnip-expand-or-jump)"), "")
       else
         fallback()
       end
     end,
     ["<S-Tab>"] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t("<C-p>"), "n")
-      elseif vim.fn["vsnip#jumpable"]({ -1 }) == 1 then
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif vim.fn["vsnip#jumpable"]({ -1 }) > 0 then
         vim.fn.feedkeys(t("<Plug>(vsnip-jump-prev)"), "")
       else
         fallback()
