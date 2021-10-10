@@ -11,6 +11,7 @@ require("packer").startup(function(use)
 
   -- editor scheme
   use("fneu/breezy")
+  use("tomasiser/vim-code-dark")
   use("itchyny/lightline.vim")
 
   -- language support
@@ -20,7 +21,10 @@ require("packer").startup(function(use)
   use("editorconfig/editorconfig-vim")
   use("airblade/vim-gitgutter")
   use("tpope/vim-fugitive")
-  use("tpope/vim-surround")
+  use({
+    "tpope/vim-surround",
+    requires = { "tpope/vim-repeat" },
+  })
   use("tpope/vim-commentary")
   use("cohama/lexima.vim")
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
