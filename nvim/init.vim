@@ -1,13 +1,15 @@
 let g:mapleader = "\<space>"
 
-" disable some built-in plugins
+" {{{ disable some built-in plugins
 let s:builtins = ['gzip', 'netrw', 'netrwPlugin', 'tarPlugin', 'zipPlugin']
 for s:e in s:builtins
   execute 'let g:loaded_' . s:e . '=1'
 endfor
+" }}}
 
-" plugins
+" {{{ plugins
 lua require'plugins'
+" }}}
 
 " {{{ Editor Settings
 filetype plugin indent on
@@ -17,11 +19,9 @@ set noswapfile
 set nobackup
 
 " utf-8 as default
-set encoding=utf-8
-set fileencoding=utf-8
 set fileencodings=utf-8,cp932,default
 " use `<LF>` for line ending
-set fileformat=unix
+set fileformats=unix,dos
 
 " general
 set number
