@@ -40,27 +40,16 @@ local servers = {
       "--header-insertion=iwyu",
     },
   },
+  cssls = {
+    cmd = { "vscode-css-languageserver", "--stdio" },
+  },
   cmake = {},
   dartls = {},
   diagnosticls = {
-    filetypes = { "lua", "python", "sh", "zsh" },
+    filetypes = { "lua", "sh", "zsh" },
     init_options = {
       -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
       linters = {
-        flake8 = {
-          command = "flake8",
-          debounce = 100,
-          args = { "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s", "-" },
-          offsetLine = 0,
-          offsetColumn = 0,
-          sourceName = "flake8",
-          formatLines = 1,
-          formatPattern = {
-            [[(\d+),(\d+),([A-Z]),(.*)(\r|\n)*$]],
-            { line = 1, column = 2, security = 3, message = 4 },
-          },
-          securities = { W = "warning", E = "error", F = "error", C = "error", N = "error" },
-        },
         shellcheck = {
           command = "shellcheck",
           debounce = 100,
@@ -78,20 +67,11 @@ local servers = {
         },
       },
       filetypes = {
-        python = "flake8",
         sh = "shellcheck",
         zsh = "shellcheck",
       },
       -- https://github.com/iamcco/diagnostic-languageserver/wiki/Formatters
       formatters = {
-        black = {
-          command = "black",
-          args = { "-q", "-" },
-        },
-        isort = {
-          command = "isort",
-          args = { "-q", "-" },
-        },
         shfmt = {
           command = "shfmt",
         },
@@ -102,14 +82,20 @@ local servers = {
       },
       formatFiletypes = {
         lua = "stylua",
-        python = { "isort", "black" },
         sh = "shfmt",
         zsh = "shfmt",
       },
     },
   },
   gopls = {},
-  jedi_language_server = {},
+  html = {
+    cmd = { "vscode-html-languageserver", "--stdio" },
+    filetypes = { "html", "htmldjango" },
+  },
+  jsonls = {
+    cmd = { "vscode-json-languageserver", "--stdio" },
+  },
+  pylsp = {},
   rust_analyzer = {},
   sumneko_lua = function()
     local cmd
@@ -158,6 +144,8 @@ local servers = {
       },
     },
   },
+  tsserver = {},
+  vimls = {},
 }
 
 for server, config in pairs(servers) do
