@@ -1,32 +1,29 @@
 let g:lightline = {
-      \ 'colorscheme': 'breezy',
-      \ }
-
-let g:lightline.active = {
-      \ 'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']]
-      \ }
-
-let g:lightline.component_function = {
-      \ 'fileencoding': 'LightlineFileencoding',
-      \ 'fileformat': 'LightlineFileformat',
-      \ 'filename': 'LightlineFilename',
-      \ 'filetype': 'LightlineFiletype',
-      \ 'gitbranch': 'FugitiveHead',
-      \ }
-
-let g:lightline.mode_map = {
-      \ 'n': 'N',
-      \ 'i': 'I',
-      \ 'R': 'R',
-      \ 'v': 'V',
-      \ 'V': 'VL',
-      \ "\<C-v>": 'VB',
-      \ 'c': 'C',
-      \ 's': 'S',
-      \ 'S': 'SL',
-      \ "\<C-s>": 'SB',
-      \ 't': 'T',
-      \ }
+\ 'colorscheme': 'breezy',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
+\ },
+\ 'component_function': {
+\   'fileencoding': 'LightlineFileencoding',
+\   'fileformat': 'LightlineFileformat',
+\   'filename': 'LightlineFilename',
+\   'filetype': 'LightlineFiletype',
+\   'gitbranch': 'FugitiveHead',
+\ },
+\ 'mode_map': {
+\   'n': 'N',
+\   'i': 'I',
+\   'R': 'R',
+\   'v': 'V',
+\   'V': 'VL',
+\   "\<C-v>": 'VB',
+\   'c': 'C',
+\   's': 'S',
+\   'S': 'SL',
+\   "\<C-s>": 'SB',
+\   't': 'T',
+\ },
+\}
 
 fu s:is_window_narrow()
   retu winwidth(0) <= 70
