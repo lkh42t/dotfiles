@@ -95,7 +95,16 @@ local servers = {
   jsonls = {
     cmd = { "vscode-json-languageserver", "--stdio" },
   },
-  pylsp = {},
+  pylsp = {
+    settings = {
+      pylsp = {
+        plugins = {
+          flake8 = { enabled = true },
+          pyflakes = { enabled = false },
+        },
+      },
+    },
+  },
   rust_analyzer = {},
   sumneko_lua = function()
     local cmd
