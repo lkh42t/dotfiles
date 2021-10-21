@@ -53,10 +53,25 @@ local servers = {
   cmake = {},
   dartls = {},
   diagnosticls = {
-    filetypes = { "lua", "sh", "zsh" },
+    filetypes = { "lua", "rst", "sh", "zsh" },
     init_options = {
       -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
       linters = {
+        rstcheck = {
+          command = "rstcheck",
+          debounce = 100,
+          args = { "-" },
+          isStderr = true,
+          sourceName = "rstcheck",
+          offsetLine = 0,
+          offsetColumn = 0,
+          formatLines = 1,
+          formatPattern = {
+            [[^.*:(\d+): \((.+)/\d+\) (.*)(\r|\n)*$]],
+            { line = 1, security = 2, message = 3 },
+          },
+          securities = { INFO = "warning", ERROR = "error" },
+        },
         shellcheck = {
           command = "shellcheck",
           debounce = 100,
@@ -74,6 +89,7 @@ local servers = {
         },
       },
       filetypes = {
+        rst = "rstcheck",
         sh = "shellcheck",
         zsh = "shellcheck",
       },
