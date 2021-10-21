@@ -1,5 +1,14 @@
 local lspconfig = require("lspconfig")
 
+-- {{{ customize diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  virtual_text = true,
+})
+-- }}}
+
 -- {{{ on_attach
 local function on_attach(_, bufnr)
   local function buf_set_keymap(...)
