@@ -90,18 +90,26 @@ fi
 # }}}
 
 # {{{ prompt
+setopt prompt_subst
+
 autoload -Uz colors
 colors
 
-setopt prompt_subst
+autoload -Uz promptinit
+promptinit
 
-PROMPT=$'\n''[%{$fg_bold[magenta]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%c%{$reset_color%}]'
-if [[ -n $GIT_PS1_SRC ]]; then
-	__source "$GIT_PS1_SRC" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
-	GIT_PS1_SHOWDIRTYSTATE=1
-	GIT_PS1_SHOWUNTRACKEDFILES=1
-fi
-PROMPT="$PROMPT"$'\n''%# '
+prompt_mytheme_setup() {
+	PROMPT=$'\n''[%{$fg_bold[magenta]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%c%{$reset_color%}]'
+	if [[ -n $GIT_PS1_SRC ]]; then
+		__source "$GIT_PS1_SRC" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
+		GIT_PS1_SHOWDIRTYSTATE=1
+		GIT_PS1_SHOWUNTRACKEDFILES=1
+	fi
+	PROMPT="$PROMPT"$'\n''%# '
+}
+
+prompt_themes+=(mytheme)
+prompt mytheme
 # }}}
 
 # {{{ setup asdf
