@@ -1,3 +1,7 @@
+local function feedkeys(s)
+  vim.fn.feedkeys(vim.api.nvim_replace_termcodes(s, true, true, true), "i")
+end
+
 local cmp = require("cmp")
 cmp.setup({
   sources = {
@@ -22,6 +26,8 @@ cmp.setup({
     ["<Tab>"] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif vim.fn["vsnip#jumpable"](1) > 0 then
+        feedkeys("<Plug>(vsnip-jump-next)")
       else
         fallback()
       end
@@ -29,6 +35,8 @@ cmp.setup({
     ["<S-Tab>"] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
+      elseif vim.fn["vsnip#jumpable"](-1) > 0 then
+        feedkeys("<Plug>(vsnip-jump-prev)")
       else
         fallback()
       end
