@@ -13,10 +13,7 @@ __source() {
 	done
 }
 __prepend_path() {
-	[[ ${path[(i)$1]} -gt ${#path} ]] && path=($1 $path)
-}
-__prepend_path_with_check() {
-	[[ -d $1 ]] && __prepend_path "$1"
+	[[ ${path[(i)$1]} -gt ${#path} ]] && path=($1(N-/) $path)
 }
 # }}}
 
@@ -117,15 +114,15 @@ fi
 
 # {{{ PATH setting
 # flutter
-[[ -d ~/.local/flutter ]] && __prepend_path ~/.local/flutter/default/bin
+__prepend_path ~/.local/flutter/default/bin
 
 # texlive
-[[ -d ~/.local/texlive ]] && __prepend_path ~/.local/texlive/default/bin/x86_64-linux
+__prepend_path ~/.local/texlive/default/bin/x86_64-linux
 
 # golang
 hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
 
-__prepend_path_with_check ~/.local/bin
+__prepend_path ~/.local/bin
 # }}}
 
 # {{{ auto completion
@@ -202,6 +199,5 @@ __source ~/.zsh/functions/*.zsh
 # {{{ unset utility functions
 unset -f __source
 unset -f __prepend_path
-unset -f __prepend_path_with_check
 unload_variables
 # }}}
