@@ -27,7 +27,6 @@ require("packer").startup(function(use)
   })
   use("tpope/vim-commentary")
   use("cohama/lexima.vim")
-  use({ "mattn/emmet-vim", ft = { "html", "htmldjango", "css", "scss", "xml" } })
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("ctrlpvim/ctrlp.vim")
 
