@@ -5,7 +5,14 @@ end
 local cmp = require("cmp")
 cmp.setup({
   sources = {
-    { name = "buffer" },
+    {
+      name = "buffer",
+      opts = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end,
+      },
+    },
     { name = "calc" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
