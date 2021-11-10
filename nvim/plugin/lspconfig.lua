@@ -119,7 +119,7 @@ local servers = {
       },
     },
   },
-  emmet_ls = {},
+  -- emmet_ls = {},
   gopls = {},
   html = {
     cmd = { "vscode-html-languageserver", "--stdio" },
