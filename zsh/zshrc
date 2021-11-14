@@ -7,8 +7,11 @@ bindkey -e
 
 # {{{ utility functions
 __source() {
+	[[ -f $1 ]] && . "$1"
+}
+__source_files() {
 	while [[ -n $1 ]]; do
-		[[ -f $1 ]] && . "$1"
+		__source "$1"
 		shift
 	done
 }
@@ -18,7 +21,7 @@ __prepend_path() {
 # }}}
 
 # load platform specific variables
-__source ~/.zsh/platforms/"${$(uname):l}".zsh
+__source ~/.zsh/platforms/"${$(uname):l}.zsh"
 
 # {{{ command history settings
 HISTFILE=~/.zsh_history
@@ -193,11 +196,12 @@ bindkey "^U" backward-kill-line
 # }}}
 
 # {{{ load functions
-__source ~/.zsh/functions/*.zsh
+__source_files ~/.zsh/functions/*.zsh
 # }}}
 
 # {{{ unset utility functions
 unset -f __source
+unset -f __source_files
 unset -f __prepend_path
 unload_variables
 # }}}
