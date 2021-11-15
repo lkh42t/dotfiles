@@ -25,27 +25,27 @@ let g:lightline = {
 \ },
 \}
 
-fu s:is_window_narrow()
-  retu winwidth(0) <= 70
-endf
+function s:is_window_narrow() abort
+  return winwidth(0) <= 70
+endfunction
 
-fu! LightlineFileencoding()
-  retu s:is_window_narrow() ? '' : &fenc !=# '' ? &fenc : &enc
-endf
+function! LightlineFileencoding() abort
+  return s:is_window_narrow() ? '' : &fenc !=# '' ? &fenc : &enc
+endfunction
 
-fu! LightlineFileformat()
-  retu s:is_window_narrow() ? '' : &ff
-endf
+function! LightlineFileformat() abort
+  return s:is_window_narrow() ? '' : &ff
+endfunction
 
-fu! LightlineFilename()
+function! LightlineFilename() abort
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
   let path = expand('%:p')
   if path[:len(root) - 1] ==# root
-    retu path[len(root) + 1:]
-  en
-  retu expand('%')
-endf
+    return path[len(root) + 1:]
+  endif
+  return expand('%')
+endfunction
 
-fu! LightlineFiletype()
-  retu s:is_window_narrow() ? '' : &ft !=# '' ? &ft : 'no ft'
-endf
+function! LightlineFiletype() abort
+  return s:is_window_narrow() ? '' : &ft !=# '' ? &ft : 'no ft'
+endfunction

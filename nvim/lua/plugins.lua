@@ -53,8 +53,8 @@ require("packer").startup(function(use)
 end)
 
 vim.cmd([[
-  aug packer_user_config
-    au!
-    au BufWritePost plugins.lua source <afile> | PackerCompile
-  aug end
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup END
 ]])
