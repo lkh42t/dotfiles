@@ -5,7 +5,7 @@ export LANGUAGE=en_US
 # use emacs-like key bindings
 bindkey -e
 
-# {{{ utility functions
+# utility functions {{{
 __source() {
 	[[ -f $1 ]] && . "$1"
 }
@@ -23,7 +23,7 @@ __prepend_path() {
 # load platform specific variables
 __source ~/.zsh/platforms/"${$(uname):l}.zsh"
 
-# {{{ command history settings
+# command history settings {{{
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=50000
@@ -40,7 +40,7 @@ setopt hist_save_no_dups
 setopt share_history
 # }}}
 
-# {{{ general settings
+# general settings {{{
 setopt autocd
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -53,7 +53,7 @@ setopt correct
 autoload -Uz select-word-style && select-word-style bash
 # }}}
 
-# {{{ aliases
+# aliases {{{
 [[ -n $LS_COLOR_OPT ]] && alias ls="ls -h $LS_COLOR_OPT" || alias ls='ls -h'
 alias la='ls -A'
 alias ll='ls -l'
@@ -67,7 +67,7 @@ alias mkdir='mkdir -p'
 hash nvim 2>/dev/null && alias v='nvim'
 # }}}
 
-# {{{ environment variables
+# environment variables {{{
 export LESS=-RF
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
@@ -79,7 +79,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESSHISTFILE=-
 # }}}
 
-# {{{ syntax highlight
+# syntax highlight {{{
 if [[ -n $SYNTAX_HIGHLIGHT_SRC ]]; then
 	__source "$SYNTAX_HIGHLIGHT_SRC"
 	typeset -A ZSH_HIGHLIGHT_STYLES
@@ -88,7 +88,7 @@ if [[ -n $SYNTAX_HIGHLIGHT_SRC ]]; then
 fi
 # }}}
 
-# {{{ prompt
+# prompt {{{
 setopt prompt_subst
 
 autoload -Uz colors && colors
@@ -108,14 +108,14 @@ prompt_themes+=(mytheme)
 prompt mytheme
 # }}}
 
-# {{{ setup asdf
+# setup asdf {{{
 if [[ -d ~/.asdf ]]; then
 	__source ~/.asdf/asdf.sh
 	fpath=(~/.asdf/completions $fpath)
 fi
 # }}}
 
-# {{{ PATH setting
+# PATH setting {{{
 # flutter
 __prepend_path ~/.local/flutter/default/bin
 
@@ -128,7 +128,7 @@ hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
 __prepend_path ~/.local/bin
 # }}}
 
-# {{{ auto completion
+# auto completion {{{
 fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
 
@@ -146,7 +146,7 @@ hash pip 2>/dev/null && compctl -K _pip_completion pip
 hash pip3 2>/dev/null && compctl -K _pip_completion pip3
 # }}}
 
-# {{{ key settings
+# key settings {{{
 () {
 	local -A key
 	key[Home]=${terminfo[khome]}
@@ -195,11 +195,11 @@ hash pip3 2>/dev/null && compctl -K _pip_completion pip3
 bindkey "^U" backward-kill-line
 # }}}
 
-# {{{ load functions
+# load functions {{{
 __source_files ~/.zsh/functions/*.zsh
 # }}}
 
-# {{{ unset utility functions
+# unset utility functions {{{
 unset -f __source
 unset -f __source_files
 unset -f __prepend_path

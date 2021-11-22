@@ -1,17 +1,17 @@
 let g:mapleader = "\<space>"
 
-" {{{ disable some built-in plugins
+" disable some built-in plugins {{{
 let s:builtins = ['gzip', 'netrw', 'netrwPlugin', 'tarPlugin', 'zipPlugin']
 for s:e in s:builtins
   execute 'let g:loaded_' . s:e . '=1'
 endfor
 " }}}
 
-" {{{ plugins
+" plugins {{{
 lua require'plugins'
 " }}}
 
-" {{{ Editor Settings
+" Editor Settings {{{
 filetype plugin indent on
 syntax on
 
@@ -73,8 +73,7 @@ set termguicolors " use 24-bit true color
 colorscheme breezy
 " }}}
 
-" {{{ Keymaps
-" more logical
+" Keymaps {{{
 nnoremap Y y$
 nnoremap j gj
 vnoremap j gj

@@ -1,6 +1,6 @@
 local lspconfig = require("lspconfig")
 
--- {{{ customize diagnostics
+-- customize diagnostics {{{
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   signs = true,
   underline = true,
@@ -9,7 +9,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 -- }}}
 
--- {{{ on_attach
+-- on_attach {{{
 local function on_attach(_, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -37,12 +37,12 @@ local function on_attach(_, bufnr)
 end
 -- }}}
 
--- {{{ create new capabilities to enable snippets
+-- create new capabilities to enable snippets {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 -- }}}
 
--- {{{ language servers
+-- language servers {{{
 local servers = {
   bashls = {},
   clangd = {
