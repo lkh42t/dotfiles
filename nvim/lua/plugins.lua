@@ -6,51 +6,60 @@ if vim.fn.isdirectory(install_path) == 0 then
   vim.cmd([[packadd packer.nvim]])
 end
 
-require("packer").startup(function(use)
-  use("wbthomason/packer.nvim")
+require("packer").startup({
+  function(use)
+    use("wbthomason/packer.nvim")
 
-  -- editor scheme
-  use("fneu/breezy")
-  use("tomasiser/vim-code-dark")
-  use("itchyny/lightline.vim")
+    -- editor scheme
+    use("fneu/breezy")
+    use("tomasiser/vim-code-dark")
+    use("itchyny/lightline.vim")
 
-  -- language support
-  use({ "dart-lang/dart-vim-plugin", ft = "dart" })
-  use({ "Vimjas/vim-python-pep8-indent", ft = "python" })
+    -- language support
+    use({ "dart-lang/dart-vim-plugin", ft = "dart" })
+    use({ "Vimjas/vim-python-pep8-indent", ft = "python" })
 
-  -- editor enhancement
-  use("editorconfig/editorconfig-vim")
-  use("airblade/vim-gitgutter")
-  use("tpope/vim-fugitive")
-  use({
-    "tpope/vim-surround",
-    requires = { "tpope/vim-repeat" },
-  })
-  use("tpope/vim-commentary")
-  use("cohama/lexima.vim")
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-  use("ctrlpvim/ctrlp.vim")
+    -- editor enhancement
+    use("editorconfig/editorconfig-vim")
+    use("airblade/vim-gitgutter")
+    use("tpope/vim-fugitive")
+    use({
+      "tpope/vim-surround",
+      requires = { "tpope/vim-repeat" },
+    })
+    use("tpope/vim-commentary")
+    use("cohama/lexima.vim")
+    use("ctrlpvim/ctrlp.vim")
+    use({ "nvim-treesitter/nvim-treesitter", branch = "0.5-compat", run = ":TSUpdate" })
 
-  -- language server and completion
-  use("neovim/nvim-lspconfig")
-  use({
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-calc",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
-      "hrsh7th/vim-vsnip-integ",
+    -- language server and completion
+    use("neovim/nvim-lspconfig")
+    use({
+      "hrsh7th/nvim-cmp",
+      requires = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-calc",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-vsnip",
+        "hrsh7th/vim-vsnip",
+        "hrsh7th/vim-vsnip-integ",
+      },
+    })
+
+    if packer_bootstrap then
+      require("packer").sync()
+    end
+  end,
+  config = {
+    git = {
+      subcommands = {
+        install = "clone --no-single-branch --progress",
+      },
     },
-  })
-
-  if packer_bootstrap then
-    require("packer").sync()
-  end
-end)
+  },
+})
 
 vim.cmd([[
   augroup packer_user_config
