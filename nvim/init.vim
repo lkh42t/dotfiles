@@ -92,4 +92,10 @@ nnoremap <M-l>     <C-w>l
 nnoremap <M-Right> <C-w>l
 
 tnoremap <Esc> <C-\><C-n>
+
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
 " }}}
