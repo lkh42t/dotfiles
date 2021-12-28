@@ -82,15 +82,6 @@ vnoremap k gk
 
 nnoremap <silent> <Esc><Esc> <Cmd>nohlsearch<CR>
 
-nnoremap <M-h>     <C-w>h
-nnoremap <M-Left>  <C-w>h
-nnoremap <M-j>     <C-w>j
-nnoremap <M-Down>  <C-w>j
-nnoremap <M-k>     <C-w>k
-nnoremap <M-Up>    <C-w>k
-nnoremap <M-l>     <C-w>l
-nnoremap <M-Right> <C-w>l
-
 tnoremap <Esc> <C-\><C-n>
 
 cnoremap <C-b> <Left>
