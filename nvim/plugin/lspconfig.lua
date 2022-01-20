@@ -125,46 +125,28 @@ local servers = {
     },
   },
   rust_analyzer = {},
-  sumneko_lua = function()
-    local cmd
-    if vim.fn.executable("lua-language-server") > 0 then
-      cmd = { "lua-language-server" }
-    else
-      local system_name
-      if vim.fn.has("mac") > 0 then
-        system_name = "macOS"
-      elseif vim.fn.has("unix") > 0 then
-        system_name = "Linux"
-      elseif vim.fn.has("win32") > 0 then
-        system_name = "Windows"
-      else
-        print("Unsupported system")
-        return {}
-      end
-
-      local sumneko_root = vim.fn.stdpath("cache") .. "/lspconfig/sumneko_lua/lua-language-server"
-      local sumneko_bin = sumneko_root .. "/bin/" .. system_name .. "/lua-language-server"
-
-      cmd = { sumneko_bin, "-E", sumneko_root .. "/main.lua" }
-    end
-
-    local runtime_path = vim.split(package.path, ";")
-    table.insert(runtime_path, "lua/?.lua")
-    table.insert(runtime_path, "lua/?/init.lua")
-
-    return {
-      cmd = cmd,
-      settings = {
-        Lua = {
-          runtime = { version = "LuaJIT", path = runtime_path },
-          diagnostics = {
-            globals = { "vim" },
-          },
-          workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+  sumneko_lua = {
+    settings = {
+      Lua = {
+        runtime = {
+          version = "LuaJIT",
+          path = (function()
+            local runtime_path = vim.split(package.path, ";")
+            table.insert(runtime_path, "lua/?.lua")
+            table.insert(runtime_path, "lua/?/init.lua")
+            return runtime_path
+          end)(),
+        },
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+        telemetry = {
+          enable = false,
         },
       },
-    }
-  end,
+    },
+  },
   texlab = {
     settings = {
       texlab = {
