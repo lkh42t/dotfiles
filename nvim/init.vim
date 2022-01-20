@@ -47,7 +47,7 @@ set listchars=tab:>\ ,space:·
 
 " completion
 set shortmess+=c
-set completeopt=menuone,noselect
+set completeopt=menuone,noinsert,noselect
 
 " spacing
 set expandtab     " use spaces instead of tabs
