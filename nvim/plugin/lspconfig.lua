@@ -45,17 +45,7 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 -- language servers {{{
 local servers = {
   bashls = {},
-  clangd = {
-    cmd = {
-      "clangd",
-      "--all-scopes-completion",
-      "--background-index",
-      "--clang-tidy",
-      "--completion-style=detailed",
-      "--cross-file-rename",
-      "--header-insertion=iwyu",
-    },
-  },
+  clangd = {},
   cssls = {
     cmd = { "vscode-css-languageserver", "--stdio" },
   },
