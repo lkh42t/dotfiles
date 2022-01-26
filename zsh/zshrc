@@ -54,12 +54,12 @@ autoload -Uz select-word-style && select-word-style bash
 # }}}
 
 # aliases {{{
-[[ -n $LS_COLOR_OPT ]] && alias ls="ls -h $LS_COLOR_OPT" || alias ls='ls -h'
+alias ls='ls -h --color=auto'
 alias la='ls -A'
 alias ll='ls -l'
 alias lla='ls -lA'
 
-[[ -n $GREP_COLOR_OPT ]] && alias grep="grep $GREP_COLOR_OPT"
+alias grep='grep --color=auto'
 [[ -n $DIFF_COLOR_OPT ]] && alias diff="diff $DIFF_COLOR_OPT"
 
 alias mkdir='mkdir -p'
