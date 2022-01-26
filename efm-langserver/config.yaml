@@ -1,0 +1,39 @@
+version: 2
+root-markers:
+  - .git/
+lint-bounce: 1s
+
+tools:
+  lua-stylua: &lua-stylua
+    format-command: 'stylua -s -'
+    format-stdin: true
+  rstcheck: &rst-rstcheck
+    lint-command: 'rstcheck'
+    lint-ignore-exit-code: true
+    lint-source: 'rstcheck'
+    lint-formats:
+      - '%f:%l: (%tNFO/1) %m'
+      - '%f:%l: (%tRROR/3) %m'
+
+  sh-shellcheck: &sh-shellcheck
+    lint-command: 'shellcheck -f gcc -x'
+    lint-source: 'shellcheck'
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+  sh-shfmt: &sh-shfmt
+    format-command: 'shfmt -s'
+    format-stdin: true
+
+languages:
+  lua:
+    - <<: *lua-stylua
+  rst:
+    - <<: *rst-rstcheck
+  sh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt
+  zsh:
+    - <<: *sh-shellcheck
+    - <<: *sh-shfmt

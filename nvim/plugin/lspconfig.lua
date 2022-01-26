@@ -51,47 +51,10 @@ local servers = {
   },
   cmake = {},
   dartls = {},
-  diagnosticls = {
-    filetypes = { "lua", "sh", "zsh" },
-    init_options = {
-      -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
-      linters = {
-        shellcheck = {
-          command = "shellcheck",
-          debounce = 100,
-          args = { "-f", "json", "-s", "bash", "-" },
-          sourceName = "shellcheck",
-          parseJson = {
-            line = "line",
-            command = "command",
-            endLine = "endLine",
-            endColumn = "endColumn",
-            message = "${message} [${code}]",
-            security = "level",
-          },
-          securities = { error = "error", warning = "warning", info = "info", style = "hint" },
-        },
-      },
-      filetypes = {
-        sh = "shellcheck",
-        zsh = "shellcheck",
-      },
-      -- https://github.com/iamcco/diagnostic-languageserver/wiki/Formatters
-      formatters = {
-        shfmt = {
-          command = "shfmt",
-        },
-        stylua = {
-          command = "stylua",
-          args = { "-s", "-" },
-        },
-      },
-      formatFiletypes = {
-        lua = "stylua",
-        sh = "shfmt",
-        zsh = "shfmt",
-      },
-    },
+  efm = {
+    cmd = { "efm-langserver" },
+    filetypes = { "lua", "rst", "sh", "zsh" },
+    init_options = { documentFormatting = true },
   },
   emmet_ls = {},
   gopls = {},
