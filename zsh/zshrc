@@ -18,6 +18,9 @@ __source_files() {
 __prepend_path() {
 	[[ ${path[(i)$1]} -gt ${#path} ]] && path=($1(N-/) $path)
 }
+__is_macos() {
+	[[ $OSTYPE = darwin* ]]
+}
 # }}}
 
 # load platform specific variables
@@ -120,7 +123,11 @@ fi
 __prepend_path ~/.local/flutter/default/bin
 
 # texlive
-__prepend_path ~/.local/texlive/default/bin/x86_64-linux
+if __is_macos; then
+	__prepend_path ~/.local/texlive/default/bin/universal-darwin
+else
+	__prepend_path ~/.local/texlive/default/bin/x86_64-linux
+fi
 
 # golang
 hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
@@ -203,5 +210,6 @@ __source_files ~/.zsh/functions/*.zsh
 unset -f __source
 unset -f __source_files
 unset -f __prepend_path
+unset -f __is_macos
 unload_variables
 # }}}
