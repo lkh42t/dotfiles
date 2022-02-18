@@ -35,6 +35,11 @@ local function on_attach(_, bufnr)
   buf_set_keymap("n", "]d", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
   buf_set_keymap("n", "<Leader>e", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 end
+
+local function disable_formatter(client, _)
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+end
 -- }}}
 
 -- create new capabilities to enable snippets {{{
@@ -99,6 +104,7 @@ local servers = {
         },
       },
     },
+    on_attach = disable_formatter,
   },
   texlab = {
     settings = {
@@ -115,7 +121,17 @@ for server, config in pairs(servers) do
   if type(config) == "function" then
     config = config()
   end
-  config.on_attach = on_attach
+
+  if config.on_attach ~= nil then
+    local _on_attach = config.on_attach
+    config.on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      _on_attach(client, bufnr)
+    end
+  else
+    config.on_attach = on_attach
+  end
+
   config.capabilities = capabilities
   config.flags = { debounce_text_changes = 100 }
   lspconfig[server].setup(config)
