@@ -1,12 +1,11 @@
 local lspconfig = require("lspconfig")
 
 -- customize diagnostics {{{
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  signs = true,
-  underline = true,
+vim.diagnostic.config({
   update_in_insert = true,
-  virtual_text = true,
+  virtual_text = false,
 })
+vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
 -- }}}
 
 -- on_attach {{{
@@ -57,7 +56,6 @@ local servers = {
   cmake = {},
   dartls = {},
   efm = {
-    cmd = { "efm-langserver" },
     filetypes = { "lua", "rst", "sh", "zsh" },
     init_options = { documentFormatting = true },
   },
