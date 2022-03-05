@@ -69,8 +69,12 @@ autocmd BufWritePre * :%s/\s\+$//ge
 
 " color scheme
 set termguicolors " use 24-bit true color
-" set background=dark
-colorscheme breezy
+set background=dark
+let g:ayucolor = 'dark'
+colorscheme ayu
+" fix for listchars based on vscode-ayu
+hi NonText guifg=#6c7380
+hi SpecialKey guifg=#6c7380
 " }}}
 
 " Keymaps {{{

@@ -11,8 +11,7 @@ require("packer").startup({
     use("wbthomason/packer.nvim")
 
     -- editor scheme
-    use("fneu/breezy")
-    use("tomasiser/vim-code-dark")
+    use("Luxed/ayu-vim")
     use("itchyny/lightline.vim")
 
     -- language support
