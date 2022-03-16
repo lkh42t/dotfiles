@@ -30,6 +30,7 @@ require("packer").startup({
     use("cohama/lexima.vim")
     use("ctrlpvim/ctrlp.vim")
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use("nvim-treesitter/nvim-treesitter-textobjects")
 
     -- language server and completion
     use("neovim/nvim-lspconfig")
