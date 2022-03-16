@@ -61,7 +61,13 @@ local servers = {
     init_options = { documentFormatting = true },
   },
   emmet_ls = {},
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        gofumpt = true,
+      },
+    },
+  },
   html = {
     cmd = { "vscode-html-languageserver", "--stdio" },
     filetypes = { "html", "htmldjango" },
