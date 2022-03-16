@@ -55,6 +55,7 @@ local servers = {
   },
   cmake = {},
   dartls = {},
+  dockerls = {},
   efm = {
     filetypes = { "lua", "rst", "sh", "zsh" },
     init_options = { documentFormatting = true },
@@ -81,6 +82,7 @@ local servers = {
     },
   },
   rust_analyzer = {},
+  sqls = {},
   sumneko_lua = {
     settings = {
       Lua = {
@@ -113,6 +115,7 @@ local servers = {
   },
   tsserver = {},
   vimls = {},
+  yamlls = {},
 }
 
 for server, config in pairs(servers) do
