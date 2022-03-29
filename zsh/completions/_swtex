@@ -6,7 +6,7 @@ _swtex() {
 		commands=(
 			'get:show current version'
 			'list:show available versions'
-			'set:switch texlive to the specified version'
+			'set:switch to the specified version'
 			'help:show usage'
 		)
 		_describe -t commands 'commands' commands "$@"

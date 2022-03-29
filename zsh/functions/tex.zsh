@@ -10,7 +10,7 @@ __swtex_list_versions() {
 }
 
 __swtex_usage() {
-	__switcher_base_usage swtex texlive
+	__switcher_base_usage swtex
 }
 
 # texlive version switcher

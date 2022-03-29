@@ -28,7 +28,6 @@ __switcher_base_set_version() {
 
 __switcher_base_usage() {
 	local progname=$1
-	local verbose_name=${2:-${progname#sw}}
 	cat <<EOF
 Usage: $progname COMMAND
 
@@ -36,6 +35,6 @@ Commands:
 	get		show current version
 	help		show usage
 	list		show available versions
-	set VERSION	switch $verbose_name to the specified version
+	set VERSION	switch to the specified version
 EOF
 }
