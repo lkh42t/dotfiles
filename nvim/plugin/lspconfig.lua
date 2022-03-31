@@ -1,24 +1,17 @@
 local lspconfig = require("lspconfig")
 
--- customize diagnostics {{{
-vim.diagnostic.config({
-  update_in_insert = true,
-  virtual_text = false,
-})
-vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
--- }}}
-
 -- on_attach {{{
 local function on_attach(_, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
 
-  vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local opts = { noremap = true, silent = true }
 
   buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  buf_set_keymap("n", "<C-K>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   buf_set_keymap("n", "<Leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   buf_set_keymap("n", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   buf_set_keymap("n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -32,7 +25,8 @@ local function on_attach(_, bufnr)
   buf_set_keymap("n", "<Leader>wr", "<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
   buf_set_keymap("n", "[d", "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<Leader>e", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+  buf_set_keymap("n", "<Leader>e", "<Cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  buf_set_keymap("n", "<Leader>q", "<Cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
 local function disable_formatter(client, _)
