@@ -43,7 +43,7 @@ set clipboard=unnamedplus
 
 " invisible characters
 set list
-set listchars=tab:>\ ,space:·
+set listchars=tab:>\ ,space:∙
 
 " completion
 set shortmess+=c
