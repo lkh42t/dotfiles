@@ -1,6 +1,9 @@
-# force locale
+# locale settings {{{
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US
+export LC_COLLATE=C
+export LC_MONETARY=ja_JP.UTF-8
+# }}}
 
 # use emacs-like key bindings
 bindkey -e
@@ -9,7 +12,7 @@ bindkey -e
 __source() {
 	[[ -f $1 ]] && . "$1"
 }
-__source_files() {
+__source_all() {
 	while [[ -n $1 ]]; do
 		__source "$1"
 		shift
@@ -23,8 +26,9 @@ __is_macos() {
 }
 # }}}
 
-# load platform specific variables
+# load platform specific variables {{{
 __source ~/.zsh/platforms/"${$(uname):l}.zsh"
+# }}}
 
 # command history settings {{{
 HISTFILE=~/.zsh_history
@@ -160,12 +164,12 @@ bindkey "^U" backward-kill-line
 # }}}
 
 # load functions {{{
-__source_files ~/.zsh/functions/*.zsh
+__source_all ~/.zsh/functions/*.zsh
 # }}}
 
 # unset utility functions {{{
 unset -f __source
-unset -f __source_files
+unset -f __source_all
 unset -f __prepend_path
 unset -f __is_macos
 unload_variables
