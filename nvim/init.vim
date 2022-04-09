@@ -24,21 +24,19 @@ set fileencodings=utf-8,cp932,default
 set fileformats=unix,dos
 
 " general
-set number
-set hidden
-set autoread
-set cursorline
 set colorcolumn=80,100,120
-set laststatus=2
-set showtabline=2
-set showcmd
+set cursorline
+set foldmethod=marker
 set noshowmode
+set number
 set scrolloff=3
 set showmatch
-set splitright
+set showtabline=2
 set splitbelow
-set foldmethod=marker
+set splitright
 set updatetime=100
+
+" clipboard
 set clipboard=unnamedplus
 
 " invisible characters
@@ -49,14 +47,12 @@ set listchars=tab:>\ ,space:∙
 set shortmess+=c
 set completeopt=menuone,noinsert,noselect
 
-" spacing
+" indent
 set expandtab     " use spaces instead of tabs
 set shiftwidth=2  " indent width is 2
 set softtabstop=2 " 2-space when <Tab> is pressed
 
 " search
-set hlsearch
-set incsearch
 set ignorecase " case-insensitive search when all characters is small
 set smartcase  " case-sensitive when capitals are used
 set inccommand=split
@@ -64,33 +60,39 @@ set inccommand=split
 " LaTeX
 let g:tex_flavor = 'latex'
 
-" trim trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//ge
-
 " color scheme
 set termguicolors " use 24-bit true color
 set background=dark
 let g:ayucolor = 'dark'
 colorscheme ayu
-" fix for listchars based on vscode-ayu
+" highlight for listchars based on vscode-ayu
 hi NonText guifg=#6c7380
 hi SpecialKey guifg=#6c7380
 " }}}
 
 " Keymaps {{{
-nnoremap Y y$
 nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 
-nnoremap <silent> <Esc><Esc> <Cmd>nohlsearch<CR>
-
 tnoremap <Esc> <C-\><C-n>
 
+" emacs like keybinding for command-line mode
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
+" }}}
+
+" autocmd {{{
+augroup FiletypeIndent
+  autocmd!
+  autocmd FileType python setl sts=4 sw=4
+  autocmd FileType go,make,sh,zsh setl noet sts& sw&
+augroup END
+
+" trim trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//ge
 " }}}
