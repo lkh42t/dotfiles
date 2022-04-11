@@ -8,7 +8,7 @@ endfor
 " }}}
 
 " plugins {{{
-lua require'plugins'
+call plugins#setup()
 " }}}
 
 " Editor Settings {{{
