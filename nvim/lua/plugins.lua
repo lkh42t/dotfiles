@@ -16,6 +16,7 @@ require("packer").startup({
 
     -- language support
     use("dart-lang/dart-vim-plugin")
+    use("fatih/vim-go")
     use("Vimjas/vim-python-pep8-indent")
 
     -- editor enhancement
