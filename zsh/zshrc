@@ -71,6 +71,9 @@ alias grep='grep --color=auto'
 
 alias mkdir='mkdir -p'
 
+# libarchive's tar supports more formats than GNU's one.
+hash bsdtar 2>/dev/null && alias tar='bsdtar'
+
 hash nvim 2>/dev/null && alias v='nvim'
 # }}}
 
