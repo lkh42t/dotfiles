@@ -134,7 +134,6 @@ for server, config in pairs(servers) do
   end
 
   config.capabilities = capabilities
-  config.flags = { debounce_text_changes = 100 }
   lspconfig[server].setup(config)
 end
 -- }}}
