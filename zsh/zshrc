@@ -34,7 +34,7 @@ __source ~/.zsh/platforms/"${$(uname):l}.zsh"
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=50000
-HISTORY_IGNORE='((l[als]|lla|popd)|(cd|l[als]|lla|man|scp|sftp|ssh|sudo|rm) *)'
+HISTORY_IGNORE='((l[als]|lla|popd)|(cd|l[als]|lla|man|scp|sftp|ssh|sudo|sudoedit|rm) *)'
 zshaddhistory() {
 	whence ${${(z)1}[1]} >| /dev/null || return 1
 }
