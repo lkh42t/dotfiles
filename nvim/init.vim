@@ -95,4 +95,12 @@ augroup END
 
 " trim trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//ge
+
+augroup NeovimTerminal
+  autocmd!
+  " disable line numbers in terminal
+  autocmd TermOpen * setl nonu nornu
+  " allow to use Ctrl-C to send SIGINT in normal mode
+  autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
+augroup END
 " }}}
