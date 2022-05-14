@@ -14,14 +14,6 @@ tools:
     lint-formats:
       - '%f:%l: (%tNFO/1) %m'
       - '%f:%l: (%tRROR/3) %m'
-
-  sh-shellcheck: &sh-shellcheck
-    lint-command: 'shellcheck -f gcc -x'
-    lint-source: 'shellcheck'
-    lint-formats:
-      - '%f:%l:%c: %trror: %m'
-      - '%f:%l:%c: %tarning: %m'
-      - '%f:%l:%c: %tote: %m'
   sh-shfmt: &sh-shfmt
     format-command: 'shfmt -s'
     format-stdin: true
@@ -32,8 +24,6 @@ languages:
   rst:
     - <<: *rst-rstcheck
   sh:
-    - <<: *sh-shellcheck
     - <<: *sh-shfmt
   zsh:
-    - <<: *sh-shellcheck
     - <<: *sh-shfmt
