@@ -4,10 +4,16 @@ root-markers:
 lint-bounce: 1s
 
 tools:
+  css-prettier: &css-prettier
+    format-command: 'prettier --parser css'
+    format-stdin: true
+  javascript-prettier: &javascript-prettier
+    format-command: 'prettier --parser babel'
+    format-stdin: true
   lua-stylua: &lua-stylua
     format-command: 'stylua -s -'
     format-stdin: true
-  rstcheck: &rst-rstcheck
+  rst-rstcheck: &rst-rstcheck
     lint-command: 'rstcheck'
     lint-ignore-exit-code: true
     lint-source: 'rstcheck'
@@ -17,13 +23,27 @@ tools:
   sh-shfmt: &sh-shfmt
     format-command: 'shfmt -s'
     format-stdin: true
+  typescript-prettier: &typescript-prettier
+    format-command: 'prettier --parser typescript'
+    format-stdin: true
+  yaml-prettier: &yaml-prettier
+    format-command: 'prettier --parser yaml'
+    format-stdin: true
 
 languages:
+  css:
+    - <<: *css-prettier
+  javascript:
+    - <<: *javascript-prettier
   lua:
     - <<: *lua-stylua
   rst:
     - <<: *rst-rstcheck
   sh:
     - <<: *sh-shfmt
+  typescript:
+    - <<: *typescript-prettier
+  yaml:
+    - <<: *yaml-prettier
   zsh:
     - <<: *sh-shfmt
