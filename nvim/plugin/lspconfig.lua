@@ -46,12 +46,13 @@ local servers = {
   clangd = {},
   cssls = {
     cmd = { "vscode-css-languageserver", "--stdio" },
+    on_attach = disable_formatter,
   },
   cmake = {},
   dartls = {},
   dockerls = {},
   efm = {
-    filetypes = { "lua", "rst", "sh", "zsh" },
+    filetypes = { "css", "javascript", "typescript", "lua", "rst", "sh", "yaml", "zsh" },
     init_options = { documentFormatting = true },
   },
   emmet_ls = {},
@@ -65,6 +66,7 @@ local servers = {
   html = {
     cmd = { "vscode-html-languageserver", "--stdio" },
     filetypes = { "html", "htmldjango" },
+    on_attach = disable_formatter,
   },
   jsonls = {
     cmd = { "vscode-json-languageserver", "--stdio" },
@@ -113,7 +115,9 @@ local servers = {
       },
     },
   },
-  tsserver = {},
+  tsserver = {
+    on_attach = disable_formatter,
+  },
   vimls = {},
   yamlls = {},
 }
