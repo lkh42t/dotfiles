@@ -1,10 +1,14 @@
 DIFF_COLOR_OPT=''
 
-SYNTAX_HIGHLIGHT_SRC=$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 GIT_PS1_SRC=/Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 
-hash brew 2>/dev/null && fpath=($(brew --prefix)/share/zsh-completions $fpath)
+if [[ -d /opt/homebrew/bin ]]; then
+	path=(/opt/homebrew/bin $path)
+
+	SYNTAX_HIGHLIGHT_SRC=$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+	fpath=($(brew --prefix)/share/{zsh/site-functions,zsh-completions} $fpath)
+fi
 
 unload_variables() {
 	unset DIFF_COLOR_OPT
