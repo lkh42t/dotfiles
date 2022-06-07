@@ -1,0 +1,36 @@
+#compdef awsp
+
+_awsp() {
+	_sub_commands() {
+		local -a commands
+		commands=(
+			'get:get current profile'
+			'help:show usage'
+			'list:show available profiles'
+			'reset:reset to default profile'
+			'set:set profile'
+		)
+		_describe -t commands 'commands' commands "$@"
+	}
+
+	_profiles() {
+		local -a profiles
+		profiles=($(awsp list))
+		_describe -t profiles 'profile' profiles "$@"
+	}
+
+	_arguments -C \
+		'1: :_sub_commands' \
+		'*:: :->args'
+
+	case "$state" in
+	args)
+		case $words[1] in
+		set)
+			_arguments -C \
+				'1: :_profiles'
+			;;
+		esac
+		;;
+	esac
+}
