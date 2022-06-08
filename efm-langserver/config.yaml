@@ -19,6 +19,7 @@ tools:
     lint-source: 'rstcheck'
     lint-formats:
       - '%f:%l: (%tNFO/1) %m'
+      - '%f:%l: (%tARNING/2) %m'
       - '%f:%l: (%tRROR/3) %m'
   sh-shfmt: &sh-shfmt
     format-command: 'shfmt -s'
