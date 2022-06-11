@@ -2,8 +2,7 @@
 
 _awsp() {
 	_sub_commands() {
-		local -a commands
-		commands=(
+		local commands=(
 			'get:get current profile'
 			'help:show usage'
 			'list:show available profiles'
@@ -15,7 +14,7 @@ _awsp() {
 
 	_profiles() {
 		local -a profiles
-		profiles=($(awsp list))
+		while IFS= read -r line; do profiles+=("$line"); done < <(awsp list)
 		_describe -t profiles 'profile' profiles "$@"
 	}
 
