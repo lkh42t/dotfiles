@@ -9,7 +9,7 @@ end
 
 local cmp = require("cmp")
 cmp.setup({
-  sources = {
+  sources = cmp.config.sources({
     {
       name = "buffer",
       options = {
@@ -23,21 +23,21 @@ cmp.setup({
     { name = "nvim_lua" },
     { name = "path" },
     { name = "vsnip" },
-  },
+  }),
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-e>"] = cmp.mapping.abort(),
+    ["<C-Space>"] = cmp.mapping.complete(),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif vim.fn["vsnip#jumpable"](1) > 0 then
+      elseif vim.fn["vsnip#available"](1) > 0 then
         feedkeys("<Plug>(vsnip-expand-or-jump)", "")
       elseif has_words_before() then
         cmp.complete()
@@ -45,14 +45,12 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    ["<S-Tab>"] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif vim.fn["vsnip#jumpable"](-1) > 0 then
         feedkeys("<Plug>(vsnip-jump-prev)", "")
-      else
-        fallback()
       end
     end, { "i", "s" }),
-  },
+  }),
 })
