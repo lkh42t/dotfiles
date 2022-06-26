@@ -55,12 +55,18 @@ local servers = {
     filetypes = { "css", "javascript", "typescript", "lua", "rst", "sh", "yaml", "zsh" },
     init_options = { documentFormatting = true },
   },
-  emmet_ls = {},
+  emmet_ls = {
+    filetypes = { "css", "html", "htmldjango" },
+  },
   gopls = {
     settings = {
       gopls = {
         gofumpt = true,
+        staticcheck = true,
       },
+    },
+    init_options = {
+      usePlaceholders = true,
     },
   },
   html = {
