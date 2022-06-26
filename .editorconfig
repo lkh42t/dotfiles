@@ -4,10 +4,10 @@ root = true
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
+tab_width = 8
 trim_trailing_whitespace = true
 
 [Makefile]
-indent_size = 8
 indent_style = tab
 
 [*.lua]
@@ -18,10 +18,12 @@ indent_style = space
 indent_size = 2
 indent_style = space
 
+[*.{yaml,yml}]
+indent_size = 2
+indent_style = space
+
 [fontconfig/**/*.conf]
-indent_size = 8
 indent_style = tab
 
 [zsh/**/*]
-indent_size = 8
 indent_style = tab
