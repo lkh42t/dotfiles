@@ -65,9 +65,6 @@ set termguicolors " use 24-bit true color
 set background=dark
 let g:ayucolor = 'dark'
 colorscheme ayu
-" highlight for listchars based on vscode-ayu
-hi NonText guifg=#6c7380
-hi SpecialKey guifg=#6c7380
 " }}}
 
 " Keymaps {{{
