@@ -1,12 +1,5 @@
 let g:mapleader = "\<space>"
 
-" disable some built-in plugins {{{
-let s:builtins = ['gzip', 'netrw', 'netrwPlugin', 'tarPlugin', 'zipPlugin']
-for s:e in s:builtins
-  execute 'let g:loaded_' . s:e . '=1'
-endfor
-" }}}
-
 " plugins {{{
 call plugins#setup()
 " }}}
