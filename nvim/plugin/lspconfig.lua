@@ -52,11 +52,22 @@ local servers = {
   dartls = {},
   dockerls = {},
   efm = {
-    filetypes = { "css", "javascript", "typescript", "lua", "rst", "sh", "yaml", "zsh" },
+    filetypes = {
+      "css",
+      "javascript",
+      "javascriptreact",
+      "lua",
+      "rst",
+      "sh",
+      "typescript",
+      "typescriptreact",
+      "yaml",
+      "zsh",
+    },
     init_options = { documentFormatting = true },
   },
   emmet_ls = {
-    filetypes = { "css", "html", "htmldjango" },
+    filetypes = { "css", "html", "htmldjango", "javascriptreact", "scss", "typescriptreact" },
   },
   gopls = {
     settings = {
