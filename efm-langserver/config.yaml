@@ -36,6 +36,8 @@ languages:
     - <<: *css-prettier
   javascript:
     - <<: *javascript-prettier
+  javascriptreact:
+    - <<: *javascript-prettier
   lua:
     - <<: *lua-stylua
   rst:
@@ -43,6 +45,8 @@ languages:
   sh:
     - <<: *sh-shfmt
   typescript:
+    - <<: *typescript-prettier
+  typescriptreact:
     - <<: *typescript-prettier
   yaml:
     - <<: *yaml-prettier
