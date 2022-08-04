@@ -158,7 +158,7 @@ function _pip_completion {
 		COMP_CWORD=$((cword - 1)) \
 		PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null))
 }
-hash pip 2>/dev/null && compctl -K _pip_completion pip
+hash pip 2>/dev/null || hash pip3 2>/dev/null && compctl -K _pip_completion pip pip3
 # }}}
 
 # key settings {{{
