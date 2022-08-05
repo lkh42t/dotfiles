@@ -49,7 +49,14 @@ local servers = {
     on_attach = disable_formatter,
   },
   cmake = {},
-  dartls = {},
+  dartls = {
+    settings = {
+      dart = {
+        completeFunctionCalls = true,
+        enableSnippets = true,
+      },
+    },
+  },
   dockerls = {},
   efm = {
     filetypes = {
