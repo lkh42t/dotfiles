@@ -83,9 +83,6 @@ augroup FiletypeIndent
   autocmd FileType go,make,sh,zsh setl noet sts& sw&
 augroup END
 
-" trim trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//ge
-
 augroup NeovimTerminal
   autocmd!
   " disable line numbers in terminal
