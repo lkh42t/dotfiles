@@ -91,3 +91,7 @@ augroup NeovimTerminal
   autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
 augroup END
 " }}}
+
+" command {{{
+command TrimTrailingSpace :%s/\s\+$//ge
+" }}}
