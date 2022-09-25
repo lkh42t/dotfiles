@@ -18,7 +18,6 @@ cmp.setup({
         end,
       },
     },
-    { name = "calc" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "path" },
