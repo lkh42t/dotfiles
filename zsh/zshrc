@@ -56,6 +56,9 @@ setopt no_beep
 
 setopt correct
 
+# suppress `zsh: no matches found`
+setopt no_nomatch
+
 # make '/' as word seperator
 autoload -Uz select-word-style && select-word-style bash
 # }}}
