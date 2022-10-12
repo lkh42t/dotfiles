@@ -80,10 +80,8 @@ local servers = {
       gopls = {
         gofumpt = true,
         staticcheck = true,
+        usePlaceholders = true,
       },
-    },
-    init_options = {
-      usePlaceholders = true,
     },
   },
   html = {
