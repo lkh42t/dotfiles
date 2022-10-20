@@ -29,7 +29,8 @@ local function on_attach(_, bufnr)
   vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
 end
 
-local function disable_formatter(client, _)
+local function disable_formatter(client, bufnr)
+  on_attach(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false
 end
 -- }}}
@@ -144,13 +145,7 @@ for server, config in pairs(servers) do
     config = config()
   end
 
-  if config.on_attach ~= nil then
-    local _on_attach = config.on_attach
-    config.on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      _on_attach(client, bufnr)
-    end
-  else
+  if config.on_attach == nil then
     config.on_attach = on_attach
   end
 
