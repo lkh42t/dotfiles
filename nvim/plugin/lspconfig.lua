@@ -1,5 +1,25 @@
 local lspconfig = require("lspconfig")
 
+-- UI customization {{{
+local border = {
+  { "┌", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "┐", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "┘", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "└", "FloatBorder" },
+  { "│", "FloatBorder" },
+}
+
+local util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return util_open_floating_preview(contents, syntax, opts, ...)
+end
+-- }}}
+
 -- on_attach {{{
 local opts = { noremap = true, silent = true }
 
