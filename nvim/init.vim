@@ -16,12 +16,56 @@ set fileencodings=utf-8,cp932,default
 " use `<LF>` for line ending
 set fileformats=unix,dos
 
+" :help vim-differences
+if !has('nvim')
+  set autoindent
+  set autoread
+  set backspace=indent,eol,start
+  set belloff=all
+  set nocompatible
+  set complete-=i
+  set cscopeverbose
+  set display=lastline
+  set formatoptions=tcqj
+  set nofsync
+  set hidden
+  set history=10000
+  set hlsearch
+  set incsearch
+  set nojoinspaces
+  set langnoremap
+  set nolangremap
+  set laststatus=2
+  set mouse=nvi
+  set mousemodel=popup_setpos
+  set nrformats=bin,hex
+  set ruler
+  set sessionoptions+=unix,slash
+  set sessionoptions-=options
+  set shortmess+=F
+  set shortmess-=S
+  set showcmd
+  set sidescroll=1
+  set smarttab
+  set nostartofline
+  set switchbuf=uselast
+  set tabpagemax=50
+  set tags=./tags;,tags
+  set ttimeoutlen=50
+  set ttyfast
+  set viewoptions-=options
+  set viminfo+=!
+  set wildmenu
+  set wildoptions=pum,tagfile
+endif
+
 " general
 set colorcolumn=80,100,120
 set cursorline
 set foldmethod=marker
 set noshowmode
 set number
+set nrformats+=unsigned
 set scrolloff=3
 set showmatch
 set showtabline=2
@@ -48,7 +92,9 @@ set softtabstop=2 " 2-space when <Tab> is pressed
 " search
 set ignorecase " case-insensitive search when all characters is small
 set smartcase  " case-sensitive when capitals are used
-set inccommand=split
+if has('nvim')
+  set inccommand=split
+endif
 
 " LaTeX
 let g:tex_flavor = 'latex'
@@ -61,6 +107,16 @@ colorscheme ayu
 " }}}
 
 " Keymaps {{{
+if !has('nvim')
+  nnoremap Y y$
+  nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+  inoremap <C-U> <C-G>u<C-U>
+  inoremap <C-W> <C-G>u<C-W>
+  xnoremap * y/\V<C-R>"<CR>
+  xnoremap # y?\V<C-R>"<CR>
+  nnoremap & :&&<CR>
+endif
+
 nnoremap j gj
 vnoremap j gj
 nnoremap k gk
@@ -83,13 +139,23 @@ augroup FiletypeIndent
   autocmd FileType go,make,sh,zsh setl noet sts& sw&
 augroup END
 
-augroup NeovimTerminal
-  autocmd!
-  " disable line numbers in terminal
-  autocmd TermOpen * setl nonu nornu
-  " allow to use Ctrl-C to send SIGINT in normal mode
-  autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
-augroup END
+if has('nvim')
+  augroup NeovimTerminal
+    autocmd!
+    " disable line numbers in terminal
+    autocmd TermOpen * setl nonu nornu
+    " allow to use Ctrl-C to send SIGINT in normal mode
+    autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
+  augroup END
+else
+  augroup VimTerminal
+    autocmd!
+    " disable line numbers in terminal
+    autocmd TerminalOpen * setl nonu nornu
+    " allow to use Ctrl-C to send SIGINT in normal mode
+    autocmd TerminalOpen * nnoremap <buffer> <C-c> i<C-c>
+  augroup END
+endif
 " }}}
 
 " command {{{
