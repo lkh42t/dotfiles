@@ -93,7 +93,7 @@ local servers = {
     init_options = { documentFormatting = true },
   },
   emmet_ls = {
-    filetypes = { "css", "html", "htmldjango", "javascriptreact", "scss", "typescriptreact" },
+    filetypes = { "css", "html", "htmldjango", "scss" },
   },
   gopls = {
     settings = {
@@ -115,6 +115,7 @@ local servers = {
   pylsp = {
     settings = {
       pylsp = {
+        configurationSources = { "flake8" },
         plugins = {
           flake8 = { enabled = true },
           mccabe = { enabled = false },
@@ -152,6 +153,10 @@ local servers = {
   texlab = {
     settings = {
       texlab = {
+        build = {
+          executable = "llmk",
+          args = {},
+        },
         chktex = { onOpenAndSave = true },
       },
     },
@@ -159,7 +164,12 @@ local servers = {
   tsserver = {
     on_attach = disable_formatter,
   },
-  vimls = {},
+  vimls = {
+    init_options = {
+      vimruntime = vim.env.VIMRUNTIME,
+      runtimepath = vim.o.runtimepath,
+    },
+  },
   yamlls = {},
 }
 
