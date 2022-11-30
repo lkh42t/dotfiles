@@ -63,10 +63,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = {
   bashls = {},
   clangd = {},
-  cssls = {
-    cmd = { "vscode-css-languageserver", "--stdio" },
-    on_attach = disable_formatter,
-  },
+  cssls = {},
   cmake = {},
   dartls = {
     settings = {
@@ -105,13 +102,10 @@ local servers = {
     },
   },
   html = {
-    cmd = { "vscode-html-languageserver", "--stdio" },
     filetypes = { "html", "htmldjango" },
     on_attach = disable_formatter,
   },
-  jsonls = {
-    cmd = { "vscode-json-languageserver", "--stdio" },
-  },
+  jsonls = {},
   pylsp = {
     settings = {
       pylsp = {
