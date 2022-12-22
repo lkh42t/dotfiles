@@ -35,7 +35,9 @@ local function on_attach(_, bufnr)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", "<Leader>f", vim.lsp.buf.format, bufopts)
+  vim.keymap.set("n", "<Leader>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, bufopts)
   vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, bufopts)
   vim.keymap.set("n", "<Leader>gi", vim.lsp.buf.implementation, bufopts)
@@ -112,6 +114,9 @@ local servers = {
         configurationSources = { "flake8" },
         plugins = {
           flake8 = { enabled = true },
+          jedi_completion = {
+            cache_for = { "aws_cdk", "matplotlib", "numpy", "pandas" },
+          },
           mccabe = { enabled = false },
           pycodestyle = { enabled = false },
           pyflakes = { enabled = false },
