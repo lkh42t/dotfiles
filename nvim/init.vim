@@ -38,6 +38,7 @@ endif
 " language server and completion
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
+    Plug 'ray-x/lsp_signature.nvim'
   Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-nvim-lsp'

@@ -29,6 +29,7 @@ vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist, opts)
 
 local function on_attach(_, bufnr)
+  require("lsp_signature").on_attach({}, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
