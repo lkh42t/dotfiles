@@ -109,25 +109,7 @@ local servers = {
     on_attach = disable_formatter,
   },
   jsonls = {},
-  pylsp = {
-    settings = {
-      pylsp = {
-        configurationSources = { "flake8" },
-        plugins = {
-          flake8 = { enabled = true },
-          jedi_completion = {
-            cache_for = { "aws_cdk", "matplotlib", "numpy", "pandas" },
-          },
-          mccabe = { enabled = false },
-          pycodestyle = { enabled = false },
-          pyflakes = { enabled = false },
-        },
-      },
-    },
-  },
-  rust_analyzer = {},
-  sqls = {},
-  sumneko_lua = {
+  lua_ls = {
     settings = {
       Lua = {
         runtime = {
@@ -150,6 +132,24 @@ local servers = {
     },
     on_attach = disable_formatter,
   },
+  pylsp = {
+    settings = {
+      pylsp = {
+        configurationSources = { "flake8" },
+        plugins = {
+          flake8 = { enabled = true },
+          jedi_completion = {
+            cache_for = { "aws_cdk", "matplotlib", "numpy", "pandas" },
+          },
+          mccabe = { enabled = false },
+          pycodestyle = { enabled = false },
+          pyflakes = { enabled = false },
+        },
+      },
+    },
+  },
+  rust_analyzer = {},
+  sqls = {},
   texlab = {
     settings = {
       texlab = {
