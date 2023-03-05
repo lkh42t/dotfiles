@@ -83,7 +83,6 @@ local servers = {
       "javascript",
       "javascriptreact",
       "lua",
-      "rst",
       "sh",
       "typescript",
       "typescriptreact",
@@ -95,6 +94,7 @@ local servers = {
   emmet_ls = {
     filetypes = { "css", "html", "htmldjango", "scss" },
   },
+  esbonio = {},
   gopls = {
     settings = {
       gopls = {
