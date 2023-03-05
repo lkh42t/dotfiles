@@ -13,14 +13,6 @@ tools:
   lua-stylua: &lua-stylua
     format-command: "stylua -s -"
     format-stdin: true
-  rst-rstcheck: &rst-rstcheck
-    lint-command: "rstcheck"
-    lint-ignore-exit-code: true
-    lint-source: "rstcheck"
-    lint-formats:
-      - "%f:%l: (%tNFO/1) %m"
-      - "%f:%l: (%tARNING/2) %m"
-      - "%f:%l: (%tRROR/3) %m"
   sh-shfmt: &sh-shfmt
     format-command: "shfmt -s"
     format-stdin: true
@@ -40,8 +32,6 @@ languages:
     - <<: *javascript-prettier
   lua:
     - <<: *lua-stylua
-  rst:
-    - <<: *rst-rstcheck
   sh:
     - <<: *sh-shfmt
   typescript:
