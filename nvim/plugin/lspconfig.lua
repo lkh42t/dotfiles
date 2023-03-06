@@ -80,6 +80,7 @@ local servers = {
   efm = {
     filetypes = {
       "css",
+      "dockerfile",
       "javascript",
       "javascriptreact",
       "lua",

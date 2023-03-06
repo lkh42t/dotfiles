@@ -1,12 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mattn/efm-langserver/master/schema.json
 version: 2
 root-markers:
   - .git/
-lint-debounce: 1s
+lint-debounce: 100ms
 
 tools:
   css-prettier: &css-prettier
     format-command: "prettier --parser css"
     format-stdin: true
+  dockerfile-hadolint: &dockerfile-hadolint
+    lint-command: "hadolint --no-color"
+    lint-formats:
+      - "%f:%l %m"
   javascript-prettier: &javascript-prettier
     format-command: "prettier --parser babel"
     format-stdin: true
@@ -26,6 +31,8 @@ tools:
 languages:
   css:
     - <<: *css-prettier
+  dockerfile:
+    - <<: *dockerfile-hadolint
   javascript:
     - <<: *javascript-prettier
   javascriptreact:
