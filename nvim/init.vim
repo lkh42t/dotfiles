@@ -1,5 +1,10 @@
 let g:mapleader = "\<space>"
 
+" Disable providers to improve startup time.
+for s:p in ['node', 'perl', 'python3', 'ruby']
+  execute 'let g:loaded_' . s:p . '_provider = 0'
+endfor
+
 " plugins {{{
 let s:url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 let s:data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
