@@ -12,6 +12,12 @@ tools:
     lint-command: "hadolint --no-color"
     lint-formats:
       - "%f:%l %m"
+  javascript-eslint: &javascript-eslint
+    lint-command: "eslint -f compact --max-warnings=0 --stdin --stdin-filename ${INPUT}"
+    lint-formats:
+      - "%f: line %l, col %c, %tarning - %m"
+      - "%f: line %l, col %c, %trror - %m"
+    lint-stdin: true
   javascript-prettier: &javascript-prettier
     format-command: "prettier --parser babel"
     format-stdin: true
@@ -35,16 +41,20 @@ languages:
     - <<: *dockerfile-hadolint
   javascript:
     - <<: *javascript-prettier
+    - <<: *javascript-eslint
   javascriptreact:
     - <<: *javascript-prettier
+    - <<: *javascript-eslint
   lua:
     - <<: *lua-stylua
   sh:
     - <<: *sh-shfmt
   typescript:
     - <<: *typescript-prettier
+    - <<: *javascript-eslint
   typescriptreact:
     - <<: *typescript-prettier
+    - <<: *javascript-eslint
   yaml:
     - <<: *yaml-prettier
   zsh:
