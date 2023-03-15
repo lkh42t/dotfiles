@@ -1,8 +1,8 @@
 XDG_CONFIG_HOME ?= $(HOME)/.config
 
-XDG_COMPAT_TARGETS := efm-langserver fontconfig nvim
-NO_XDG_COMPAT_TARGETS := vim zsh
-ALL_TARGETS := $(XDG_COMPAT_TARGETS) $(NO_XDG_COMPAT_TARGETS)
+XDG_COMPATIBLE_TARGETS := efm-langserver fontconfig nvim
+XDG_INCOMPATIBLE_TARGETS := vim zsh
+ALL_TARGETS := $(XDG_COMPATIBLE_TARGETS) $(XDG_INCOMPATIBLE_TARGETS)
 
 .PHONY: all config-home $(ALL_TARGETS)
 
@@ -11,7 +11,7 @@ all: $(ALL_TARGETS)
 config-home:
 	mkdir -p $(XDG_CONFIG_HOME)
 
-$(XDG_COMPAT_TARGETS): config-home
+$(XDG_COMPATIBLE_TARGETS): config-home
 	ln -sf $(abspath $@) $(XDG_CONFIG_HOME)
 
 vim:
