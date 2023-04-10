@@ -150,7 +150,6 @@ local servers = {
     },
   },
   rust_analyzer = {},
-  sqls = {},
   texlab = {
     settings = {
       texlab = {
