@@ -1,3 +1,4 @@
+CP_COW_OPT='-c'
 DIFF_COLOR_OPT=''
 
 GIT_PS1_SRC=/Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
@@ -11,6 +12,7 @@ if [[ -d /opt/homebrew/bin ]]; then
 fi
 
 unload_variables() {
+	unset CP_COW_OPT
 	unset DIFF_COLOR_OPT
 	unset SYNTAX_HIGHLIGHT_SRC
 	unset GIT_PS1_SRC
