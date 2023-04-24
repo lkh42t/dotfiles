@@ -52,8 +52,21 @@ local function on_attach(_, bufnr)
   vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
 end
 
-local function disable_formatter(client, bufnr)
-  on_attach(client, bufnr)
+local function build_on_attach_callback(callbacks)
+  return function(client, bufnr)
+    on_attach(client, bufnr)
+
+    if type(callbacks) == "function" then
+      callbacks(client, bufnr)
+    elseif type(callbacks) == "table" then
+      for _, cb in ipairs(callbacks) do
+        cb(client, bufnr)
+      end
+    end
+  end
+end
+
+local function disable_formatter(client, _)
   client.server_capabilities.documentFormattingProvider = false
 end
 -- }}}
@@ -180,6 +193,8 @@ for server, config in pairs(servers) do
 
   if config.on_attach == nil then
     config.on_attach = on_attach
+  elseif config.on_attach ~= on_attach then
+    config.on_attach = build_on_attach_callback(config.on_attach)
   end
 
   config.capabilities = capabilities
