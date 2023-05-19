@@ -1,18 +1,14 @@
-__awsp_usage() {
-	cat <<EOF
-Usage: awsp COMMAND
+awsp() {
+	local usage='Usage: awsp COMMAND
 
 Commands:
 	get		get current profile
 	help		show usage
 	list		show available profiles
 	reset		reset to default profile
-	set PROFILE	set profile
-EOF
-}
+	set PROFILE	set profile'
 
-awsp() {
-	local credentials_file=${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}
+	local config_file=${AWS_CONFIG_FILE:-$HOME/.aws/config}
 
 	local cmd=$1
 	case $cmd in
@@ -20,11 +16,14 @@ awsp() {
 		echo "${AWS_PROFILE:-default}"
 		;;
 	help)
-		__awsp_usage
+		echo "$usage" >&2
 		;;
 	list)
-		if [[ -f $credentials_file ]]; then
-			sed -n 's/^\[\(.*\)\]$/\1/p' "$credentials_file" | sort -u
+		if [[ -f $config_file ]]; then
+			{
+				sed -n 's/^\[profile \(.*\)\]$/\1/p' "$config_file"
+				echo 'default'
+			} | sort -u
 		fi
 		;;
 	reset)
@@ -32,14 +31,14 @@ awsp() {
 		;;
 	set)
 		if [[ -z $2 ]]; then
-			echo awsp: requires an argument >&2
+			echo 'awsp: requires an argument' >&2
 			return 1
 		fi
 		export AWS_PROFILE="$2"
 		;;
 	*)
-		echo awsp: unknown subcommand: "'$cmd'" >&2
-		__awsp_usage
+		echo "awsp: unknown subcommand: '$cmd'" >&2
+		echo "$usage" >&2
 		return 1
 		;;
 	esac
