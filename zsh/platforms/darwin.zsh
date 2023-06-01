@@ -1,7 +1,7 @@
 CP_COW_OPT='-c'
 DIFF_COLOR_OPT=''
 
-GIT_PS1_SRC=/Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+GIT_PS1_SRC=/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
 
 if [[ -d /opt/homebrew/bin ]]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
