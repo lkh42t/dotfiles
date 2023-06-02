@@ -85,7 +85,6 @@ if !has('nvim')
   set belloff=all
   set nocompatible
   set complete-=i
-  set cscopeverbose
   set display=lastline
   set formatoptions=tcqj
   set nofsync
@@ -114,6 +113,7 @@ if !has('nvim')
   set tags=./tags;,tags
   set ttimeoutlen=50
   set ttyfast
+  set viewoptions+=unix,slash
   set viewoptions-=options
   set viminfo+=!
   set wildmenu
