@@ -30,7 +30,6 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/lexima.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -38,6 +37,9 @@ Plug 'tpope/vim-surround'
 if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+endif
+if !has('nvim-0.9')
+  Plug 'editorconfig/editorconfig-vim'
 endif
 
 " language server and completion
