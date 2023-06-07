@@ -113,7 +113,7 @@ autoload -Uz colors && colors
 autoload -Uz promptinit && promptinit
 
 prompt_mytheme_setup() {
-	PROMPT=$'\n''[%{$fg_bold[magenta]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%c%{$reset_color%}]'
+	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
 	if [[ -n $GIT_PS1_SRC ]]; then
 		__source "$GIT_PS1_SRC" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
 		GIT_PS1_SHOWDIRTYSTATE=1
