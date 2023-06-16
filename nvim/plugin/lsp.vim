@@ -134,6 +134,19 @@ if executable('rust-analyzer')
 endif
 " }}}
 
+" terraformls {{{
+if executable('terraform-ls')
+  augroup lsp_terraformls
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'terraformls',
+    \ 'cmd': {server_info->['terraform-ls', 'serve']},
+    \ 'allowlist': ['terraform', 'terraform-vars'],
+    \})
+  augroup END
+endif
+" }}}
+
 " texlab {{{
 if executable('texlab')
   augroup lsp_texlab

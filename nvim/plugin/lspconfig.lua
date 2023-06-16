@@ -163,6 +163,7 @@ local servers = {
     },
   },
   rust_analyzer = {},
+  terraformls = {},
   texlab = {
     settings = {
       texlab = {

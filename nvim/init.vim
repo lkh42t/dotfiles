@@ -24,6 +24,7 @@ Plug 'itchyny/lightline.vim'
 " language support
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'fatih/vim-go'
+Plug 'hashivim/vim-terraform'
 Plug 'Vimjas/vim-python-pep8-indent'
 
 " editor enhancement
