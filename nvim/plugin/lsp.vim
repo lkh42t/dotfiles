@@ -4,6 +4,7 @@ if has('nvim-0.5') | finish | endif
 let g:lsp_diagnostics_float_cursor = 1
 
 " servers {{{
+" bashls {{{
 if executable('bash-language-server')
   augroup lsp_bashls
     autocmd!
@@ -14,7 +15,9 @@ if executable('bash-language-server')
     \})
   augroup END
 endif
+" }}}
 
+" clangd {{{
 if executable('clangd')
   augroup lsp_clangd
     autocmd!
@@ -25,12 +28,14 @@ if executable('clangd')
     \})
   augroup END
 endif
+" }}}
 
+" dartls {{{
 if executable('dart')
-  augroup lsp_dart
+  augroup lsp_dartls
     autocmd!
     autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'dart',
+    \ 'name': 'dartls',
     \ 'cmd': {server_info->['dart', 'language-server', '--protocol=lsp']},
     \ 'allowlist': ['dart'],
     \ 'initialization_options': {
@@ -48,9 +53,11 @@ if executable('dart')
     \})
   augroup END
 endif
+" }}}
 
+" efm {{{
 if executable('efm-langserver')
-  augroup lsp_efm_langserver
+  augroup lsp_efm
     autocmd!
     autocmd User lsp_setup call lsp#register_server({
     \ 'name': 'efm',
@@ -70,7 +77,9 @@ if executable('efm-langserver')
     \})
   augroup END
 endif
+" }}}
 
+" gopls {{{
 if executable('gopls')
   augroup lsp_gopls
     autocmd!
@@ -86,7 +95,9 @@ if executable('gopls')
     \})
   augroup END
 endif
+" }}}
 
+" pylsp {{{
 if executable('pylsp')
   augroup lsp_pylsp
     autocmd!
@@ -108,7 +119,9 @@ if executable('pylsp')
     \})
   augroup END
 endif
+" }}}
 
+" rust_analyzer {{{
 if executable('rust-analyzer')
   augroup lsp_rust_analyzer
     autocmd!
@@ -119,7 +132,9 @@ if executable('rust-analyzer')
     \})
   augroup END
 endif
+" }}}
 
+" texlab {{{
 if executable('texlab')
   augroup lsp_texlab
     autocmd!
@@ -139,7 +154,9 @@ if executable('texlab')
     \})
   augroup END
 endif
+" }}}
 
+" vimls {{{
 if executable('vim-language-server')
   augroup lsp_vimls
     autocmd!
@@ -166,7 +183,9 @@ if executable('vim-language-server')
     \})
   augroup END
 endif
+" }}}
 
+" yamlls {{{
 if executable('yaml-language-server')
   augroup lsp_yamlls
     autocmd!
@@ -182,6 +201,7 @@ if executable('yaml-language-server')
     \})
   augroup END
 endif
+" }}}
 " }}}
 
 function! s:on_lsp_buffer_enabled() abort
