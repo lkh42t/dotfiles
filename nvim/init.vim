@@ -166,6 +166,9 @@ set termguicolors " use 24-bit true color
 set background=dark
 let g:ayucolor = 'dark'
 colorscheme ayu
+if !has('nvim')
+  hi SpecialKey guifg=#464b56
+endif
 " }}}
 
 " Keymaps {{{
