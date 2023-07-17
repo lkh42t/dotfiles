@@ -162,7 +162,15 @@ local servers = {
       },
     },
   },
-  rust_analyzer = {},
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          command = "clippy",
+        },
+      },
+    },
+  },
   terraformls = {},
   texlab = {
     settings = {
