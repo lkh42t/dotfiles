@@ -39,7 +39,9 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 endif
-if !has('nvim-0.9')
+if has('patch-9.0.1799')
+  packadd! editorconfig
+elseif !has('nvim-0.9')
   Plug 'editorconfig/editorconfig-vim'
 endif
 
