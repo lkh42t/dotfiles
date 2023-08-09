@@ -109,6 +109,7 @@ local servers = {
     filetypes = { "css", "html", "htmldjango", "scss" },
   },
   esbonio = {},
+  eslint = {},
   gopls = {
     settings = {
       gopls = {
