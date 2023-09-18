@@ -43,10 +43,8 @@ languages:
     - <<: *sh-shfmt
   typescript:
     - <<: *typescript-prettier
-    - <<: *javascript-eslint
   typescriptreact:
     - <<: *typescript-prettier
-    - <<: *javascript-eslint
   yaml:
     - <<: *yaml-prettier
   zsh:
