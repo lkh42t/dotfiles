@@ -9,9 +9,10 @@ tools:
     format-command: "prettier --parser css"
     format-stdin: true
   dockerfile-hadolint: &dockerfile-hadolint
-    lint-command: "hadolint --no-color"
+    lint-command: "hadolint --no-color -"
     lint-formats:
       - "%f:%l %m"
+    lint-stdin: true
   javascript-prettier: &javascript-prettier
     format-command: "prettier --parser babel"
     format-stdin: true
