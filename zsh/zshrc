@@ -36,7 +36,12 @@ HISTSIZE=10000
 SAVEHIST=50000
 HISTORY_IGNORE='((l[als]|lla|popd)|(cd|l[als]|lla|man|scp|sftp|ssh|sudo|sudoedit|rm) *)'
 zshaddhistory() {
-	whence ${${(z)1}[1]} >| /dev/null || return 1
+	local j=1
+	# skip all env vars
+	while [[ ${${(z)1}[$j]} = *=* ]]; do
+		((j++))
+	done
+	whence ${${(z)1}[$j]} >| /dev/null || return 1
 }
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
