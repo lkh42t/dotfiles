@@ -13,11 +13,17 @@ tools:
     lint-formats:
       - "%f:%l %m"
     lint-stdin: true
+  html-prettier: &html-prettier
+    format-command: "prettier --parser html"
+    format-stdin: true
   javascript-prettier: &javascript-prettier
     format-command: "prettier --parser babel"
     format-stdin: true
   lua-stylua: &lua-stylua
     format-command: "stylua -s -"
+    format-stdin: true
+  scss-prettier: &scss-prettier
+    format-command: "prettier --parser scss"
     format-stdin: true
   sh-shfmt: &sh-shfmt
     format-command: "shfmt -s"
@@ -34,12 +40,16 @@ languages:
     - <<: *css-prettier
   dockerfile:
     - <<: *dockerfile-hadolint
+  html:
+    - <<: *html-prettier
   javascript:
     - <<: *javascript-prettier
   javascriptreact:
     - <<: *javascript-prettier
   lua:
     - <<: *lua-stylua
+  scss:
+    - <<: *scss-prettier
   sh:
     - <<: *sh-shfmt
   typescript:
