@@ -21,41 +21,40 @@ end
 -- }}}
 
 -- on_attach {{{
-local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist)
 
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist, opts)
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    require("lsp_signature").on_attach({}, ev.buf)
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-local function on_attach(_, bufnr)
-  require("lsp_signature").on_attach({}, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", "<Leader>f", function()
-    vim.lsp.buf.format({ async = true })
-  end, bufopts)
-  vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "<Leader>gi", vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set("n", "<Leader>gr", vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "<Leader>td", vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set("n", "<Leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-end
+    local opts = { buffer = ev.buf }
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set({ "n", "v" }, "<Leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<Leader>f", function()
+      vim.lsp.buf.format({ async = true })
+    end, opts)
+    vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "<Leader>gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "<Leader>gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<Leader>td", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set("n", "<Leader>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+  end,
+})
 
 local function build_on_attach_callback(callbacks)
   return function(client, bufnr)
-    on_attach(client, bufnr)
-
     if type(callbacks) == "function" then
       callbacks(client, bufnr)
     elseif type(callbacks) == "table" then
@@ -199,9 +198,7 @@ for server, config in pairs(servers) do
     config = config()
   end
 
-  if config.on_attach == nil then
-    config.on_attach = on_attach
-  elseif config.on_attach ~= on_attach then
+  if config.on_attach ~= nil then
     config.on_attach = build_on_attach_callback(config.on_attach)
   end
 
