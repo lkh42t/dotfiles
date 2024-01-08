@@ -78,7 +78,11 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = {
   bashls = {},
   clangd = {},
-  cssls = {},
+  cssls = {
+    init_options = {
+      provideFormatter = false,
+    },
+  },
   cmake = {},
   dartls = {
     settings = {
@@ -120,9 +124,15 @@ local servers = {
   },
   html = {
     filetypes = { "html", "htmldjango" },
-    on_attach = disable_formatter,
+    init_options = {
+      provideFormatter = false,
+    },
   },
-  jsonls = {},
+  jsonls = {
+    init_options = {
+      provideFormatter = false,
+    },
+  },
   lua_ls = {
     on_init = function(client)
       local path = client.workspace_folders[1].name
