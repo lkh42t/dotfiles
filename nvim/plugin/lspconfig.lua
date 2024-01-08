@@ -97,9 +97,11 @@ local servers = {
     filetypes = {
       "css",
       "dockerfile",
+      "html",
       "javascript",
       "javascriptreact",
       "lua",
+      "scss",
       "sh",
       "typescript",
       "typescriptreact",
