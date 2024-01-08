@@ -55,6 +55,19 @@ if executable('dart')
 endif
 " }}}
 
+" dockerls {{{
+if executable('docker-langserver')
+  augroup lsp_dockerls
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'dockerls',
+    \ 'cmd': {server_info->['docker-langserver', '--stdio']},
+    \ 'allowlist': ['dockerfile'],
+    \})
+  augroup END
+endif
+" }}}
+
 " efm {{{
 if executable('efm-langserver')
   augroup lsp_efm
@@ -74,6 +87,22 @@ if executable('efm-langserver')
     \   'yaml',
     \   'zsh',
     \  ],
+    \})
+  augroup END
+endif
+" }}}
+
+" eslint {{{
+if executable('vscode-eslint-language-server')
+  augroup lsp_eslint
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'eslint',
+    \ 'cmd': {server_info->['vscode-eslint-language-server', '--stdio']},
+    \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+    \ 'workspace_config': {
+    \   'run': 'onType',
+    \ },
     \})
   augroup END
 endif
@@ -142,6 +171,19 @@ if executable('terraform-ls')
     \ 'name': 'terraformls',
     \ 'cmd': {server_info->['terraform-ls', 'serve']},
     \ 'allowlist': ['terraform', 'terraform-vars'],
+    \})
+  augroup END
+endif
+" }}}
+
+" tsserver {{{
+if executable('typescript-language-server')
+  augroup lsp_tsserver
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'tsserver',
+    \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+    \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
     \})
   augroup END
 endif
