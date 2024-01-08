@@ -110,9 +110,6 @@ local servers = {
     },
     init_options = { documentFormatting = true },
   },
-  emmet_ls = {
-    filetypes = { "css", "html", "htmldjango", "scss" },
-  },
   esbonio = {},
   eslint = {},
   gopls = {
