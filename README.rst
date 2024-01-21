@@ -8,4 +8,5 @@ Settings for
 - Fontconfig
 - launchd
 - Neovim
+- tmux
 - Zsh

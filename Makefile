@@ -1,6 +1,6 @@
 XDG_CONFIG_HOME ?= $(HOME)/.config
 
-XDG_COMPATIBLE_TARGETS := efm-langserver fontconfig nvim
+XDG_COMPATIBLE_TARGETS := efm-langserver fontconfig nvim tmux
 XDG_INCOMPATIBLE_TARGETS := launchd vim zsh
 ALL_TARGETS := $(XDG_COMPATIBLE_TARGETS) $(XDG_INCOMPATIBLE_TARGETS)
 
