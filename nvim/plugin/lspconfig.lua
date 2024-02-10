@@ -133,6 +133,13 @@ local servers = {
     },
   },
   lua_ls = {
+    settings = {
+      Lua = {
+        format = {
+          enable = false,
+        },
+      },
+    },
     on_init = function(client)
       local path = client.workspace_folders[1].name
       if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -151,7 +158,6 @@ local servers = {
       end
       return true
     end,
-    on_attach = disable_formatter,
   },
   pylsp = {
     settings = {
