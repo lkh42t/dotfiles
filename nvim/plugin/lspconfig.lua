@@ -217,7 +217,12 @@ for server, config in pairs(servers) do
     config.on_attach = build_on_attach_callback(config.on_attach)
   end
 
-  config.capabilities = capabilities
+  if config.capabilities ~= nil then
+    config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities)
+  else
+    config.capabilities = capabilities
+  end
+
   lspconfig[server].setup(config)
 end
 -- }}}
