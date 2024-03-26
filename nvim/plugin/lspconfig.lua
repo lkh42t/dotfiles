@@ -161,22 +161,32 @@ local servers = {
       return true
     end,
   },
-  pylsp = {
-    settings = {
-      pylsp = {
-        configurationSources = { "flake8" },
-        plugins = {
-          flake8 = { enabled = true },
-          jedi_completion = {
-            cache_for = { "aws_cdk", "matplotlib", "numpy", "pandas" },
+  pyright = {
+    capabilities = {
+      textDocument = {
+        publishDiagnostics = {
+          tagSupport = {
+            valueSet = { 2 },
           },
-          mccabe = { enabled = false },
-          pycodestyle = { enabled = false },
-          pyflakes = { enabled = false },
+        },
+      },
+    },
+    settings = {
+      pyright = {
+        disableOrganizeImports = true,
+      },
+      python = {
+        analysis = {
+          diagnosticMode = "off",
+          typeCheckingMode = "off",
+          diagnosticSeverityOverrides = {
+            reportInvalidTypeForm = "none",
+          },
         },
       },
     },
   },
+  ruff_lsp = {},
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
