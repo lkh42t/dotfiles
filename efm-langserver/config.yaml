@@ -19,6 +19,12 @@ tools:
   javascript-prettier: &javascript-prettier
     format-command: "prettier --parser babel"
     format-stdin: true
+  json-prettier: &json-prettier
+    format-command: "prettier --parser json"
+    format-stdin: true
+  jsonc-prettier: &jsonc-prettier
+    format-command: "prettier --parser jsonc"
+    format-stdin: true
   lua-stylua: &lua-stylua
     format-command: "stylua -s -"
     format-stdin: true
@@ -46,6 +52,10 @@ languages:
     - <<: *javascript-prettier
   javascriptreact:
     - <<: *javascript-prettier
+  json:
+    - <<: *json-prettier
+  jsonc:
+    - <<: *jsonc-prettier
   lua:
     - <<: *lua-stylua
   scss:
