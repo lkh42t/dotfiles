@@ -100,6 +100,8 @@ local servers = {
       "html",
       "javascript",
       "javascriptreact",
+      "json",
+      "jsonc",
       "lua",
       "scss",
       "sh",
