@@ -68,6 +68,10 @@ end
 local function disable_formatter(client, _)
   client.server_capabilities.documentFormattingProvider = false
 end
+
+local function disable_hover(client, _)
+  client.server_capabilities.hoverProvider = false
+end
 -- }}}
 
 -- create new capabilities to enable snippets {{{
@@ -177,16 +181,14 @@ local servers = {
       },
       python = {
         analysis = {
-          diagnosticMode = "off",
-          typeCheckingMode = "off",
-          diagnosticSeverityOverrides = {
-            reportInvalidTypeForm = "none",
-          },
+          ignore = { "*" },
         },
       },
     },
   },
-  ruff_lsp = {},
+  ruff = {
+    on_attach = disable_hover,
+  },
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
