@@ -77,16 +77,23 @@ if executable('efm-langserver')
     \ 'cmd': {server_info->['efm-langserver']},
     \ 'allowlist': [
     \   'css',
+    \   'dockerfile',
+    \   'html',
     \   'javascript',
     \   'javascriptreact',
+    \   'json',
+    \   'jsonc',
     \   'lua',
-    \   'rst',
+    \   'scss',
     \   'sh',
     \   'typescript',
     \   'typescriptreact',
     \   'yaml',
     \   'zsh',
-    \  ],
+    \ ],
+    \ 'initialization_options': {
+    \   'documentFormatting': v:true,
+    \ },
     \})
   augroup END
 endif
@@ -126,25 +133,39 @@ if executable('gopls')
 endif
 " }}}
 
-" pylsp {{{
-if executable('pylsp')
-  augroup lsp_pylsp
+" pyright {{{
+if executable('pyright-langserver')
+  augroup lsp_pyright
     autocmd!
     autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'pylsp',
-    \ 'cmd': {server_info->['pylsp']},
+    \ 'name': 'pyright',
+    \ 'cmd': {server_info->['pyright-langserver', 'start']},
     \ 'allowlist': ['python'],
     \ 'workspace_config': {
-    \   'pylsp': {
-    \     'configurationSources': ['flake8'],
-    \     'plugins': {
-    \       'flake8': {'enabled': v:true},
-    \       'mccabe': {'enabled': v:false},
-    \       'pycodestyle': {'enabled': v:false},
-    \       'pyflakes': {'enabled': v:false},
+    \   'pyright': {
+    \     'disableOrganizeImports': v:true,
+    \   },
+    \   'python': {
+    \     'analysis': {
+    \       'autoSearchPaths': v:true,
+    \       'ignore': ['*'],
+    \       'useLibraryCodeForTypes': v:true,
     \     },
     \   },
     \ },
+    \})
+  augroup END
+endif
+" }}}
+
+" ruff {{{
+if executable('ruff')
+  augroup lsp_ruff
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'ruff',
+    \ 'cmd': {server_info->['ruff', 'server', '--preview']},
+    \ 'allowlist': ['python'],
     \})
   augroup END
 endif
