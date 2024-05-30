@@ -148,7 +148,14 @@ if executable('pyright-langserver')
     \   'python': {
     \     'analysis': {
     \       'autoSearchPaths': v:true,
-    \       'ignore': ['*'],
+    \       'diagnosticMode': 'off',
+    \       'diagnosticSeverityOverrides': {
+    \         'reportInvalidTypeForm': 'none',
+    \         'reportMissingImports': 'none',
+    \         'reportMissingModuleSource': 'none',
+    \         'reportUndefinedVariable': 'none',
+    \       },
+    \       'typeCheckingMode': 'off',
     \       'useLibraryCodeForTypes': v:true,
     \     },
     \   },
