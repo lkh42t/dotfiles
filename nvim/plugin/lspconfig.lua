@@ -181,7 +181,14 @@ local servers = {
       },
       python = {
         analysis = {
-          ignore = { "*" },
+          diagnosticMode = "off",
+          diagnosticSeverityOverrides = {
+            reportInvalidTypeForm = "none",
+            reportMissingImports = "none",
+            reportMissingModuleSource = "none",
+            reportUndefinedVariable = "none",
+          },
+          typeCheckingMode = "off",
         },
       },
     },
