@@ -204,12 +204,12 @@ if executable('terraform-ls')
 endif
 " }}}
 
-" tsserver {{{
+" ts_ls {{{
 if executable('typescript-language-server')
-  augroup lsp_tsserver
+  augroup lsp_ts_ls
     autocmd!
     autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'tsserver',
+    \ 'name': 'ts_ls',
     \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
     \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
     \})

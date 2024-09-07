@@ -217,7 +217,7 @@ local servers = {
       },
     },
   },
-  tsserver = {
+  ts_ls = {
     on_attach = disable_formatter,
   },
   vimls = {
