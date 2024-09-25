@@ -85,11 +85,9 @@ if executable('efm-langserver')
     \   'jsonc',
     \   'lua',
     \   'scss',
-    \   'sh',
     \   'typescript',
     \   'typescriptreact',
     \   'yaml',
-    \   'zsh',
     \ ],
     \ 'initialization_options': {
     \   'documentFormatting': v:true,
