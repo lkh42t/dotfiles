@@ -207,6 +207,12 @@ augroup FiletypeIndent
   autocmd FileType go,make,sh,zsh setl noet sts& sw&
 augroup END
 
+augroup FiletypeComment
+  autocmd!
+  " prefer line comments for C and C++
+  autocmd FileType c,cpp setl cms=//%s
+augroup END
+
 if has('nvim')
   augroup NeovimTerminal
     autocmd!
