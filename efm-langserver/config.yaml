@@ -31,9 +31,6 @@ tools:
   scss-prettier: &scss-prettier
     format-command: "prettier --parser scss"
     format-stdin: true
-  sh-shfmt: &sh-shfmt
-    format-command: "shfmt -s"
-    format-stdin: true
   typescript-prettier: &typescript-prettier
     format-command: "prettier --parser typescript"
     format-stdin: true
@@ -60,13 +57,9 @@ languages:
     - <<: *lua-stylua
   scss:
     - <<: *scss-prettier
-  sh:
-    - <<: *sh-shfmt
   typescript:
     - <<: *typescript-prettier
   typescriptreact:
     - <<: *typescript-prettier
   yaml:
     - <<: *yaml-prettier
-  zsh:
-    - <<: *sh-shfmt
