@@ -106,7 +106,7 @@ if !has('nvim')
   set ruler
   set sessionoptions+=unix,slash
   set sessionoptions-=options
-  set shortmess+=F
+  set shortmess+=CF
   set shortmess-=S
   set showcmd
   set sidescroll=1
