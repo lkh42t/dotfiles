@@ -191,7 +191,13 @@ local servers = {
       },
     },
   },
-  terraformls = {},
+  terraformls = {
+    init_options = {
+      terraform = {
+        path = vim.fn.exepath("tofu"),
+      },
+    },
+  },
   texlab = {
     settings = {
       texlab = {
