@@ -21,8 +21,6 @@ end
 -- }}}
 
 -- on_attach {{{
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist)
 
@@ -33,7 +31,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     local opts = { buffer = ev.buf }
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, opts)
     vim.keymap.set({ "n", "v" }, "<Leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<Leader>f", function()
