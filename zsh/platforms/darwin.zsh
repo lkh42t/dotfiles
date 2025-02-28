@@ -4,9 +4,7 @@ DIFF_COLOR_OPT=''
 GIT_PS1_SRC=/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
 
 if [[ -d /opt/homebrew/bin ]]; then
-	if [[ -z $HOMEBREW_PREFIX ]]; then
-		eval "$(/opt/homebrew/bin/brew shellenv)"
-	fi
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 
 	SYNTAX_HIGHLIGHT_SRC=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

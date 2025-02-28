@@ -19,7 +19,7 @@ __source_all() {
 	done
 }
 __prepend_path() {
-	[[ ${path[(i)$1]} -gt ${#path} ]] && path=($1(N-/) $path)
+	path=($1(N-/) $path)
 }
 __is_macos() {
 	[[ $OSTYPE = darwin* ]]
@@ -153,6 +153,9 @@ fi
 hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
 
 __prepend_path ~/.local/bin
+
+# dedup
+typeset -U PATH
 # }}}
 
 # auto completion {{{
