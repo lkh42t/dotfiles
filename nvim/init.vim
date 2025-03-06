@@ -55,7 +55,9 @@ if has('nvim-0.5')
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-nvim-lua'
     Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-vsnip'
+    if !has('nvim-0.10')
+      Plug 'hrsh7th/cmp-vsnip'
+    endif
 else
   Plug 'prabirshrestha/vim-lsp'
   Plug 'prabirshrestha/asyncomplete.vim'
@@ -63,8 +65,10 @@ else
     Plug 'prabirshrestha/asyncomplete-file.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
 endif
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
+if !has('nvim-0.10')
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
+endif
 
 call plug#end()
 " }}}
