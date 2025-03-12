@@ -40,14 +40,7 @@ local snippet = {
 local cmp = require("cmp")
 cmp.setup({
   sources = cmp.config.sources({
-    {
-      name = "buffer",
-      options = {
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end,
-      },
-    },
+    { name = "buffer" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "path" },
