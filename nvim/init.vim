@@ -25,7 +25,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
-Plug 'Vimjas/vim-python-pep8-indent'
+if !has('nvim')
+  Plug 'Vimjas/vim-python-pep8-indent'
+endif
 
 " editor enhancement
 Plug 'airblade/vim-gitgutter'
