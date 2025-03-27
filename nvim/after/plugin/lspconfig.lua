@@ -71,11 +71,10 @@ local function disable_hover(client, _)
 end
 -- }}}
 
--- create new capabilities to enable snippets {{{
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
--- }}}
-
 -- language servers {{{
+lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
 local servers = {
   bashls = {},
   clangd = {},
@@ -240,12 +239,6 @@ for server, config in pairs(servers) do
 
   if config.on_attach ~= nil then
     config.on_attach = build_on_attach_callback(config.on_attach)
-  end
-
-  if config.capabilities ~= nil then
-    config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities)
-  else
-    config.capabilities = capabilities
   end
 
   lspconfig[server].setup(config)
