@@ -133,7 +133,7 @@ set noswapfile
 set nobackup
 
 " utf-8 as default
-set fileencodings=utf-8,cp932,default
+set fileencodings=ucs-bom,utf-8,default,cp932
 " use `<LF>` for line ending
 set fileformats=unix,dos
 
