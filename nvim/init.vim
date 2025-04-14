@@ -1,3 +1,54 @@
+" default settings for VIM {{{
+if !has('nvim')
+  " load defaults.vim
+  unlet! skip_defaults_vim
+  source $VIMRUNTIME/defaults.vim
+
+  " :help vim-differences
+  set autoindent
+  set autoread
+  set belloff=all
+  set nocompatible
+  set comments+=fb:•
+  set commentstring=
+  set complete-=i
+  set define=^\\s*#\\s*define
+  set display=lastline
+  set fillchars=vert:│,fold:·,foldsep:│
+  set formatoptions=tcqj
+  set hidden
+  set history=10000
+  set hlsearch
+  set include=
+  set incsearch
+  set nojoinspaces
+  set langnoremap
+  set nolangremap
+  set laststatus=2
+  set mouse=nvi
+  set mousemodel=popup_setpos
+  set nrformats=bin,hex
+  set ruler
+  set sessionoptions+=unix,slash
+  set sessionoptions-=options
+  set shortmess+=CF
+  set shortmess-=S
+  set showcmd
+  set sidescroll=1
+  set smarttab
+  set nostartofline
+  set switchbuf=uselast
+  set tabpagemax=50
+  set tags=./tags;,tags
+  set ttimeoutlen=50
+  set ttyfast
+  set viewoptions+=unix,slash
+  set viewoptions-=options
+  set viminfo+=!
+  set wildoptions=pum,tagfile
+endif
+" }}}
+
 let g:mapleader = "\<space>"
 
 " Disable providers to improve startup time.
@@ -85,49 +136,6 @@ set nobackup
 set fileencodings=utf-8,cp932,default
 " use `<LF>` for line ending
 set fileformats=unix,dos
-
-" :help vim-differences
-if !has('nvim')
-  set autoindent
-  set autoread
-  set backspace=indent,eol,start
-  set belloff=all
-  set nocompatible
-  set complete-=i
-  set display=lastline
-  set formatoptions=tcqj
-  set nofsync
-  set hidden
-  set history=10000
-  set hlsearch
-  set incsearch
-  set nojoinspaces
-  set langnoremap
-  set nolangremap
-  set laststatus=2
-  set mouse=nvi
-  set mousemodel=popup_setpos
-  set nrformats=bin,hex
-  set ruler
-  set sessionoptions+=unix,slash
-  set sessionoptions-=options
-  set shortmess+=CF
-  set shortmess-=S
-  set showcmd
-  set sidescroll=1
-  set smarttab
-  set nostartofline
-  set switchbuf=uselast
-  set tabpagemax=50
-  set tags=./tags;,tags
-  set ttimeoutlen=50
-  set ttyfast
-  set viewoptions+=unix,slash
-  set viewoptions-=options
-  set viminfo+=!
-  set wildmenu
-  set wildoptions=pum,tagfile
-endif
 
 " general
 set colorcolumn=80,100,120
