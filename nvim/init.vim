@@ -214,6 +214,11 @@ cnoremap <C-d> <Del>
 " }}}
 
 " autocmd {{{
+augroup CheckTime
+  autocmd!
+  autocmd InsertEnter,WinEnter * checktime
+augroup END
+
 augroup FiletypeIndent
   autocmd!
   autocmd FileType python setl sts=4 sw=4
