@@ -1,34 +1,51 @@
-local lspconfig = require("lspconfig")
-
 -- UI customization {{{
-local border = {
-  { "┌", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "┐", "FloatBorder" },
-  { "│", "FloatBorder" },
-  { "┘", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "└", "FloatBorder" },
-  { "│", "FloatBorder" },
-}
+vim.o.winborder = "single"
+-- }}}
 
-local util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or border
-  return util_open_floating_preview(contents, syntax, opts, ...)
-end
+-- Global keymaps {{{
+vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist)
+vim.keymap.set({ "i", "s" }, "<Tab>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-n>"
+  elseif vim.snippet.active({ direction = 1 }) then
+    return "<Cmd>lua vim.snippet.jump(1)<CR>"
+  else
+    return "<Tab>"
+  end
+end, { expr = true, silent = true })
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-p>"
+  elseif vim.snippet.active({ direction = -1 }) then
+    return "<Cmd>lua vim.snippet.jump(-1)<CR>"
+  else
+    return "<S-Tab>"
+  end
+end, { expr = true, silent = true })
 -- }}}
 
 -- on_attach {{{
-vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist)
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
+    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
     require("lsp_signature").on_attach({}, ev.buf)
-    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.treesitter.query.omnifunc"
+    if client:supports_method("textDocument/completion") then
+      local chars = {}
+      for i = 32, 126 do
+        table.insert(chars, string.char(i))
+      end
+      client.server_capabilities.completionProvider.triggerCharacters = chars
+      vim.lsp.completion.enable(true, client.id, ev.buf, {
+        autotrigger = true,
+        convert = function(item)
+          return { abbr = item.label:gsub("%b()", "") }
+        end,
+      })
+    end
 
     local opts = { buffer = ev.buf }
     vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, opts)
@@ -72,9 +89,6 @@ end
 -- }}}
 
 -- language servers {{{
-lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-})
 local servers = {
   bashls = {},
   clangd = {},
@@ -241,6 +255,7 @@ for server, config in pairs(servers) do
     config.on_attach = build_on_attach_callback(config.on_attach)
   end
 
-  lspconfig[server].setup(config)
+  vim.lsp.config(server, config)
+  vim.lsp.enable(server)
 end
 -- }}}

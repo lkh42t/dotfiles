@@ -102,24 +102,12 @@ endif
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
     Plug 'ray-x/lsp_signature.nvim'
-  Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-nvim-lua'
-    Plug 'hrsh7th/cmp-path'
-    if !has('nvim-0.10')
-      Plug 'hrsh7th/cmp-vsnip'
-    endif
 else
   Plug 'prabirshrestha/vim-lsp'
   Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-buffer.vim'
     Plug 'prabirshrestha/asyncomplete-file.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-endif
-if !has('nvim-0.10')
-  Plug 'hrsh7th/vim-vsnip'
-  Plug 'hrsh7th/vim-vsnip-integ'
 endif
 
 call plug#end()
@@ -160,7 +148,7 @@ set listchars=tab:>\ ,space:∙
 
 " completion
 set shortmess+=c
-set completeopt=menu,menuone,noselect
+set completeopt=fuzzy,menu,menuone,noselect,popup
 
 " indent
 set expandtab     " use spaces instead of tabs
