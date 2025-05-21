@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    require("lsp_signature").on_attach({}, ev.buf)
+    require("lsp_signature").on_attach({ zindex = 50 }, ev.buf)
 
     vim.bo[ev.buf].omnifunc = "v:lua.vim.treesitter.query.omnifunc"
     if client:supports_method("textDocument/completion") then
