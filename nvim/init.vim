@@ -89,8 +89,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 if has('nvim')
-  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' }
 endif
 if has('patch-9.0.1799')
   packadd! editorconfig
