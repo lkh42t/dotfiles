@@ -98,8 +98,11 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESSHISTFILE=-
 
 # GPG
-export GPG_TTY=$(tty)
-hash gpgconf 2>/dev/null && export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+if hash gpg 2>/dev/null; then
+	export GPG_TTY=$(tty)
+	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	gpg-connect-agent updatestartuptty /bye >/dev/null
+fi
 # }}}
 
 # syntax highlight {{{
