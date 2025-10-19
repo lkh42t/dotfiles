@@ -1,5 +1,5 @@
 " Use builtin LSP for Neovim 0.5+
-if has('nvim-0.5') | finish | endif
+if has('nvim-0.5') || !exists('g:lsp_loaded') | finish | endif
 
 let g:lsp_diagnostics_float_cursor = 1
 

@@ -1,4 +1,4 @@
-if has('nvim-0.5') | finish | endif
+if has('nvim-0.5') || !exists('g:asyncomplete_loaded') | finish | endif
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
