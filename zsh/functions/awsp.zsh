@@ -15,15 +15,12 @@ Commands:
 	get)
 		echo "${AWS_PROFILE:-default}"
 		;;
-	help)
+	help | -h | --help)
 		echo "$usage" >&2
 		;;
 	list)
 		if [[ -f $config_file ]]; then
-			{
-				sed -n 's/^\[profile \(.*\)\]$/\1/p' "$config_file"
-				echo 'default'
-			} | sort -u
+			sed -n -e 's/^\[default\]$/default/p' -e 's/^\[profile \(.*\)\]$/\1/p' "$config_file"
 		fi
 		;;
 	reset)
