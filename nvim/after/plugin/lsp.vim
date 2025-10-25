@@ -11,7 +11,7 @@ if executable('bash-language-server')
     autocmd User lsp_setup call lsp#register_server({
     \ 'name': 'bashls',
     \ 'cmd': {server_info->['bash-language-server', 'start']},
-    \ 'allowlist': ['sh'],
+    \ 'allowlist': ['bash', 'sh', 'zsh'],
     \})
   augroup END
 endif

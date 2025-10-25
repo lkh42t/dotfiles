@@ -90,7 +90,9 @@ end
 
 -- language servers {{{
 local servers = {
-  bashls = {},
+  bashls = {
+    filetypes = { "bash", "sh", "zsh" }
+  },
   clangd = {},
   cssls = {
     init_options = {
