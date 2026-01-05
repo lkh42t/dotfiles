@@ -142,13 +142,6 @@ if [[ -n $SYNTAX_HIGHLIGHT_SRC ]]; then
 fi
 # }}}
 
-# setup asdf {{{
-if [[ -d ~/.asdf ]]; then
-	__source ~/.asdf/asdf.sh
-	fpath=(~/.asdf/completions $fpath)
-fi
-# }}}
-
 # PATH setting {{{
 # flutter
 __prepend_path ~/.local/flutter/default/bin
