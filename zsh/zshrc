@@ -30,7 +30,27 @@ __is_macos() {
 __source ~/.zsh/platforms/"${$(uname):l}.zsh"
 # }}}
 
-# command history settings {{{
+# general settings {{{
+# make '/' as word seperator
+autoload -Uz select-word-style && select-word-style bash
+
+# key bindings
+bindkey "^U" backward-kill-line
+
+# seealso: zshoptions(1)
+# Changing Directories
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+
+# Completion
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit && compinit
+
+# Expansion and Globbing
+setopt no_nomatch  # suppress `zsh: no matches found`
+
+# History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=50000
@@ -50,22 +70,28 @@ setopt hist_no_store
 setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt share_history
-# }}}
 
-# general settings {{{
-setopt autocd
-setopt auto_pushd
-setopt pushd_ignore_dups
-
-setopt no_beep
-
+# Input/Output
 setopt correct
 
-# suppress `zsh: no matches found`
-setopt no_nomatch
+# Prompting
+setopt prompt_subst
+autoload -Uz colors && colors
+autoload -Uz promptinit && promptinit
+prompt_mytheme_setup() {
+	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
+	if [[ -n $GIT_PS1_SRC ]]; then
+		__source "$GIT_PS1_SRC" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
+		GIT_PS1_SHOWDIRTYSTATE=1
+		GIT_PS1_SHOWUNTRACKEDFILES=1
+	fi
+	PROMPT="$PROMPT"$'\n''%# '
+}
+prompt_themes+=(mytheme)
+prompt mytheme
 
-# make '/' as word seperator
-autoload -Uz select-word-style && select-word-style bash
+# Zle
+setopt no_beep
 # }}}
 
 # aliases {{{
@@ -80,7 +106,7 @@ alias grep='grep --color=auto'
 
 alias mkdir='mkdir -p'
 
-# libarchive's tar supports more formats than GNU's one.
+# prefer libarchive's tar because it supports more formats than GNU's one.
 hash bsdtar 2>/dev/null && alias tar='bsdtar'
 
 hash nvim 2>/dev/null && alias v='nvim'
@@ -114,26 +140,6 @@ if [[ -n $SYNTAX_HIGHLIGHT_SRC ]]; then
 fi
 # }}}
 
-# prompt {{{
-setopt prompt_subst
-
-autoload -Uz colors && colors
-autoload -Uz promptinit && promptinit
-
-prompt_mytheme_setup() {
-	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
-	if [[ -n $GIT_PS1_SRC ]]; then
-		__source "$GIT_PS1_SRC" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
-		GIT_PS1_SHOWDIRTYSTATE=1
-		GIT_PS1_SHOWUNTRACKEDFILES=1
-	fi
-	PROMPT="$PROMPT"$'\n''%# '
-}
-
-prompt_themes+=(mytheme)
-prompt mytheme
-# }}}
-
 # setup asdf {{{
 if [[ -d ~/.asdf ]]; then
 	__source ~/.asdf/asdf.sh
@@ -156,15 +162,6 @@ fi
 hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
 
 __prepend_path ~/.local/bin
-# }}}
-
-# auto completion {{{
-fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit && compinit
-# }}}
-
-# key settings {{{
-bindkey "^U" backward-kill-line
 # }}}
 
 # load functions {{{
