@@ -67,6 +67,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+--- @alias OnAttachCallback fun(client: vim.lsp.Client, bufnr: integer)
+
+--- @param callbacks OnAttachCallback|OnAttachCallback[]
+--- @return OnAttachCallback
 local function build_on_attach_callback(callbacks)
   return function(client, bufnr)
     if type(callbacks) == "function" then
@@ -79,10 +83,12 @@ local function build_on_attach_callback(callbacks)
   end
 end
 
+--- @type OnAttachCallback
 local function disable_formatter(client, _)
   client.server_capabilities.documentFormattingProvider = false
 end
 
+--- @type OnAttachCallback
 local function disable_hover(client, _)
   client.server_capabilities.hoverProvider = false
 end
@@ -91,7 +97,7 @@ end
 -- language servers {{{
 local servers = {
   bashls = {
-    filetypes = { "bash", "sh", "zsh" }
+    filetypes = { "bash", "sh", "zsh" },
   },
   clangd = {},
   cssls = {
