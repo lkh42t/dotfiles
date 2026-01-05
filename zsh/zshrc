@@ -76,6 +76,7 @@ setopt correct
 
 # Prompting
 setopt prompt_subst
+setopt transient_rprompt
 autoload -Uz colors && colors
 autoload -Uz promptinit && promptinit
 prompt_mytheme_setup() {
@@ -86,6 +87,7 @@ prompt_mytheme_setup() {
 		GIT_PS1_SHOWUNTRACKEDFILES=1
 	fi
 	PROMPT="$PROMPT"$'\n''%# '
+	RPROMPT='[%F{yellow}%?%f]'
 }
 prompt_themes+=(mytheme)
 prompt mytheme
