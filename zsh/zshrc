@@ -160,7 +160,8 @@ __prepend_path ~/.local/bin
 # }}}
 
 # load functions {{{
-__source_all ~/.zsh/functions/*.zsh
+fpath=(~/.zsh/functions $fpath)
+autoload -Uz awsp swflutter swtex
 # }}}
 
 # unset utility functions {{{

@@ -1,3 +1,5 @@
+#!/hint/zsh
+
 awsp() {
 	local usage='Usage: awsp COMMAND
 
@@ -40,3 +42,5 @@ Commands:
 		;;
 	esac
 }
+
+awsp "$@"

@@ -1,0 +1,45 @@
+#!/hint/zsh
+
+swtex() {
+	local usage='Usage: swtex COMMAND
+
+Commands:
+	get		show current version
+	help		show usage
+	list		show available versions
+	set VERSION	switch to the specified version'
+
+	local base_dir=~/.local/texlive
+
+	local cmd=$1
+	case $cmd in
+	get)
+		readlink "$base_dir/default"
+		;;
+	help | -h | --help)
+		echo "$usage" >&2
+		;;
+	list)
+		find "$base_dir" -mindepth 1 -maxdepth 1 -type d -not -name texmf-local | sed 's@^.*/@@'
+		;;
+	set)
+		local newver=$2
+		if [[ ! $newver ]]; then
+			echo 'swtex: missing version' >&2
+			return 1
+		elif [[ ! -d $base_dir/$newver ]]; then
+			echo "swtex: unknown version: $newver" >&2
+			return 2
+		fi
+		rm -f "$base_dir/default"
+		ln -sf "$newver" "$base_dir/default"
+		;;
+	*)
+		echo "swtex: unknown subcommand: '$cmd'" >&2
+		echo "$usage" >&2
+		return 1
+		;;
+	esac
+}
+
+swtex "$@"
