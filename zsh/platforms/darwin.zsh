@@ -1,5 +1,3 @@
-CP_COW_OPT='-c'
-
 GIT_PS1_SRC=/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
 
 if [[ -d /opt/homebrew/bin ]]; then
@@ -13,7 +11,6 @@ if [[ -d /opt/homebrew/bin ]]; then
 fi
 
 unload_variables() {
-	unset CP_COW_OPT
 	unset SYNTAX_HIGHLIGHT_SRC
 	unset GIT_PS1_SRC
 	unset -f unload_variables

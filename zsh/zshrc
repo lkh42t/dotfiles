@@ -104,7 +104,13 @@ alias lla='ls -lA'
 
 alias diff='diff --color=auto'
 alias grep='grep --color=auto'
-[[ -n $CP_COW_OPT ]] && alias cp="cp $CP_COW_OPT"
+
+# copy-on-write
+if __is_macos; then
+	alias cp='cp -c'
+else
+	alias cp='cp --reflink=auto'
+fi
 
 alias mkdir='mkdir -p'
 
