@@ -1,5 +1,4 @@
 CP_COW_OPT='-c'
-DIFF_COLOR_OPT=''
 
 GIT_PS1_SRC=/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
 
@@ -15,7 +14,6 @@ fi
 
 unload_variables() {
 	unset CP_COW_OPT
-	unset DIFF_COLOR_OPT
 	unset SYNTAX_HIGHLIGHT_SRC
 	unset GIT_PS1_SRC
 	unset -f unload_variables

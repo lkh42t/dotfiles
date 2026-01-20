@@ -102,9 +102,9 @@ alias la='ls -A'
 alias ll='ls -l'
 alias lla='ls -lA'
 
+alias diff='diff --color=auto'
 alias grep='grep --color=auto'
 [[ -n $CP_COW_OPT ]] && alias cp="cp $CP_COW_OPT"
-[[ -n $DIFF_COLOR_OPT ]] && alias diff="diff $DIFF_COLOR_OPT"
 
 alias mkdir='mkdir -p'
 
