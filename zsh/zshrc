@@ -9,15 +9,6 @@ export LC_MONETARY=ja_JP.UTF-8
 bindkey -e
 
 # utility functions {{{
-__source() {
-	[[ -f $1 ]] && . "$1"
-}
-__source_all() {
-	while [[ -n $1 ]]; do
-		__source "$1"
-		shift
-	done
-}
 __prepend_path() {
 	[[ ${path[(i)$1]} -gt ${#path} ]] && path=($1(N-/) $path)
 }
@@ -27,7 +18,7 @@ __is_macos() {
 # }}}
 
 # load platform specific variables {{{
-__source ~/.zsh/platforms/"${$(uname):l}.zsh"
+. ~/.zsh/platforms/"${$(uname):l}.zsh"
 # }}}
 
 # general settings {{{
@@ -81,8 +72,9 @@ autoload -Uz colors && colors
 autoload -Uz promptinit && promptinit
 prompt_mytheme_setup() {
 	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
-	if [[ -n $GIT_PS1_SRC ]]; then
-		__source "$GIT_PS1_SRC" && PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
+	if [[ -n $GIT_PS1_SRC ]] && [[ -r $GIT_PS1_SRC ]]; then
+		. "$GIT_PS1_SRC"
+		PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
 		GIT_PS1_SHOWDIRTYSTATE=1
 		GIT_PS1_SHOWUNTRACKEDFILES=1
 	fi
@@ -148,8 +140,8 @@ fi
 # }}}
 
 # syntax highlight {{{
-if [[ -n $SYNTAX_HIGHLIGHT_SRC ]]; then
-	__source "$SYNTAX_HIGHLIGHT_SRC"
+if [[ -n $SYNTAX_HIGHLIGHT_SRC ]] && [[ -r $SYNTAX_HIGHLIGHT_SRC ]]; then
+	. "$SYNTAX_HIGHLIGHT_SRC"
 	typeset -A ZSH_HIGHLIGHT_STYLES
 	ZSH_HIGHLIGHT_STYLES[globbing]='none'
 	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -179,8 +171,6 @@ autoload -Uz awsp swflutter swtex
 # }}}
 
 # unset utility functions {{{
-unset -f __source
-unset -f __source_all
 unset -f __prepend_path
 unset -f __is_macos
 unload_variables
