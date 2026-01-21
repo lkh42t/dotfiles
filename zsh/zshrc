@@ -1,3 +1,5 @@
+# shellcheck disable=SC2034,SC2128,SC2155,SC2206
+
 # locale settings {{{
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US
@@ -18,7 +20,13 @@ __is_macos() {
 # }}}
 
 # load platform specific variables {{{
-. ~/.zsh/platforms/"${$(uname):l}.zsh"
+if __is_macos; then
+	# shellcheck source=platforms/darwin.zsh
+	. ~/.zsh/platforms/darwin.zsh
+else
+	# shellcheck source=platforms/linux.zsh
+	. ~/.zsh/platforms/linux.zsh
+fi
 # }}}
 
 # general settings {{{
@@ -73,7 +81,9 @@ autoload -Uz promptinit && promptinit
 prompt_mytheme_setup() {
 	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
 	if [[ -n $GIT_PS1_SRC ]] && [[ -r $GIT_PS1_SRC ]]; then
+		# shellcheck disable=SC1090
 		. "$GIT_PS1_SRC"
+		# shellcheck disable=SC2016
 		PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
 		GIT_PS1_SHOWDIRTYSTATE=1
 		GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -141,6 +151,7 @@ fi
 
 # syntax highlight {{{
 if [[ -n $SYNTAX_HIGHLIGHT_SRC ]] && [[ -r $SYNTAX_HIGHLIGHT_SRC ]]; then
+	# shellcheck disable=SC1090
 	. "$SYNTAX_HIGHLIGHT_SRC"
 	typeset -A ZSH_HIGHLIGHT_STYLES
 	ZSH_HIGHLIGHT_STYLES[globbing]='none'
