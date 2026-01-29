@@ -207,14 +207,11 @@ augroup CheckTime
   autocmd InsertEnter,WinEnter * checktime
 augroup END
 
-augroup FiletypeIndent
+augroup FiletypeSettings
   autocmd!
   autocmd FileType python setl sts=4 sw=4
+  " use tabs for indent
   autocmd FileType go,make,sh,zsh setl noet sts& sw&
-augroup END
-
-augroup FiletypeComment
-  autocmd!
   " prefer line comments for C and C++
   autocmd FileType c,cpp setl cms=//%s
 augroup END
