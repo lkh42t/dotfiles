@@ -140,7 +140,7 @@ set splitright
 set updatetime=100
 
 " clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
 
 " invisible characters
 set list
