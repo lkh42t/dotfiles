@@ -1,25 +1,25 @@
-" default settings for VIM {{{
+" default settings for Vim {{{
 if !has('nvim')
   " load defaults.vim
   unlet! skip_defaults_vim
   source $VIMRUNTIME/defaults.vim
 
-  " :help vim-differences
+  " :help nvim-defaults
   set autoindent
   set autoread
   set belloff=all
-  set nocompatible
   set comments+=fb:•
   set commentstring=
+  set nocompatible
   set complete-=i
-  set define=^\\s*#\\s*define
+  set diffopt+=linematch:40
+  set diffopt-=inline:simple
   set display=lastline
   set fillchars=vert:│,fold:·,foldsep:│
   set formatoptions=tcqj
   set hidden
   set history=10000
   set hlsearch
-  set include=
   set incsearch
   set nojoinspaces
   set langnoremap
@@ -40,6 +40,7 @@ if !has('nvim')
   set switchbuf=uselast
   set tabpagemax=50
   set tags=./tags;,tags
+  set ttimeout
   set ttimeoutlen=50
   set ttyfast
   set viewoptions+=unix,slash
