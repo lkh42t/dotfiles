@@ -66,190 +66,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
   end,
 })
-
---- @alias OnAttachCallback fun(client: vim.lsp.Client, bufnr: integer)
-
---- @param callbacks OnAttachCallback|OnAttachCallback[]
---- @return OnAttachCallback
-local function build_on_attach_callback(callbacks)
-  return function(client, bufnr)
-    if type(callbacks) == "function" then
-      callbacks(client, bufnr)
-    elseif type(callbacks) == "table" then
-      for _, cb in ipairs(callbacks) do
-        cb(client, bufnr)
-      end
-    end
-  end
-end
-
---- @type OnAttachCallback
-local function disable_formatter(client, _)
-  client.server_capabilities.documentFormattingProvider = false
-end
-
---- @type OnAttachCallback
-local function disable_hover(client, _)
-  client.server_capabilities.hoverProvider = false
-end
 -- }}}
 
 -- language servers {{{
 local servers = {
-  bashls = {
-    filetypes = { "bash", "sh", "zsh" },
-  },
-  clangd = {},
-  cssls = {
-    init_options = {
-      provideFormatter = false,
-    },
-  },
-  cmake = {},
-  dartls = {
-    settings = {
-      dart = {
-        completeFunctionCalls = true,
-        enableSnippets = true,
-      },
-    },
-  },
-  dockerls = {},
-  efm = {
-    filetypes = {
-      "css",
-      "dockerfile",
-      "html",
-      "javascript",
-      "javascriptreact",
-      "json",
-      "jsonc",
-      "lua",
-      "scss",
-      "typescript",
-      "typescriptreact",
-      "yaml",
-    },
-    init_options = { documentFormatting = true },
-  },
-  esbonio = {},
-  eslint = {},
-  gopls = {
-    settings = {
-      gopls = {
-        gofumpt = true,
-        staticcheck = true,
-        usePlaceholders = true,
-      },
-    },
-  },
-  html = {
-    filetypes = { "html", "htmldjango" },
-    init_options = {
-      provideFormatter = false,
-    },
-  },
-  jsonls = {
-    init_options = {
-      provideFormatter = false,
-    },
-  },
-  lua_ls = {
-    settings = {
-      Lua = {
-        format = {
-          enable = false,
-        },
-        runtime = {
-          version = "LuaJIT",
-        },
-        workspace = {
-          library = { vim.env.VIMRUNTIME },
-          -- library = vim.api.nvim_get_runtime_file("", true),
-        },
-      },
-    },
-  },
-  pyright = {
-    capabilities = {
-      textDocument = {
-        publishDiagnostics = {
-          tagSupport = {
-            valueSet = { 2 },
-          },
-        },
-      },
-    },
-    settings = {
-      pyright = {
-        disableOrganizeImports = true,
-      },
-      python = {
-        analysis = {
-          diagnosticMode = "off",
-          diagnosticSeverityOverrides = {
-            reportInvalidTypeForm = "none",
-            reportMissingImports = "none",
-            reportMissingModuleSource = "none",
-            reportUndefinedVariable = "none",
-          },
-          typeCheckingMode = "off",
-        },
-      },
-    },
-  },
-  ruff = {
-    on_attach = disable_hover,
-  },
-  rust_analyzer = {
-    settings = {
-      ["rust-analyzer"] = {
-        check = {
-          command = "clippy",
-        },
-      },
-    },
-  },
-  terraformls = {
-    init_options = {
-      terraform = {
-        path = vim.fn.exepath("tofu"),
-      },
-    },
-  },
-  texlab = {
-    settings = {
-      texlab = {
-        build = {
-          executable = "llmk",
-          args = {},
-        },
-        chktex = { onOpenAndSave = true },
-      },
-    },
-  },
-  ts_ls = {
-    on_attach = disable_formatter,
-  },
-  vimls = {
-    init_options = {
-      vimruntime = vim.env.VIMRUNTIME,
-      runtimepath = vim.o.runtimepath,
-    },
-  },
-  yamlls = {},
+  "bashls",
+  "clangd",
+  "cmake",
+  "cssls",
+  "dartls",
+  "dockerls",
+  "efm",
+  "esbonio",
+  "eslint",
+  "gopls",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "pyright",
+  "ruff",
+  "rust_analyzer",
+  "terraformls",
+  "texlab",
+  "ts_ls",
+  "vimls",
+  "yamlls",
 }
-
-for server, config in pairs(servers) do
-  if type(config) == "function" then
-    config = config()
-  end
-
-  if config.on_attach ~= nil then
-    config.on_attach = build_on_attach_callback(config.on_attach)
-  end
-
-  vim.lsp.config(server, config)
-  vim.lsp.enable(server)
-end
+vim.lsp.enable(servers)
 -- }}}
