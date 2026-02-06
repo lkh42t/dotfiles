@@ -5,47 +5,15 @@ vim.o.winborder = "single"
 -- Global keymaps {{{
 vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist)
-vim.keymap.set({ "i", "s" }, "<Tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-n>"
-  elseif vim.snippet.active({ direction = 1 }) then
-    return "<Cmd>lua vim.snippet.jump(1)<CR>"
-  else
-    return "<Tab>"
-  end
-end, { expr = true, silent = true })
-vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-p>"
-  elseif vim.snippet.active({ direction = -1 }) then
-    return "<Cmd>lua vim.snippet.jump(-1)<CR>"
-  else
-    return "<S-Tab>"
-  end
-end, { expr = true, silent = true })
 -- }}}
 
 -- on_attach {{{
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
     require("lsp_signature").on_attach({ zindex = 50 }, ev.buf)
 
     vim.bo[ev.buf].omnifunc = "v:lua.vim.treesitter.query.omnifunc"
-    if client:supports_method("textDocument/completion") then
-      local chars = {}
-      for i = 32, 126 do
-        table.insert(chars, string.char(i))
-      end
-      client.server_capabilities.completionProvider.triggerCharacters = chars
-      vim.lsp.completion.enable(true, client.id, ev.buf, {
-        autotrigger = true,
-        convert = function(item)
-          return { abbr = item.label:gsub("%b()", "") }
-        end,
-      })
-    end
 
     local opts = { buffer = ev.buf }
     vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, opts)
@@ -92,5 +60,9 @@ local servers = {
   "vimls",
   "yamlls",
 }
+local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
+for _, server in ipairs(servers) do
+  vim.lsp.config(server, { capability = default_capabilities })
+end
 vim.lsp.enable(servers)
 -- }}}

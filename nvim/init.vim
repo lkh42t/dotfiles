@@ -101,14 +101,22 @@ endif
 
 " language server and completion
 if has('nvim-0.5')
+  " LSP plugins
   Plug 'neovim/nvim-lspconfig'
-    Plug 'ray-x/lsp_signature.nvim'
+  Plug 'ray-x/lsp_signature.nvim'
+  " completion plugins
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-path'
 else
+  " LSP plugins
   Plug 'prabirshrestha/vim-lsp'
+  " completion plugins
   Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-buffer.vim'
-    Plug 'prabirshrestha/asyncomplete-file.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/asyncomplete-buffer.vim'
+  Plug 'prabirshrestha/asyncomplete-file.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
 endif
 
 call plug#end()
