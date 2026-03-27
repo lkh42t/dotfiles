@@ -98,6 +98,23 @@ prompt mytheme
 setopt no_beep
 # }}}
 
+# PATH setting {{{
+__prepend_path ~/.local/bin
+
+# flutter
+__prepend_path ~/.local/flutter/default/bin
+
+# texlive
+if __is_macos; then
+	__prepend_path ~/.local/texlive/default/bin/universal-darwin
+else
+	__prepend_path ~/.local/texlive/default/bin/x86_64-linux
+fi
+
+# golang
+hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
+# }}}
+
 # aliases {{{
 alias ls='ls -h --color=auto'
 alias la='ls -A'
@@ -157,23 +174,6 @@ if [[ -n $SYNTAX_HIGHLIGHT_SRC ]] && [[ -r $SYNTAX_HIGHLIGHT_SRC ]]; then
 	ZSH_HIGHLIGHT_STYLES[globbing]='none'
 	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 fi
-# }}}
-
-# PATH setting {{{
-# flutter
-__prepend_path ~/.local/flutter/default/bin
-
-# texlive
-if __is_macos; then
-	__prepend_path ~/.local/texlive/default/bin/universal-darwin
-else
-	__prepend_path ~/.local/texlive/default/bin/x86_64-linux
-fi
-
-# golang
-hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
-
-__prepend_path ~/.local/bin
 # }}}
 
 # load functions {{{
