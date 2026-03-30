@@ -152,6 +152,14 @@ set updatetime=100
 
 " clipboard
 set clipboard=unnamed,unnamedplus
+if has('nvim-0.10')
+  if exists('$SSH_TTY') && !exists('$TMUX')
+    let g:clipboard = 'osc52'
+  endif
+elseif has('patch-9.1.1984')
+  packadd osc52
+  set clipmethod+=osc52
+endif
 
 " invisible characters
 set list
