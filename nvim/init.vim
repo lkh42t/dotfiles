@@ -93,10 +93,12 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
   Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' }
 endif
-if has('patch-9.0.1799')
-  packadd! editorconfig
-elseif !has('nvim-0.9')
-  Plug 'editorconfig/editorconfig-vim'
+if !has('nvim-0.9')
+  if has('patch-9.0.1799')
+    packadd! editorconfig
+  else
+    Plug 'editorconfig/editorconfig-vim'
+  endif
 endif
 
 " language server and completion
