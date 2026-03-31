@@ -1,4 +1,4 @@
-require("nvim-treesitter").install("unstable")
+require("nvim-treesitter").install({ "stable", "unstable" })
 require("nvim-treesitter-textobjects").setup({
   select = {
     lookahead = true,
