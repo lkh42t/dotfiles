@@ -188,10 +188,14 @@ let g:tex_flavor = 'latex'
 set termguicolors " use 24-bit true color
 set background=dark
 let g:ayucolor = 'dark'
+function! s:custom_ayu_colors()
+  call ayu#hi('SpecialKey', 'editor_gutter_normal', '')
+endfunction
+augroup custom_ayu_colors
+  autocmd!
+  autocmd ColorScheme ayu call s:custom_ayu_colors()
+augroup END
 colorscheme ayu
-if !has('nvim')
-  hi SpecialKey guifg=#464b56
-endif
 " }}}
 
 " Keymaps {{{
