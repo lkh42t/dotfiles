@@ -3,11 +3,11 @@ XDG_CONFIG_HOME ?= $(HOME)/.config
 UNAME_OS := $(shell uname -s)
 
 XDG_CONFIG_TARGETS := efm-langserver fontconfig git nvim tmux
-NON_XDG_CONFIG_TARGETS := vim zsh
+ALL_TARGETS := $(XDG_CONFIG_TARGETS)
+ALL_TARGETS += vim zsh
 ifeq ($(UNAME_OS),Darwin)
-	NON_XDG_CONFIG_TARGETS += launchd
+	ALL_TARGETS += launchd
 endif
-ALL_TARGETS := $(XDG_CONFIG_TARGETS) $(NON_XDG_CONFIG_TARGETS)
 
 .PHONY: all config-home $(ALL_TARGETS)
 
