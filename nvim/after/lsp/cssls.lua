@@ -4,4 +4,3 @@ return {
     provideFormatter = false,
   },
 }
-
