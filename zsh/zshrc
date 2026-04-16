@@ -140,6 +140,9 @@ hash nvim 2>/dev/null && alias v='nvim'
 # }}}
 
 # environment variables {{{
+# man(1)
+export MANROFFOPT=-c
+
 # less(1)
 export LESS='-iFR -Dd+c -Du+gd -Dsybd'
 export LESSHISTFILE=-  # disable history
