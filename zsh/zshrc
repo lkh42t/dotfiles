@@ -48,7 +48,7 @@ fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
 
 # Expansion and Globbing
-setopt no_nomatch  # suppress `zsh: no matches found`
+setopt no_nomatch # suppress `zsh: no matches found`
 
 # History
 HISTFILE=~/.zsh_history
@@ -63,7 +63,7 @@ zshaddhistory() {
 		((j++))
 	done
 	# shellcheck disable=SC2296,SC2298
-	whence ${${(z)1}[$j]} >| /dev/null || return 1
+	whence ${${(z)1}[$j]} >|/dev/null || return 1
 }
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -148,7 +148,7 @@ export MANROFFOPT=-c
 
 # less(1)
 export LESS='-iFR -Dd+c -Du+gd -Dsybd'
-export LESSHISTFILE=-  # disable history
+export LESSHISTFILE=- # disable history
 
 # GPG
 if hash gpg 2>/dev/null; then
