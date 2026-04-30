@@ -34,9 +34,6 @@ tools:
   typescript-prettier: &typescript-prettier
     format-command: "prettier --parser typescript"
     format-stdin: true
-  yaml-prettier: &yaml-prettier
-    format-command: "prettier --parser yaml"
-    format-stdin: true
 
 languages:
   css:
@@ -61,5 +58,3 @@ languages:
     - <<: *typescript-prettier
   typescriptreact:
     - <<: *typescript-prettier
-  yaml:
-    - <<: *yaml-prettier
