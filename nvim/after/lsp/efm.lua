@@ -12,7 +12,6 @@ return {
     "scss",
     "typescript",
     "typescriptreact",
-    "yaml",
   },
   init_options = { documentFormatting = true },
 }
