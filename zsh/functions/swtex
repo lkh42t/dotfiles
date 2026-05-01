@@ -20,7 +20,11 @@ Commands:
 		echo "$usage" >&2
 		;;
 	list)
-		find "$base_dir" -mindepth 1 -maxdepth 1 -type d -not -name texmf-local | sed 's@^.*/@@'
+		local versions=($base_dir/*(N/))
+		versions=(${versions:#*/texmf-local})
+		if [[ ${#versions} -gt 0 ]]; then
+			printf '%s\n' "${versions[@]:t}"
+		fi
 		;;
 	set)
 		local newver=$2
