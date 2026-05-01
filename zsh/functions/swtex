@@ -1,14 +1,19 @@
 #!/hint/zsh
 
-swtex() {
-	local usage='Usage: swtex COMMAND
+readonly CMDNAME=swtex
+
+usage() {
+	printf 'Usage: %s COMMAND
 
 Commands:
 	get		show current version
 	help		show usage
 	list		show available versions
-	set VERSION	switch to the specified version'
+	set VERSION	switch to the specified version
+' "$CMDNAME"
+}
 
+swtex() {
 	local base_dir=~/.local/texlive
 
 	local cmd=$1
@@ -17,7 +22,7 @@ Commands:
 		readlink "$base_dir/default"
 		;;
 	help | -h | --help)
-		echo "$usage" >&2
+		usage >&2
 		;;
 	list)
 		local versions=($base_dir/*(N/))
@@ -29,18 +34,18 @@ Commands:
 	set)
 		local newver=$2
 		if [[ ! $newver ]]; then
-			echo 'swtex: missing version' >&2
+			printf "%s: missing version\n" "$CMDNAME" >&2
 			return 1
 		elif [[ ! -d $base_dir/$newver ]]; then
-			echo "swtex: unknown version: $newver" >&2
+			printf "%s: unknown version: %s\n" "$CMDNAME" "$newver" >&2
 			return 2
 		fi
 		rm -f "$base_dir/default"
 		ln -sf "$newver" "$base_dir/default"
 		;;
 	*)
-		echo "swtex: unknown subcommand: '$cmd'" >&2
-		echo "$usage" >&2
+		printf "%s: unknown subcommand: %s\n" "$CMDNAME" "$cmd" >&2
+		usage >&2
 		return 1
 		;;
 	esac

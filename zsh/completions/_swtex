@@ -1,33 +1,34 @@
 #compdef swtex
 
-_swtex() {
-	_sub_commands() {
-		local -a commands
-		commands=(
-			'get:show current version'
-			'list:show available versions'
-			'set:switch to the specified version'
-			'help:show usage'
-		)
-		_describe -t commands 'commands' commands "$@"
-	}
+_swtex_subcommands() {
+	local -a commands
+	commands=(
+		'get:show current version'
+		'list:show available versions'
+		'set:switch to the specified version'
+		'help:show usage'
+	)
+	_describe -t commands 'commands' commands "$@"
+}
 
-	_versions() {
-		local versions
-		versions=($(swtex list))
-		_describe -t versions 'version' versions "$@"
-	}
+_swtex_versions() {
+	local versions
+	versions=($(swtex list))
+	_describe -t versions 'version' versions "$@"
+}
+
+_swtex() {
 
 	_arguments -C \
-		'1: :_sub_commands' \
+		'1: :_swtex_subcommands' \
 		'*:: :->args'
 
 	case "$state" in
 	args)
-		case $words[1] in
+		case ${words[1]} in
 		set)
 			_arguments -C \
-				'1: :_versions'
+				'1: :_swtex_versions'
 			;;
 		esac
 		;;
