@@ -24,7 +24,19 @@ if executable('clangd')
     autocmd User lsp_setup call lsp#register_server({
     \ 'name': 'clangd',
     \ 'cmd': {server_info->['clangd']},
-    \ 'allowlist': ['c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto'],
+    \ 'allowlist': ['c', 'cpp', 'objc', 'objcpp', 'cuda'],
+    \})
+  augroup END
+endif
+" }}}
+
+" cmake {{{
+if executable('cmake-language-server')
+  augroup lsp_cmake
+    autocmd! User lsp_setup call lsp#register_server({
+    \ 'name': 'cmake',
+    \ 'cmd': {server_info->['cmake-language-server']},
+    \ 'allowlist': ['cmake']
     \})
   augroup END
 endif
@@ -120,7 +132,7 @@ if executable('gopls')
     autocmd User lsp_setup call lsp#register_server({
     \ 'name': 'gopls',
     \ 'cmd': {server_info->['gopls', '-remote=auto']},
-    \ 'allowlist': ['go'],
+    \ 'allowlist': ['go', 'gomod', 'gowork', 'gotmpl'],
     \ 'initialization_options': {
     \   'gofumpt': v:true,
     \   'staticcheck': v:true,
@@ -169,7 +181,7 @@ if executable('ruff')
     autocmd!
     autocmd User lsp_setup call lsp#register_server({
     \ 'name': 'ruff',
-    \ 'cmd': {server_info->['ruff', 'server', '--preview']},
+    \ 'cmd': {server_info->['ruff', 'server']},
     \ 'allowlist': ['python'],
     \})
   augroup END
@@ -250,7 +262,7 @@ if executable('vim-language-server')
     \ 'allowlist': ['vim'],
     \ 'initialization_options': {
     \   'isNeovim': has('nvim'),
-    \   'iskeyword': &isk . ',:',
+    \   'iskeyword': &isk,
     \   'vimruntime': $VIMRUNTIME,
     \   'runtimepath': &rtp,
     \   'diagnostic': {'enable': v:true},
@@ -280,6 +292,9 @@ if executable('yaml-language-server')
     \ 'workspace_config': {
     \   'redhat': {
     \     'telemetry': {'enabled': v:false},
+    \   },
+    \   'yaml': {
+    \     'format': {'enabled': v:true},
     \   },
     \ },
     \})
