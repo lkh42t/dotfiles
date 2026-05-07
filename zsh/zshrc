@@ -77,24 +77,9 @@ setopt share_history
 setopt correct
 
 # Prompting
-setopt prompt_subst
+fpath=(~/.zsh/functions $fpath)
 setopt transient_rprompt
-autoload -Uz colors && colors
 autoload -Uz promptinit && promptinit
-prompt_mytheme_setup() {
-	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
-	if [[ -n $GIT_PS1_SRC ]] && [[ -r $GIT_PS1_SRC ]]; then
-		# shellcheck disable=SC1090
-		. "$GIT_PS1_SRC"
-		# shellcheck disable=SC2016
-		PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
-		GIT_PS1_SHOWDIRTYSTATE=1
-		GIT_PS1_SHOWUNTRACKEDFILES=1
-	fi
-	PROMPT="$PROMPT"$'\n''%# '
-	RPROMPT='[%F{yellow}%?%f]'
-}
-prompt_themes+=(mytheme)
 prompt mytheme
 
 # Zle

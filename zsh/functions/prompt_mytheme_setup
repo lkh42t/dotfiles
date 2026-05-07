@@ -1,0 +1,40 @@
+#!/hint/zsh
+# shellcheck disable=SC2034
+
+prompt_mytheme_setup() {
+	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
+
+	local git_ps1_src
+	case $OSTYPE in
+	darwin*)
+		if [[ -n $HOMEBREW_PREFIX ]] && [[ -x $HOMEBREW_PREFIX/bin/git ]]; then
+			git_ps1_src=$HOMEBREW_PREFIX/opt/git/etc/bash_completion.d/git-prompt.sh
+		else
+			git_ps1_src=/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+		fi
+		;;
+	linux*)
+		if [[ -f /etc/debian_version ]]; then
+			git_ps1_src=/usr/lib/git-core/git-sh-prompt
+		else
+			git_ps1_src=/usr/share/git/completion/git-prompt.sh
+		fi
+		;;
+	esac
+
+	if [[ -n $git_ps1_src ]] && [[ -r $git_ps1_src ]]; then
+		# shellcheck disable=SC1090
+		. "$git_ps1_src"
+		# shellcheck disable=SC2016
+		PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
+		GIT_PS1_SHOWDIRTYSTATE=1
+		GIT_PS1_SHOWUNTRACKEDFILES=1
+	fi
+
+	PROMPT="$PROMPT"$'\n''%# '
+	RPROMPT='[%F{yellow}%?%f]'
+
+	prompt_opts=(cr percent sp subst)
+}
+
+prompt_mytheme_setup "$@"
