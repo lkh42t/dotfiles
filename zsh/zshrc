@@ -145,6 +145,11 @@ hash nvim 2>/dev/null && alias v='nvim'
 # environment variables {{{
 # man(1)
 export MANROFFOPT=-c
+if hash nvim 2>/dev/null; then
+	export MANPAGER='nvim +Man!'
+elif hash vim 2>/dev/null; then
+	export MANPAGER='vim +MANPAGER --not-a-term - -c "set nolist" -c "map q :<Cmd>q<CR>"'
+fi
 
 # less(1)
 export LESS='-iFR -Dd+c -Du+gd -Dsybd'
