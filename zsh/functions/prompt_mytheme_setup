@@ -1,6 +1,39 @@
 #!/hint/zsh
 # shellcheck disable=SC2034
 
+zmodload zsh/zpty
+
+prompt_mytheme_git_prompt_handler() {
+	local fd=$1
+	local response
+	if zpty -r git_prompt_task response 2>/dev/null && [[ -n $response ]]; then
+		_GIT_PROMPT_RAW=$response
+		_GIT_PROMPT=$_GIT_PROMPT_RAW
+		zle reset-prompt
+	fi
+	zle -F "$fd"
+	zpty -d git_prompt_task 2>/dev/null
+}
+
+# setup git prompt asynchronously
+prompt_mytheme_precmd() {
+	# early break if already processing
+	if zpty -t git_prompt_task 2>/dev/null; then
+		return
+	fi
+	# gray out during processing
+	[[ -n $_GIT_PROMPT_RAW ]] && _GIT_PROMPT='%B%F{black}'"$_GIT_PROMPT_RAW"'%f%b'
+	# run `__git_ps1` asynchronously
+	zpty -b git_prompt_task "__git_ps1 '(%s)'" 2>/dev/null
+	zle -F "$REPLY" prompt_mytheme_git_prompt_handler
+}
+
+# reset git prompt
+prompt_mytheme_chpwd() {
+	unset _GIT_PROMPT _GIT_PROMPT_RAW
+	zpty -d git_prompt_task 2>/dev/null
+}
+
 prompt_mytheme_setup() {
 	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
 
@@ -26,9 +59,13 @@ prompt_mytheme_setup() {
 		# shellcheck disable=SC1090
 		. "$git_ps1_src"
 		# shellcheck disable=SC2016
-		PROMPT="$PROMPT"'$(__git_ps1 "(%s)")'
+		PROMPT="$PROMPT"'${_GIT_PROMPT}'
 		GIT_PS1_SHOWDIRTYSTATE=1
 		GIT_PS1_SHOWUNTRACKEDFILES=1
+		add-zsh-hook chpwd prompt_mytheme_chpwd
+		add-zsh-hook precmd prompt_mytheme_precmd
+		prompt_cleanup 'add-zsh-hook -D chpwd prompt_mytheme_chpwd'
+		prompt_cleanup 'add-zsh-hook -D precmd prompt_mytheme_precmd'
 	fi
 
 	PROMPT="$PROMPT"$'\n''%# '
