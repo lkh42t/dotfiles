@@ -32,7 +32,7 @@ swflutter() {
 		;;
 	set)
 		local newver=$2
-		if [[ ! $newver ]]; then
+		if [[ -z $newver ]]; then
 			printf "%s: missing version\n" "$CMDNAME" >&2
 			return 1
 		elif [[ ! -d $base_dir/$newver ]]; then
