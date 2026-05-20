@@ -4,6 +4,7 @@
 [core]
 	editor = nvim
 	pager = delta
+	quotepath = false
 [delta]
 	navigate = true
 	side-by-side = true
