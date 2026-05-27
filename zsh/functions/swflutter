@@ -1,19 +1,15 @@
 #!/hint/zsh
 
-readonly CMDNAME=swflutter
-
-usage() {
-	printf 'Usage: %s COMMAND
+swflutter() {
+	local CMDNAME=swflutter
+	local usage="Usage: $CMDNAME COMMAND
 
 Commands:
 	get		show current version
 	help		show usage
 	list		show available versions
-	set VERSION	switch to the specified version
-' "$CMDNAME"
-}
+	set VERSION	switch to the specified version"
 
-swflutter() {
 	local base_dir=~/.local/flutter
 
 	local cmd=$1
@@ -22,7 +18,7 @@ swflutter() {
 		readlink "$base_dir/default"
 		;;
 	help | -h | --help)
-		usage >&2
+		printf '%s\n' "$usage" >&2
 		;;
 	list)
 		local versions=($base_dir/*(N/))
@@ -44,7 +40,7 @@ swflutter() {
 		;;
 	*)
 		printf "%s: unknown subcommand: %s\n" "$CMDNAME" "$cmd" >&2
-		usage >&2
+		printf '%s\n' "$usage" >&2
 		return 1
 		;;
 	esac
