@@ -1,4 +1,4 @@
-XDG_CONFIG_HOME ?= $(HOME)/.config
+include ./config.mk
 
 UNAME_OS := $(shell uname -s)
 
@@ -7,7 +7,10 @@ ALL_TARGETS := $(XDG_CONFIG_TARGETS)
 ALL_TARGETS += vim zsh
 ifeq ($(UNAME_OS),Darwin)
 	ALL_TARGETS += launchd
+else
+	SUBDIR_TARGETS += kde
 endif
+ALL_TARGETS += $(SUBDIR_TARGETS)
 
 .PHONY: all config-home $(ALL_TARGETS)
 
@@ -18,6 +21,9 @@ config-home:
 
 $(XDG_CONFIG_TARGETS): config-home
 	ln -sf $(abspath $@) $(XDG_CONFIG_HOME)
+
+$(SUBDIR_TARGETS):
+	$(MAKE) -C $@
 
 launchd:
 	mkdir -p $(HOME)/Library/LaunchAgents
