@@ -7,6 +7,7 @@ ALL_TARGETS := $(XDG_CONFIG_TARGETS)
 ALL_TARGETS += vim zsh
 ifeq ($(UNAME_OS),Darwin)
 	ALL_TARGETS += launchd
+	SUBDIR_TARGETS += macos
 else
 	SUBDIR_TARGETS += kde
 endif
