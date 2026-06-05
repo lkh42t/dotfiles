@@ -9,6 +9,7 @@ Settings for
 - Git
 - KDE Plasma
 - launchd
+- macOS
 - Neovim
 - tmux
 - Zsh
