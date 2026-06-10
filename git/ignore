@@ -1,5 +1,5 @@
 # vi: ft=gitignore noet sts& sw&
-### https://raw.githubusercontent.com/github/gitignore/a78658650de091f44d88f137494f49c8f3769cd3/Global/macOS.gitignore
+### https://raw.githubusercontent.com/github/gitignore/d958809c972620b94404be477168c178a5fa3fcc/Global/macOS.gitignore
 
 # General
 .DS_Store
@@ -9,10 +9,10 @@ __MACOSX/
 .LSOverride
 Icon[]
 
-# Thumbnails
+# Resource forks
 ._*
 
-# Files that might appear in the root of a volume
+# Files and directories that might appear in the root of a volume
 .DocumentRevisions-V100
 .fseventsd
 .Spotlight-V100
@@ -20,6 +20,15 @@ Icon[]
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+.com.apple.timemachine.supported
+.PKInstallSandboxManager
+.PKInstallSandboxManager-SystemSoftware
+.hotfiles.btree
+.vol
+.file
+.disk_label*
+lost+found
+.HFS+ Private Directory Data[]
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -27,6 +36,28 @@ Icon[]
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Mac OS 6 to 9
+Desktop DB
+Desktop DF
+TheFindByContentFolder
+TheVolumeSettingsFolder
+.FBCIndex
+.FBCSemaphoreFile
+.FBCLockFolder
+
+# Quota system
+.quota.group
+.quota.user
+.quota.ops.group
+.quota.ops.user
+
+# TimeMachine
+Backups.backupdb
+.MobileBackups
+.MobileBackups.trash
+MobileBackups.trash
+tmbootpicker.efi
 
 ### https://raw.githubusercontent.com/github/gitignore/27fe2b766efdedb873be8fe54b8cba39a559a7f9/Global/Vim.gitignore
 
