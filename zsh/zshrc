@@ -12,7 +12,7 @@ bindkey -e
 
 # utility functions {{{
 fpath=(~/.zsh/functions $fpath)
-autoload -Uz ~/.zsh/functions/*
+autoload -Uz ~/.zsh/functions/*(:t)
 __prepend_path() {
 	# shellcheck disable=SC1036
 	[[ ${path[(i)$1]} -gt ${#path} ]] && path=($1(N-/) $path)
