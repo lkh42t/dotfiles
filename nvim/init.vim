@@ -90,7 +90,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 if has('nvim')
-  Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
+  Plug 'romus204/tree-sitter-manager.nvim'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' }
 endif
 if !has('nvim-0.9')

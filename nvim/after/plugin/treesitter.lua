@@ -1,4 +1,10 @@
-require("nvim-treesitter").install({ "stable", "unstable" })
+require("tree-sitter-manager").setup({
+  auto_install = true,
+  -- install parsers manually which are never auto-installed
+  ensure_installed = { "comment", "printf" },
+  -- use built-in parsers
+  noauto_install = { "c", "lua", "markdown", "markdown_inline", "query", "vim", "vimdoc" },
+})
 require("nvim-treesitter-textobjects").setup({
   select = {
     lookahead = true,
