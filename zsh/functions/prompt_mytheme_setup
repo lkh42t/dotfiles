@@ -69,7 +69,7 @@ prompt_mytheme_setup() {
 	fi
 
 	PROMPT="$PROMPT"$'\n''%# '
-	RPROMPT='[%F{yellow}%?%f]'
+	RPROMPT='[%B%F{yellow}%?%f%b]'
 
 	prompt_opts=(cr percent sp subst)
 }
