@@ -1,0 +1,68 @@
+#!/hint/zsh
+
+gitig() {
+	local usage='Usage: gitig COMMAND
+
+Commands:
+	dump TEMPLATES...	write templates to stdout
+	list			show available templates
+	update			update templates cache
+	help			show usage'
+
+	local REPO_URL=https://github.com/github/gitignore.git
+	local GITIGNORE_CACHE_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/gitig/gitignore
+
+	local cmd=$1
+	case $cmd in
+	dump)
+		if [[ ! -d $GITIGNORE_CACHE_DIR ]]; then
+			git clone -q "$REPO_URL" -b main "$GITIGNORE_CACHE_DIR"
+		fi
+		shift # consume subcommand
+		local tmpl files relpath hash
+		for tmpl; do
+			local files=($GITIGNORE_CACHE_DIR/**/$tmpl.gitignore(N))
+			local relpath=${files[1]#"$GITIGNORE_CACHE_DIR/"}
+			if [[ -z $relpath ]]; then
+				print "gitig: unknown template: $tmpl" >&2
+				continue
+			fi
+
+			hash=$(git -C "$GITIGNORE_CACHE_DIR" log -n1 --format='%H' -- "$relpath")
+			print "### https://raw.githubusercontent.com/github/gitignore/$hash/$relpath\n"
+			print -r -- "$(<"$GITIGNORE_CACHE_DIR/$relpath")"
+			print
+		done
+		;;
+	list)
+		if [[ ! -d $GITIGNORE_CACHE_DIR ]]; then
+			git clone -q "$REPO_URL" -b main "$GITIGNORE_CACHE_DIR"
+		fi
+		local templates=($GITIGNORE_CACHE_DIR/**/*.gitignore(N:t:r))
+		if ((${#templates} > 0)); then
+			if [[ -t 1 ]]; then
+				print -c ${(u)templates}
+			else
+				print -l ${(u)templates}
+			fi
+		fi
+		;;
+	update)
+		if [[ ! -d $GITIGNORE_CACHE_DIR ]]; then
+			git clone "$REPO_URL" -b main "$GITIGNORE_CACHE_DIR"
+		else
+			git -C "$GITIGNORE_CACHE_DIR" pull origin main
+		fi
+		;;
+	help | -h | --help)
+		print "$usage" >&2
+		;;
+	*)
+		print "gitig: unknown subcommand: '$cmd'" >&2
+		print "$usage" >&2
+		return 1
+		;;
+	esac
+}
+
+gitig "$@"

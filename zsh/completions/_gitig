@@ -1,0 +1,36 @@
+#compdef gitig
+
+_gitig_subcommands() {
+	local commands=(
+		'dump:write templates to stdout'
+		'list:show available templates'
+		'update:update templates cache'
+		'help:show usage'
+	)
+	_describe -t commands 'commands' commands "$@"
+}
+
+_gitig_templates() {
+	local templates
+	templates=($(gitig list))
+	_describe -t templates 'templates' templates "$@"
+}
+
+_gitig() {
+	_arguments -C \
+		'1: :_gitig_subcommands' \
+		'*:: :->args'
+
+	case $state in
+	args)
+		case ${words[1]} in
+		dump)
+			_arguments -C \
+				'*:: :_gitig_templates'
+			;;
+		esac
+		;;
+	esac
+}
+
+_gitig "$@"
