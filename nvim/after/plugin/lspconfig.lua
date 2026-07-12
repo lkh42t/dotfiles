@@ -37,6 +37,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- }}}
 
 -- language servers {{{
+vim.lsp.config("*", { capability = require("cmp_nvim_lsp").default_capabilities() })
 local servers = {
   "bashls",
   "clangd",
@@ -60,9 +61,5 @@ local servers = {
   "vimls",
   "yamlls",
 }
-local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
-for _, server in ipairs(servers) do
-  vim.lsp.config(server, { capability = default_capabilities })
-end
 vim.lsp.enable(servers)
 -- }}}
