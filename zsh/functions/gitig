@@ -24,7 +24,7 @@ Commands:
 			local files=($GITIGNORE_CACHE_DIR/**/$tmpl.gitignore(N))
 			local file=${files[1]}
 			if [[ -z $file ]]; then
-				print "gitig: unknown template: $tmpl" >&2
+				print -ru2 "gitig: unknown template: $tmpl"
 				continue
 			fi
 
@@ -42,9 +42,9 @@ Commands:
 		local templates=($GITIGNORE_CACHE_DIR/**/*.gitignore(N:t:r))
 		if ((${#templates} > 0)); then
 			if [[ -t 1 ]]; then
-				print -c ${(u)templates}
+				print -rc ${(u)templates}
 			else
-				print -l ${(u)templates}
+				print -rl ${(u)templates}
 			fi
 		fi
 		;;
@@ -56,11 +56,11 @@ Commands:
 		fi
 		;;
 	help | -h | --help)
-		print "$usage" >&2
+		print -u2 "$usage"
 		;;
 	*)
-		print "gitig: unknown subcommand: '$cmd'" >&2
-		print "$usage" >&2
+		print -ru2 "gitig: unknown subcommand: '$cmd'"
+		print -u2 "$usage"
 		return 1
 		;;
 	esac

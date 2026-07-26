@@ -15,10 +15,10 @@ Commands:
 	local cmd=$1
 	case $cmd in
 	get)
-		echo "${AWS_PROFILE:-default}"
+		print -r "${AWS_PROFILE:-default}"
 		;;
 	help | -h | --help)
-		echo "$usage" >&2
+		print -u2 "$usage"
 		;;
 	list)
 		if [[ -f $config_file ]]; then
@@ -30,14 +30,14 @@ Commands:
 		;;
 	set)
 		if [[ -z $2 ]]; then
-			echo 'awsp: requires an argument' >&2
+			print -u2 'awsp: requires an argument'
 			return 1
 		fi
 		export AWS_PROFILE="$2"
 		;;
 	*)
-		echo "awsp: unknown subcommand: '$cmd'" >&2
-		echo "$usage" >&2
+		print -ru2 "awsp: unknown subcommand: '$cmd'"
+		print -u2 "$usage"
 		return 1
 		;;
 	esac

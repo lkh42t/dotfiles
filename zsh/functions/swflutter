@@ -18,29 +18,29 @@ Commands:
 		readlink "$base_dir/default"
 		;;
 	help | -h | --help)
-		printf '%s\n' "$usage" >&2
+		print -ru2 "$usage"
 		;;
 	list)
 		local versions=($base_dir/*(N/))
 		if [[ ${#versions} -gt 0 ]]; then
-			printf '%s\n' "${versions[@]:t}"
+			print -rl "${versions[@]:t}"
 		fi
 		;;
 	set)
 		local newver=$2
 		if [[ -z $newver ]]; then
-			printf "%s: missing version\n" "$CMDNAME" >&2
+			print -ru2 "$CMDNAME: missing version"
 			return 1
 		elif [[ ! -d $base_dir/$newver ]]; then
-			printf "%s: unknown version: %s\n" "$CMDNAME" "$newver" >&2
+			print -ru2 "${CMDNAME}: unknown version: $newver"
 			return 2
 		fi
 		rm -f "$base_dir/default"
 		ln -sf "$newver" "$base_dir/default"
 		;;
 	*)
-		printf "%s: unknown subcommand: %s\n" "$CMDNAME" "$cmd" >&2
-		printf '%s\n' "$usage" >&2
+		print -ru2 "${CMDNAME}: unknown subcommand: $cmd"
+		print -ru2 "$usage"
 		return 1
 		;;
 	esac
