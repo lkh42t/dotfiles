@@ -19,18 +19,19 @@ Commands:
 			git clone -q "$REPO_URL" -b main "$GITIGNORE_CACHE_DIR"
 		fi
 		shift # consume subcommand
-		local tmpl files relpath hash
+		local tmpl files file hash
 		for tmpl; do
 			local files=($GITIGNORE_CACHE_DIR/**/$tmpl.gitignore(N))
-			local relpath=${files[1]#"$GITIGNORE_CACHE_DIR/"}
-			if [[ -z $relpath ]]; then
+			local file=${files[1]}
+			if [[ -z $file ]]; then
 				print "gitig: unknown template: $tmpl" >&2
 				continue
 			fi
 
-			hash=$(git -C "$GITIGNORE_CACHE_DIR" log -n1 --format='%H' -- "$relpath")
-			print "### https://raw.githubusercontent.com/github/gitignore/$hash/$relpath\n"
-			print -r -- "$(<"$GITIGNORE_CACHE_DIR/$relpath")"
+			hash=$(git -C "$GITIGNORE_CACHE_DIR" log -n1 --format='%H' -- "${${file:A}#"$GITIGNORE_CACHE_DIR/"}")
+			print -r "### https://raw.githubusercontent.com/github/gitignore/$hash/${file#"$GITIGNORE_CACHE_DIR/"}"
+			print
+			cat -- "$file"
 			print
 		done
 		;;
