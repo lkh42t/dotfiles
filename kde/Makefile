@@ -1,6 +1,7 @@
 include ../config.mk
 
 PLASMA_SETTINGS := \
+	baloofilerc \
 	kcminputrc \
 	kwinrc \
 	plasma-localerc
@@ -15,6 +16,9 @@ $(APPS):
 
 plasma: $(PLASMA_SETTINGS)
 	$(QDBUS) org.kde.KWin /KWin reconfigure
+
+baloofilerc:
+	$(KWRITECONFIG) --file $@ --group General --key 'only basic indexing' --type bool true
 
 kcminputrc:
 	$(KWRITECONFIG) --file $@ --group Keyboard --key KeyRepeat repeat
