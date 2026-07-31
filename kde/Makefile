@@ -11,9 +11,6 @@ APPS := dolphin konsole
 
 all: plasma $(APPS)
 
-$(APPS):
-	$(MAKE) -C $@
-
 plasma: $(PLASMA_SETTINGS)
 	$(QDBUS) org.kde.KWin /KWin reconfigure
 
@@ -42,3 +39,14 @@ kwinrc:
 plasma-localerc:
 	$(KWRITECONFIG) --file $@ --group Formats --key LANG C
 	$(KWRITECONFIG) --file $@ --group Formats --key LC_MONETARY ja_JP.UTF-8
+
+dolphin:
+	$(KWRITECONFIG) --file dolphinrc --group DetailsMode --key PreviewSize 16
+	$(KWRITECONFIG) --file dolphinrc --group General --key RememberOpenedTabs --type bool false
+
+konsole:
+	mkdir -p $(XDG_DATA_HOME)/konsole
+	ln -sf $(abspath konsole/MyProfile.profile) $(XDG_DATA_HOME)/konsole
+	$(KWRITECONFIG) --file konsolerc --group 'Desktop Entry' --key DefaultProfile MyProfile.profile
+	$(KWRITECONFIG) --file konsolerc --group TabBar --key TabBarVisibility AlwaysShowTabBar
+	$(KWRITECONFIG) --file konsolerc --group ThumbnailsSettings --key ThumbnailCtrl --type bool true
