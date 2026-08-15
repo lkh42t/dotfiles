@@ -3,6 +3,7 @@ include ../config.mk
 PLASMA_SETTINGS := \
 	baloofilerc \
 	kcminputrc \
+	ksmserverrc \
 	kwinrc \
 	plasma-localerc
 APPS := dolphin konsole
@@ -31,6 +32,9 @@ kcminputrc:
 		$(KWRITECONFIG) --file $@ --group Libinput --group "$$vid" --group "$$pid" --group "$$name" --key PointerAcceleration 1.000; \
 		$(KWRITECONFIG) --file $@ --group Libinput --group "$$vid" --group "$$pid" --group "$$name" --key ScrollFactor 1; \
 	done
+
+ksmserverrc:
+	$(KWRITECONFIG) --file $@ --group General --key loginMode emptySession
 
 kwinrc:
 	$(KWRITECONFIG) --file $@ --group org.kde.kdecoration2 --key ButtonsOnLeft XIA
