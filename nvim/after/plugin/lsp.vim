@@ -143,38 +143,6 @@ if executable('gopls')
 endif
 " }}}
 
-" pyright {{{
-if executable('pyright-langserver')
-  augroup lsp_pyright
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'pyright',
-    \ 'cmd': {server_info->['pyright-langserver', 'start']},
-    \ 'allowlist': ['python'],
-    \ 'workspace_config': {
-    \   'pyright': {
-    \     'disableOrganizeImports': v:true,
-    \   },
-    \   'python': {
-    \     'analysis': {
-    \       'autoSearchPaths': v:true,
-    \       'diagnosticMode': 'off',
-    \       'diagnosticSeverityOverrides': {
-    \         'reportInvalidTypeForm': 'none',
-    \         'reportMissingImports': 'none',
-    \         'reportMissingModuleSource': 'none',
-    \         'reportUndefinedVariable': 'none',
-    \       },
-    \       'typeCheckingMode': 'off',
-    \       'useLibraryCodeForTypes': v:true,
-    \     },
-    \   },
-    \ },
-    \})
-  augroup END
-endif
-" }}}
-
 " ruff {{{
 if executable('ruff')
   augroup lsp_ruff
@@ -247,6 +215,19 @@ if executable('typescript-language-server')
     \ 'name': 'ts_ls',
     \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
     \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+    \})
+  augroup END
+endif
+" }}}
+
+" ty {{{
+if executable('ty')
+  augroup lsp_ty
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'ty',
+    \ 'cmd': {server_info->['ty', 'server']},
+    \ 'allowlist': ['python'],
     \})
   augroup END
 endif

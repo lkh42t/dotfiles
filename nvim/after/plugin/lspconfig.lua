@@ -52,7 +52,6 @@ local servers = {
   "html",
   "jsonls",
   "lua_ls",
-  "pyright",
   "ruff",
   "rust_analyzer",
   "terraformls",
