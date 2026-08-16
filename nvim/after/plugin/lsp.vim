@@ -217,19 +217,6 @@ if executable('terraform-ls')
 endif
 " }}}
 
-" ts_ls {{{
-if executable('typescript-language-server')
-  augroup lsp_ts_ls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'ts_ls',
-    \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
-    \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-    \})
-  augroup END
-endif
-" }}}
-
 " texlab {{{
 if executable('texlab')
   augroup lsp_texlab
@@ -247,6 +234,19 @@ if executable('texlab')
     \     'chktex': {'onOpenAndSave': v:true},
     \   },
     \ },
+    \})
+  augroup END
+endif
+" }}}
+
+" ts_ls {{{
+if executable('typescript-language-server')
+  augroup lsp_ts_ls
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'ts_ls',
+    \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+    \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
     \})
   augroup END
 endif

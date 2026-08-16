@@ -58,6 +58,7 @@ local servers = {
   "terraformls",
   "texlab",
   "ts_ls",
+  "ty",
   "vimls",
   "yamlls",
 }
