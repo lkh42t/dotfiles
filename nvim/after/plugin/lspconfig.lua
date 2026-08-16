@@ -56,7 +56,7 @@ local servers = {
   "rust_analyzer",
   "terraformls",
   "texlab",
-  "ts_ls",
+  "tsc",
   "ty",
   "vimls",
   "yamlls",

@@ -207,13 +207,13 @@ if executable('texlab')
 endif
 " }}}
 
-" ts_ls {{{
-if executable('typescript-language-server')
-  augroup lsp_ts_ls
+" tsc {{{
+if executable('tsc')
+  augroup lsp_tsc
     autocmd!
     autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'ts_ls',
-    \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+    \ 'name': 'tsc',
+    \ 'cmd': {server_info->['tsc', '--lsp', '--stdio']},
     \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
     \})
   augroup END
