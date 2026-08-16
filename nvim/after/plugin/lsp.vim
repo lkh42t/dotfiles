@@ -30,18 +30,6 @@ if executable('clangd')
 endif
 " }}}
 
-" cmake {{{
-if executable('cmake-language-server')
-  augroup lsp_cmake
-    autocmd! User lsp_setup call lsp#register_server({
-    \ 'name': 'cmake',
-    \ 'cmd': {server_info->['cmake-language-server']},
-    \ 'allowlist': ['cmake']
-    \})
-  augroup END
-endif
-" }}}
-
 " dartls {{{
 if executable('dart')
   augroup lsp_dartls
@@ -138,6 +126,18 @@ if executable('gopls')
     \   'staticcheck': v:true,
     \   'usePlaceholders': v:true,
     \ },
+    \})
+  augroup END
+endif
+" }}}
+
+" neocmake {{{
+if executable('neocmakelsp')
+  augroup lsp_neocmake
+    autocmd! User lsp_setup call lsp#register_server({
+    \ 'name': 'neocmake',
+    \ 'cmd': {server_info->['neocmakelsp', 'stdio']},
+    \ 'allowlist': ['cmake'],
     \})
   augroup END
 endif

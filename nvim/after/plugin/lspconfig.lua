@@ -41,7 +41,6 @@ vim.lsp.config("*", { capability = require("cmp_nvim_lsp").default_capabilities(
 local servers = {
   "bashls",
   "clangd",
-  "cmake",
   "cssls",
   "dartls",
   "dockerls",
@@ -52,6 +51,7 @@ local servers = {
   "html",
   "jsonls",
   "lua_ls",
+  "neocmake",
   "ruff",
   "rust_analyzer",
   "terraformls",
