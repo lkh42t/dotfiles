@@ -1,3 +1,7 @@
+if not vim.g.loaded_cmp then
+  return
+end
+
 local function has_words_before()
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
