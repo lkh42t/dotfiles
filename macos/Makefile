@@ -22,7 +22,7 @@ keyboard:
 	defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForSlashKey -int 1
 	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForYenKey -int 1
-	defaults write com.apple.inputmethod.Kotoeri JIMPrefLiveConversionKey -bool 0
+	defaults write com.apple.inputmethod.Kotoeri JIMPrefLiveConversionKey -bool false
 	defaults write com.apple.inputmethod.Kotoeri JIMPrefPunctuationTypeKey -int 0
 
 mouse:
