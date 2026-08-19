@@ -254,6 +254,8 @@ else
     autocmd TerminalOpen * setl fcs=eob:\  cc=
     " allow to use Ctrl-C to send SIGINT in normal mode
     autocmd TerminalOpen * nnoremap <buffer> <C-c> i<C-c>
+    " kill all terminal processes on exiting vim
+    autocmd TerminalOpen * call term_setkill(bufnr(), 'kill')
   augroup END
 endif
 " }}}
