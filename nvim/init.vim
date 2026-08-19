@@ -248,8 +248,10 @@ if has('nvim')
 else
   augroup VimTerminal
     autocmd!
-    " disable line numbers in terminal
-    autocmd TerminalOpen * setl nonu nornu
+    " :help default-autocmds
+    autocmd TerminalOpen * setl noma ul=0 tw=0 nowrap nolist nonu nornu nolist scl=no fdc=0
+    " hide end-of-buffer chars and colorcolumn
+    autocmd TerminalOpen * setl fcs=eob:\  cc=
     " allow to use Ctrl-C to send SIGINT in normal mode
     autocmd TerminalOpen * nnoremap <buffer> <C-c> i<C-c>
   augroup END
