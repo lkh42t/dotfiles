@@ -28,6 +28,7 @@ keyboard:
 mouse:
 	defaults write NSGlobalDomain com.apple.mouse.scaling -float 3.0
 	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+	defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3.0
 
 dock:
 	defaults write com.apple.dock autohide -bool true
