@@ -37,6 +37,8 @@ ksmserverrc:
 	$(KWRITECONFIG) --file $@ --group General --key loginMode emptySession
 
 kwinrc:
+	$(KWRITECONFIG) --file $@ --group Wayland --key InputMethod org.fcitx.Fcitx5.desktop
+	$(KWRITECONFIG) --file $@ --group Wayland --key VirtualKeyboardEnabled --type bool true
 	$(KWRITECONFIG) --file $@ --group org.kde.kdecoration2 --key ButtonsOnLeft XIA
 	$(KWRITECONFIG) --file $@ --group org.kde.kdecoration2 --key ButtonsOnRight ''
 
