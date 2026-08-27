@@ -13,12 +13,9 @@ else
 endif
 ALL_TARGETS += $(SUBDIR_TARGETS)
 
-.PHONY: all config-home $(ALL_TARGETS)
+.PHONY: all $(ALL_TARGETS)
 
 all: $(ALL_TARGETS)
-
-config-home:
-	mkdir -p $(XDG_CONFIG_HOME)
 
 $(XDG_CONFIG_TARGETS): config-home
 	ln -sf $(abspath $@) $(XDG_CONFIG_HOME)
