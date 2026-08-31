@@ -1,6 +1,5 @@
 TARGETS := \
-	keyboard \
-	mouse \
+	hid \
 	clipboard \
 	dock \
 	finder \
@@ -13,7 +12,7 @@ TARGETS := \
 
 all: $(TARGETS)
 
-keyboard:
+hid:
 	defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 	defaults write NSGlobalDomain InitialKeyRepeat -int 15
 	defaults write NSGlobalDomain KeyRepeat -int 2
@@ -23,15 +22,13 @@ keyboard:
 	defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 	defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 	defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
+	defaults write NSGlobalDomain com.apple.mouse.scaling -float 3.0
+	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+	defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3.0
 	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForSlashKey -int 1
 	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForYenKey -int 1
 	defaults write com.apple.inputmethod.Kotoeri JIMPrefLiveConversionKey -bool false
 	defaults write com.apple.inputmethod.Kotoeri JIMPrefPunctuationTypeKey -int 0
-
-mouse:
-	defaults write NSGlobalDomain com.apple.mouse.scaling -float 3.0
-	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
-	defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3.0
 
 clipboard:
 	defaults write com.apple.Spotlight PasteboardHistoryEnabled -bool true
