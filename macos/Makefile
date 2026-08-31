@@ -5,6 +5,7 @@ TARGETS := \
 	dock \
 	finder \
 	launchd \
+	loginwindow \
 	menubar \
 	screencapture
 
@@ -51,6 +52,9 @@ finder:
 launchd:
 	mkdir -p $(HOME)/Library/LaunchAgents
 	ln -sf $(abspath $(wildcard launchd/*)) $(HOME)/Library/LaunchAgents
+
+loginwindow:
+	defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 
 menubar:
 	defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false
