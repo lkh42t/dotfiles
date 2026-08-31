@@ -6,7 +6,6 @@ XDG_CONFIG_TARGETS := efm-langserver fontconfig git nvim tmux
 ALL_TARGETS := $(XDG_CONFIG_TARGETS)
 ALL_TARGETS += vim zsh
 ifeq ($(UNAME_OS),Darwin)
-	ALL_TARGETS += launchd
 	SUBDIR_TARGETS += macos
 else
 	SUBDIR_TARGETS += kde
@@ -22,10 +21,6 @@ $(XDG_CONFIG_TARGETS): config-home
 
 $(SUBDIR_TARGETS):
 	$(MAKE) -C $@
-
-launchd:
-	mkdir -p $(HOME)/Library/LaunchAgents
-	ln -sf $(abspath $(wildcard launchd/*)) $(HOME)/Library/LaunchAgents
 
 vim:
 	mkdir -p $(HOME)/.vim

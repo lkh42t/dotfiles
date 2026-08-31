@@ -4,6 +4,7 @@ TARGETS := \
 	clipboard \
 	dock \
 	finder \
+	launchd \
 	menubar \
 	screencapture
 
@@ -46,6 +47,10 @@ finder:
 	defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
 	defaults write com.apple.finder ShowPathbar -bool true
 	killall Finder
+
+launchd:
+	mkdir -p $(HOME)/Library/LaunchAgents
+	ln -sf $(abspath $(wildcard launchd/*)) $(HOME)/Library/LaunchAgents
 
 menubar:
 	defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false

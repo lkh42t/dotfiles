@@ -8,7 +8,6 @@ Settings for
 - Fontconfig
 - Git
 - KDE Plasma
-- launchd
 - macOS
 - Neovim
 - tmux
