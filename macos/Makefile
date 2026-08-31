@@ -6,7 +6,8 @@ TARGETS := \
 	launchd \
 	loginwindow \
 	menubar \
-	screencapture
+	screencapture \
+	windowmanager
 
 .PHONY: all $(TARGETS)
 
@@ -60,3 +61,7 @@ menubar:
 screencapture:
 	defaults write com.apple.screencapture disable-shadow -bool true
 	defaults write com.apple.screencapture location -string '~/Pictures/Screenshots'
+
+windowmanager:
+	defaults write com.apple.WindowManager EnableStandardClickToShowDesktop  -bool false
+	defaults write com.apple.WindowManager GloballyEnabled -bool false
