@@ -1,9 +1,33 @@
+local parsers = {
+  -- filetype-agnostic
+  "comment",
+  "printf",
+
+  -- git
+  "git_config",
+  "git_rebase",
+  "gitattributes",
+  "gitcommit",
+  "gitignore",
+
+  -- files in dotfiles
+  "bash",
+  "editorconfig",
+  "ini",
+  "make",
+  "rst",
+  "tmux",
+  "toml",
+  "xml",
+  "yaml",
+  "zsh",
+}
+local bundled_parsers = { "c", "lua", "markdown", "markdown_inline", "query", "vim", "vimdoc" }
 require("tree-sitter-manager").setup({
   auto_install = true,
-  -- install parsers manually which are never auto-installed
-  ensure_installed = { "comment", "printf" },
-  -- use built-in parsers
-  noauto_install = { "c", "lua", "markdown", "markdown_inline", "query", "vim", "vimdoc" },
+  ensure_installed = parsers,
+  -- prefer bundled versions
+  assume_installed = bundled_parsers,
 })
 require("nvim-treesitter-textobjects").setup({
   select = {
