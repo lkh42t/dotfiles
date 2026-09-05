@@ -1,3 +1,4 @@
+# vi: ft=dosini
 [Appearance]
 BoldIntense=false
 ColorScheme=Linux
