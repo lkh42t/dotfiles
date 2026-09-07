@@ -101,7 +101,7 @@ else
 fi
 
 # golang
-hash go 2>/dev/null && __prepend_path "$(go env GOPATH)/bin"
+hash go 2>/dev/null && __prepend_path "$(go env GOBIN)"
 # }}}
 
 # aliases {{{
