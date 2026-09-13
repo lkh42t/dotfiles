@@ -13,7 +13,7 @@ APPS := dolphin konsole
 all: plasma $(APPS)
 
 plasma: config-home $(PLASMA_SETTINGS)
-	ln -s $(abspath environment.d) $(XDG_CONFIG_HOME)
+	ln -sf $(abspath environment.d) $(XDG_CONFIG_HOME)
 	$(QDBUS) org.kde.KWin /KWin reconfigure
 
 baloofilerc:
