@@ -52,10 +52,13 @@ endif
 
 let g:mapleader = "\<space>"
 
-" Disable providers to improve startup time.
-for s:p in ['node', 'perl', 'python3', 'ruby']
-  execute 'let g:loaded_' . s:p . '_provider = 0'
-endfor
+" Disable unused providers to improve startup time.
+if has('nvim')
+  let g:loaded_node_provider = 0
+  let g:loaded_perl_provider = 0
+  let g:loaded_python3_provider = 0
+  let g:loaded_ruby_provider = 0
+endif
 
 " plugins {{{
 let s:url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
