@@ -3,7 +3,8 @@ PLASMA_SETTINGS := \
 	kcminputrc \
 	ksmserverrc \
 	kwinrc \
-	plasma-localerc
+	plasma-localerc \
+	powerdevilrc
 APPS := dolphin konsole
 
 .PHONY: all plasma $(PLASMA_SETTINGS) $(APPS)
@@ -44,6 +45,9 @@ kwinrc:
 plasma-localerc:
 	$(KWRITECONFIG) --file $@ --group Formats --key LANG C
 	$(KWRITECONFIG) --file $@ --group Formats --key LC_MONETARY ja_JP.UTF-8
+
+powerdevilrc:
+	$(KWRITECONFIG) --file $@ --group AC --group SuspendAndShutdown --key AutoSuspendAction 0
 
 dolphin:
 	$(KWRITECONFIG) --file dolphinrc --group DetailsMode --key PreviewSize 16
