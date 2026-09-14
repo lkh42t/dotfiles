@@ -30,6 +30,27 @@ if executable('clangd')
 endif
 " }}}
 
+" cssls {{{
+if executable('vscode-css-language-server')
+  augroup lsp_eslint
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'eslint',
+    \ 'cmd': {server_info->['vscode-css-language-server', '--stdio']},
+    \ 'allowlist': ['css', 'scss', 'less'],
+    \ 'initialization_options': {
+    \   'provideFormatter': v:false,
+    \ },
+    \ 'workspace_config': {
+    \   'css': { 'validate': v:true },
+    \   'scss': { 'validate': v:true },
+    \   'less': { 'validate': v:true },
+    \ },
+    \})
+  augroup END
+endif
+" }}}
+
 " dartls {{{
 if executable('dart')
   augroup lsp_dartls
@@ -125,6 +146,40 @@ if executable('gopls')
     \   'gofumpt': v:true,
     \   'staticcheck': v:true,
     \   'usePlaceholders': v:true,
+    \ },
+    \})
+  augroup END
+endif
+" }}}
+
+" html {{{
+if executable('vscode-html-language-server')
+  augroup lsp_eslint
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'eslint',
+    \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
+    \ 'allowlist': ['html'],
+    \ 'initialization_options': {
+    \   'provideFormatter': v:false,
+    \   'embeddedLanguages': { 'css': v:true, 'javascript': v:true },
+    \   'configurationSection': ['html', 'css', 'javascript'],
+    \ },
+    \})
+  augroup END
+endif
+" }}}
+
+" jsonls {{{
+if executable('vscode-json-language-server')
+  augroup lsp_eslint
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'eslint',
+    \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
+    \ 'allowlist': ['json', 'jsonc'],
+    \ 'initialization_options': {
+    \   'provideFormatter': v:false,
     \ },
     \})
   augroup END
