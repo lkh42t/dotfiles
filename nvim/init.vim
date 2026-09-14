@@ -217,14 +217,14 @@ vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 
-tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-N>
 
 " emacs like keybinding for command-line mode
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-d> <Del>
+cnoremap <C-B> <Left>
+cnoremap <C-F> <Right>
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-D> <Del>
 " }}}
 
 " autocmd {{{
@@ -246,7 +246,7 @@ if has('nvim')
   augroup NeovimTerminal
     autocmd!
     " allow to use Ctrl-C to send SIGINT in normal mode
-    autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
+    autocmd TermOpen * nnoremap <buffer> <C-C> i<C-C>
   augroup END
 else
   augroup VimTerminal
@@ -256,7 +256,7 @@ else
     " hide end-of-buffer chars and colorcolumn
     autocmd TerminalOpen * setl fcs=eob:\  cc=
     " allow to use Ctrl-C to send SIGINT in normal mode
-    autocmd TerminalOpen * nnoremap <buffer> <C-c> i<C-c>
+    autocmd TerminalOpen * nnoremap <buffer> <C-C> i<C-C>
     " kill all terminal processes on exiting vim
     autocmd TerminalOpen * call term_setkill(bufnr(), 'kill')
   augroup END
