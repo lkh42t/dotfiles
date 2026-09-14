@@ -1,5 +1,3 @@
-include ./config.mk
-
 XDG_CONFIG_TARGETS := efm-langserver fontconfig git nvim tmux
 ALL_TARGETS := $(XDG_CONFIG_TARGETS)
 ALL_TARGETS += vim zsh
@@ -26,3 +24,5 @@ zsh:
 	mkdir -p $(HOME)/.zsh
 	ln -sf $(abspath zsh/zshrc) $(HOME)/.zshrc
 	ln -sf $(abspath $(filter-out zsh/zshrc, $(wildcard zsh/*))) $(HOME)/.zsh
+
+include ./config.mk

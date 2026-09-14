@@ -1,5 +1,3 @@
-include ../config.mk
-
 PLASMA_SETTINGS := \
 	baloofilerc \
 	kcminputrc \
@@ -57,3 +55,5 @@ konsole:
 	$(KWRITECONFIG) --file konsolerc --group 'Desktop Entry' --key DefaultProfile MyProfile.profile
 	$(KWRITECONFIG) --file konsolerc --group TabBar --key TabBarVisibility AlwaysShowTabBar
 	$(KWRITECONFIG) --file konsolerc --group ThumbnailsSettings --key ThumbnailCtrl --type bool true
+
+include ../config.mk
