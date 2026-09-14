@@ -1,3 +1,6 @@
+KWRITECONFIG := kwriteconfig6
+QDBUS := qdbus6
+
 PLASMA_SETTINGS := \
 	baloofilerc \
 	kcminputrc \
