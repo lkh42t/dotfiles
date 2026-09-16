@@ -1,0 +1,58 @@
+#!/hint/zsh
+
+urlescape() {
+	emulate -L zsh
+	setopt localoptions nomultibyte
+
+	local posargs=()
+	local allowed=''
+	while [[ $# -gt 0 ]]; do
+		case $1 in
+		-a | --allow)
+			allowed=$2
+			shift 2
+			;;
+		-a*)
+			allowed=${1#-a}
+			shift
+			;;
+		--allow=*)
+			allowed=${1#--allow=}
+			shift
+			;;
+		--)
+			shift
+			posargs+=("$@")
+			set --
+			;;
+		-*)
+			shift
+			;;
+		*)
+			posargs+=("$1")
+			shift
+			;;
+		esac
+	done
+	set -- "${posargs[@]}"
+
+	local s out hex c i
+	while [[ $# -gt 0 ]]; do
+		out=''
+		s=$1
+		for ((i = 1; i <= ${#s}; i++)); do
+			c=${s[i]}
+			if [[ $c == [0-9A-Za-z_.~-] ]] || [[ $c == [[:ascii:]] && $allowed == *"$c"* ]]; then
+				out+=$c
+			else
+				printf -v hex '%02X' "'$c"
+				out+="%$hex"
+			fi
+		done
+
+		print -r -- "$out"
+		shift
+	done
+}
+
+urlescape "$@"
