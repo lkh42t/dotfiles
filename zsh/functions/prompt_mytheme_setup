@@ -1,5 +1,5 @@
 #!/hint/zsh
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 
 zmodload zsh/zpty
 
@@ -49,7 +49,8 @@ prompt_mytheme_chpwd() {
 }
 
 prompt_mytheme_setup() {
-	PROMPT=$'\n''[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%c%f%b]'
+	local prompt_line_1='[%B%F{magenta}%n@%m%f%b:%B%F{cyan}%1~%f%b]'
+	local prompt_line_2='%# '
 
 	local git_ps1_src
 	case $OSTYPE in
@@ -73,7 +74,7 @@ prompt_mytheme_setup() {
 		# shellcheck disable=SC1090
 		. "$git_ps1_src"
 		# shellcheck disable=SC2016
-		PROMPT="$PROMPT"'${_GIT_PROMPT}'
+		prompt_line_1+='${_GIT_PROMPT}'
 		GIT_PS1_SHOWDIRTYSTATE=1
 		GIT_PS1_SHOWUNTRACKEDFILES=1
 		add-zsh-hook chpwd prompt_mytheme_chpwd
@@ -82,7 +83,7 @@ prompt_mytheme_setup() {
 		prompt_cleanup 'add-zsh-hook -D precmd prompt_mytheme_precmd'
 	fi
 
-	PROMPT="$PROMPT"$'\n''%# '
+	PROMPT=$prompt_newline$prompt_line_1$prompt_newline$prompt_line_2
 	RPROMPT='[%B%F{yellow}%?%f%b]'
 
 	# OSC 7
