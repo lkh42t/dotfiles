@@ -4,17 +4,17 @@
 zmodload zsh/zpty
 
 osc7() {
-	printf '\e]7;file://%s%s\e\x5c' "$HOST" "$(urlescape --allow=/ -- "$PWD")"
+	printf "\e]7;file://%s%s\e\\" "$HOST" "$(urlescape --allow=/ -- "$PWD")"
 }
 
 osc133_precmd() {
 	local exit_code=$?
-	printf '\e]133;D;%d\e\x5c' "$exit_code"
-	printf '\e]133;A\e\x5c'
+	printf "\e]133;D;%d\e\\" "$exit_code"
+	printf "\e]133;A\e\\"
 }
 
 osc133_preexec() {
-	printf '\e]133;C\e\x5c'
+	printf "\e]133;C\e\\"
 }
 
 prompt_mytheme_git_prompt_handler() {
@@ -91,9 +91,9 @@ prompt_mytheme_setup() {
 	osc7
 
 	# OSC 133
-	PROMPT=$'%{\e]133;P;k=i\e\x5c%}'"$PROMPT"$'%{\e]133;B\e\x5c%}'
-	PROMPT2=$'%{\e]133;P;k=s\e\x5c%}'"$PROMPT2"$'%{\e]133;B\e\x5c%}'
-	RPROMPT=$'%{\e]133;P;k=r\e\x5c%}'"$RPROMPT"$'%{\e]133;B\e\x5c%}'
+	PROMPT=$'%{\e]133;P;k=i\e\\%}'"$PROMPT"$'%{\e]133;B\e\\%}'
+	PROMPT2=$'%{\e]133;P;k=s\e\\%}'"$PROMPT2"$'%{\e]133;B\e\\%}'
+	RPROMPT=$'%{\e]133;P;k=r\e\\%}'"$RPROMPT"$'%{\e]133;B\e\\%}'
 	add-zsh-hook precmd osc133_precmd
 	add-zsh-hook preexec osc133_preexec
 	prompt_cleanup 'add-zsh-hook -D precmd osc133_precmd'
