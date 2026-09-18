@@ -143,8 +143,26 @@ export LESSHISTFILE=- # disable history
 # GPG
 if whence gpg >|/dev/null; then
 	export GPG_TTY=$(tty)
-	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 	gpg-connect-agent updatestartuptty /bye >/dev/null
+fi
+if [[ -z $SSH_TTY ]] || [[ -z $SSH_AUTH_SOCK ]]; then
+	if __is_macos; then
+		# macOS App Store
+		sshsock=~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+	else
+		# Flatpak
+		sshsock=~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+	fi
+	if [[ ! -S $sshsock ]]; then
+		# Native
+		sshsock=~/.bitwarden-ssh-agent.sock
+	fi
+	if [[ -S $sshsock ]]; then
+		export SSH_AUTH_SOCK=$sshsock
+	elif [[ -n $GPG_TTY ]]; then
+		export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	fi
+	unset sshsock
 fi
 # }}}
 
