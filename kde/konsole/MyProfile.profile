@@ -3,6 +3,7 @@
 BoldIntense=false
 ColorScheme=Linux
 Font=Cascadia Mono,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,1,zero=1,0
+WordModeCoding=false
 
 [General]
 Name=MyProfile
