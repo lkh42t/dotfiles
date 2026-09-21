@@ -12,5 +12,8 @@ Parent=FALLBACK/
 RemoteTabTitleFormat=%w
 StartInCurrentSessionDir=false
 
+[Interaction Options]
+UnderlineFilesEnabled=true
+
 [Scrolling]
 HistorySize=10000
