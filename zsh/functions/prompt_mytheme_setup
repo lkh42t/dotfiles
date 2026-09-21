@@ -1,7 +1,43 @@
 #!/hint/zsh
-# shellcheck disable=SC2034,SC2154
+# shellcheck disable=SC2034,SC2154,SC2206,SC2296,SC2298
 
 zmodload zsh/zpty
+
+osc2() {
+	printf "\e]2;%s\e\\" "$*"
+}
+
+osc2_precmd() {
+	if [[ -n $SSH_CONNECTION ]]; then
+		osc2 "$(print -P '(%m) %1~:')" "-${SHELL:t}"
+	else
+		osc2 "$(print -P '%1~:')" "-${SHELL:t}"
+	fi
+}
+
+osc2_preexec() {
+	local cmd=(${(z)1})
+	local j=1
+	# skip all env vars
+	while [[ ${cmd[$j]} == *=* ]]; do
+		((j++))
+	done
+	# resolve alias recursively
+	local c=${cmd[$j]}
+	while ((${+aliases[$c]})); do
+		cmd=(${(z)aliases[$c]})
+		if [[ $c == "${cmd[1]}" ]]; then
+			break
+		fi
+		c=${cmd[1]}
+	done
+
+	if [[ -n $SSH_CONNECTION ]]; then
+		osc2 "$(print -P '(%m) %1~:')" "${c:t}"
+	else
+		osc2 "$(print -P '%1~:')" "${c:t}"
+	fi
+}
 
 osc7() {
 	printf "\e]7;file://%s%s\e\\" "$HOST" "$(urlescape --allow=/ -- "$PWD")"
@@ -85,6 +121,12 @@ prompt_mytheme_setup() {
 
 	PROMPT=$prompt_newline$prompt_line_1$prompt_newline$prompt_line_2
 	RPROMPT='[%B%F{yellow}%?%f%b]'
+
+	# OSC 2
+	add-zsh-hook precmd osc2_precmd
+	add-zsh-hook preexec osc2_preexec
+	prompt_cleanup 'add-zsh-hook -D precmd osc2_precmd'
+	prompt_cleanup 'add-zsh-hook -D preexec osc2_preexec'
 
 	# OSC 7
 	add-zsh-hook chpwd osc7
