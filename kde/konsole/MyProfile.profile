@@ -6,8 +6,10 @@ Font=Cascadia Mono,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,1,zero=1,0
 WordModeCoding=false
 
 [General]
+LocalTabTitleFormat=%w
 Name=MyProfile
 Parent=FALLBACK/
+RemoteTabTitleFormat=%w
 StartInCurrentSessionDir=false
 
 [Scrolling]
