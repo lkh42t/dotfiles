@@ -7,7 +7,8 @@ TARGETS := \
 	loginwindow \
 	menubar \
 	screencapture \
-	windowmanager
+	windowmanager \
+	iterm2
 
 .PHONY: all $(TARGETS)
 
@@ -65,3 +66,11 @@ screencapture:
 windowmanager:
 	defaults write com.apple.WindowManager EnableStandardClickToShowDesktop  -bool false
 	defaults write com.apple.WindowManager GloballyEnabled -bool false
+
+iterm2:
+	mkdir -p $(HOME)/Library/Application\ Support/iTerm2/DynamicProfiles
+	ln -sf $(abspath iterm2/MyProfile.plist) $(HOME)/Library/Application\ Support/iTerm2/DynamicProfiles
+	defaults write com.googlecode.iterm2 AllowClipboardAccess 1
+	defaults write com.googlecode.iterm2 HideTab 0
+	defaults write com.googlecode.iterm2 NeverBlockSystemShutdown 1
+	defaults write com.googlecode.iterm2 StretchTabsToFillBar 0

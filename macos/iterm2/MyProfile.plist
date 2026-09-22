@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Profiles</key>
+	<array>
+		<dict>
+			<key>ASCII Ligatures</key>
+			<true/>
+			<key>Allow Title Reporting</key>
+			<true/>
+			<key>Blink Allowed</key>
+			<true/>
+			<key>Bound Hosts</key>
+			<array>
+				<string>*</string>
+			</array>
+			<key>Guid</key>
+			<string>30FA1CF4-2F4D-498A-813D-1C6D1D93E4BF</string>
+			<key>Keyboard Map</key>
+			<dict>
+				<key>0x79-0x80000-0x10</key>
+				<dict>
+					<key>Action</key>
+					<integer>12</integer>
+					<key>Apply Mode</key>
+					<integer>0</integer>
+					<key>Escaping</key>
+					<integer>2</integer>
+					<key>Text</key>
+					<string>¥</string>
+					<key>Version</key>
+					<integer>2</integer>
+				</dict>
+			</dict>
+			<key>Name</key>
+			<string>MyProfile</string>
+			<key>Normal Font</key>
+			<string>CascadiaMono-Regular 12 {"featureSettings":[{"CTFeatureSelectorIdentifier":38,"CTFeatureTypeIdentifier":35}]}</string>
+			<key>Rewritable</key>
+			<false/>
+			<key>Scrollback Lines</key>
+			<integer>10000</integer>
+			<key>Set Local Environment Vars</key>
+			<integer>0</integer>
+			<key>Silence Bell</key>
+			<true/>
+			<key>Tags</key>
+			<array>
+				<string>Dynamic</string>
+			</array>
+			<key>Title Components</key>
+			<integer>0</integer>
+			<key>Use Bold Font</key>
+			<false/>
+			<key>Visual Bell</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>
