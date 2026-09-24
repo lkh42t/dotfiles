@@ -3,19 +3,19 @@
 
 zmodload zsh/zpty
 
-osc2() {
-	printf "\e]2;%s\e\\" "$*"
+osc0() {
+	printf "\e]0;%s\e\\" "$*"
 }
 
-osc2_precmd() {
+osc0_precmd() {
 	if [[ -n $SSH_CONNECTION ]]; then
-		osc2 "$(print -P '(%m) %1~:')" "-${SHELL:t}"
+		osc0 "$(print -P '(%m) %1~:')" "-${SHELL:t}"
 	else
-		osc2 "$(print -P '%1~:')" "-${SHELL:t}"
+		osc0 "$(print -P '%1~:')" "-${SHELL:t}"
 	fi
 }
 
-osc2_preexec() {
+osc0_preexec() {
 	local cmd=(${(z)1})
 	local j=1
 	# skip all env vars
@@ -33,9 +33,9 @@ osc2_preexec() {
 	done
 
 	if [[ -n $SSH_CONNECTION ]]; then
-		osc2 "$(print -P '(%m) %1~:')" "${c:t}"
+		osc0 "$(print -P '(%m) %1~:')" "${c:t}"
 	else
-		osc2 "$(print -P '%1~:')" "${c:t}"
+		osc0 "$(print -P '%1~:')" "${c:t}"
 	fi
 }
 
@@ -122,11 +122,11 @@ prompt_mytheme_setup() {
 	PROMPT=$prompt_newline$prompt_line_1$prompt_newline$prompt_line_2
 	RPROMPT='[%B%F{yellow}%?%f%b]'
 
-	# OSC 2
-	add-zsh-hook precmd osc2_precmd
-	add-zsh-hook preexec osc2_preexec
-	prompt_cleanup 'add-zsh-hook -D precmd osc2_precmd'
-	prompt_cleanup 'add-zsh-hook -D preexec osc2_preexec'
+	# OSC 0
+	add-zsh-hook precmd osc0_precmd
+	add-zsh-hook preexec osc0_preexec
+	prompt_cleanup 'add-zsh-hook -D precmd osc0_precmd'
+	prompt_cleanup 'add-zsh-hook -D preexec osc0_preexec'
 
 	# OSC 7
 	add-zsh-hook chpwd osc7
