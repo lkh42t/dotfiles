@@ -8,7 +8,6 @@ return {
     "javascriptreact",
     "json",
     "jsonc",
-    "lua",
     "scss",
     "typescript",
     "typescriptreact",

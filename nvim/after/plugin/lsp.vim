@@ -104,7 +104,6 @@ if executable('efm-langserver')
     \   'javascriptreact',
     \   'json',
     \   'jsonc',
-    \   'lua',
     \   'scss',
     \   'typescript',
     \   'typescriptreact',

@@ -54,6 +54,7 @@ local servers = {
   "neocmake",
   "ruff",
   "rust_analyzer",
+  "stylua",
   "terraformls",
   "texlab",
   "tsc",
