@@ -1,4 +1,4 @@
-#!/hint/zsh
+# vi: ft=zsh
 
 gitig() {
 	local usage='Usage: gitig COMMAND

@@ -1,4 +1,4 @@
-#!/hint/zsh
+# vi: ft=zsh
 
 awsp() {
 	local usage='Usage: awsp COMMAND

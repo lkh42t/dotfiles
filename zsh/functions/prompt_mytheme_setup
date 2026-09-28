@@ -1,4 +1,4 @@
-#!/hint/zsh
+# vi: ft=zsh
 # shellcheck disable=SC2034,SC2154,SC2206,SC2296,SC2298
 
 zmodload zsh/zpty
