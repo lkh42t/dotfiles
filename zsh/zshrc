@@ -64,7 +64,7 @@ zshaddhistory() {
 	while [[ ${cmd[$j]} = *=* ]]; do
 		((j++))
 	done
-	whence "${cmd[$j]}" >|/dev/null || return 1
+	whence "${cmd[$j]}" >/dev/null || return 1
 }
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -100,7 +100,7 @@ else
 fi
 
 # golang
-whence go >|/dev/null && __prepend_path "$(go env GOBIN)"
+whence go >/dev/null && __prepend_path "$(go env GOBIN)"
 # }}}
 
 # aliases {{{
@@ -122,17 +122,17 @@ fi
 alias mkdir='mkdir -p'
 
 # prefer libarchive's tar because it supports more formats than GNU's one.
-whence bsdtar >|/dev/null && alias tar='bsdtar'
+whence bsdtar >/dev/null && alias tar='bsdtar'
 
-whence nvim >|/dev/null && alias v='nvim'
+whence nvim >/dev/null && alias v='nvim'
 # }}}
 
 # environment variables {{{
 # man(1)
 export MANROFFOPT=-c
-if whence nvim >|/dev/null; then
+if whence nvim >/dev/null; then
 	export MANPAGER='nvim +Man!'
-elif whence vim >|/dev/null; then
+elif whence vim >/dev/null; then
 	export MANPAGER='vim +MANPAGER --not-a-term - -c "set nolist" -c "map q :<Cmd>q<CR>"'
 fi
 
@@ -141,7 +141,7 @@ export LESS='-iFR -Dd+c -Du+gd -Dsybd'
 export LESSHISTFILE=- # disable history
 
 # GPG
-if whence gpg >|/dev/null; then
+if whence gpg >/dev/null; then
 	export GPG_TTY=$(tty)
 	pgrep --quiet gpg-agent &>/dev/null && gpg-connect-agent updatestartuptty /bye >/dev/null
 fi
