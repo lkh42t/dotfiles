@@ -5,7 +5,7 @@ if [[ -d /opt/homebrew/bin ]]; then
 
 	SYNTAX_HIGHLIGHT_SRC=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-	fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $HOMEBREW_PREFIX/share/zsh-completions $fpath)
+	fpath=($HOMEBREW_PREFIX/share/zsh-completions $fpath)
 fi
 
 unload_variables() {
