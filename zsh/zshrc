@@ -31,16 +31,6 @@ if __is_macos && [[ -d /opt/homebrew ]]; then
 fi
 # }}}
 
-# load platform specific variables {{{
-if __is_macos; then
-	# shellcheck source=platforms/darwin.zsh
-	. ~/.zsh/platforms/darwin.zsh
-else
-	# shellcheck source=platforms/linux.zsh
-	. ~/.zsh/platforms/linux.zsh
-fi
-# }}}
-
 # general settings {{{
 # make '/' as word seperator
 autoload -Uz select-word-style && select-word-style bash
@@ -176,17 +166,31 @@ fi
 # }}}
 
 # syntax highlight {{{
-if [[ -n $SYNTAX_HIGHLIGHT_SRC ]] && [[ -r $SYNTAX_HIGHLIGHT_SRC ]]; then
+case $OSTYPE in
+darwin*)
+	zsh_highlight_src=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	;;
+linux*)
+	if [[ -f /etc/debian_version ]]; then
+		# Debian
+		zsh_highlight_src=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	else
+		# Arch Linux
+		zsh_highlight_src=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	fi
+	;;
+esac
+if [[ -n $zsh_highlight_src ]] && [[ -r $zsh_highlight_src ]]; then
 	# shellcheck disable=SC1090
-	. "$SYNTAX_HIGHLIGHT_SRC"
+	. "$zsh_highlight_src"
 	typeset -A ZSH_HIGHLIGHT_STYLES
 	ZSH_HIGHLIGHT_STYLES[globbing]='none'
 	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 fi
+unset zsh_highlight_src
 # }}}
 
 # unset utility functions {{{
 unset -f __prepend_path
 unset -f __is_macos
-unload_variables
 # }}}
