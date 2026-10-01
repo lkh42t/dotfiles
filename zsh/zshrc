@@ -11,8 +11,14 @@ export LC_MONETARY=ja_JP.UTF-8
 bindkey -e
 
 # utility functions {{{
-fpath=(~/.zsh/functions $fpath)
-autoload -Uz ~/.zsh/functions/*(:t)
+__append_path() {
+	# shellcheck disable=SC1036
+	local dirs=($@(N-/))
+	local d
+	for d in $dirs; do
+		path=(${path:#$d} $d)
+	done
+}
 __prepend_path() {
 	# shellcheck disable=SC1036
 	local dirs=($@(N-/))
@@ -117,6 +123,11 @@ fi
 
 # golang
 whence go >/dev/null && __prepend_path "$(go env GOBIN)"
+
+# Xcode Command Line Tools
+if __is_macos; then
+	__append_path /Library/Developer/CommandLineTools/usr/bin
+fi
 # }}}
 
 # aliases {{{
@@ -208,6 +219,7 @@ unset zsh_highlight_src
 # }}}
 
 # unset utility functions {{{
+unset -f __append_path
 unset -f __prepend_path
 unset -f __prepend_fpath
 unset -f __is_macos
