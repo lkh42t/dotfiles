@@ -1,12 +1,4 @@
-if [[ -d /opt/homebrew/bin ]]; then
-	if [[ -z $HOMEBREW_PREFIX ]]; then
-		eval "$(/opt/homebrew/bin/brew shellenv)"
-	fi
-
-	SYNTAX_HIGHLIGHT_SRC=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-	fpath=($HOMEBREW_PREFIX/share/zsh-completions(N-/) $fpath)
-fi
+SYNTAX_HIGHLIGHT_SRC=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 unload_variables() {
 	unset SYNTAX_HIGHLIGHT_SRC
