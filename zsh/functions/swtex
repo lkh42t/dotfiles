@@ -1,7 +1,7 @@
 # vi: ft=zsh
 
 swtex() {
-	local CMDNAME=swflutter
+	local CMDNAME=swtex
 	local usage="Usage: $CMDNAME COMMAND
 
 Commands:
