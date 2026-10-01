@@ -1,7 +1,8 @@
 # vi: ft=zsh
 
+emulate -L zsh
+
 urlescape() {
-	emulate -L zsh
 	setopt localoptions nomultibyte
 
 	local posargs=()

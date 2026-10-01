@@ -1,5 +1,7 @@
 # vi: ft=zsh
 
+emulate -L zsh
+
 awsp() {
 	local usage='Usage: awsp COMMAND
 

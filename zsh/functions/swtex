@@ -1,5 +1,7 @@
 # vi: ft=zsh
 
+emulate -L zsh
+
 swtex() {
 	local CMDNAME=swtex
 	local usage="Usage: $CMDNAME COMMAND

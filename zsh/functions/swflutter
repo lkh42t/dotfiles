@@ -1,5 +1,7 @@
 # vi: ft=zsh
 
+emulate -L zsh
+
 swflutter() {
 	local CMDNAME=swflutter
 	local usage="Usage: $CMDNAME COMMAND
