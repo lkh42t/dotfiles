@@ -25,9 +25,12 @@ __is_macos() {
 # homebrew configuration {{{
 if __is_macos && [[ -d /opt/homebrew ]]; then
 	if [[ -z $HOMEBREW_PREFIX ]]; then
-		eval "$(/opt/homebrew/bin/brew shellenv)"
+		export HOMEBREW_PREFIX=/opt/homebrew
+		export HOMEBREW_CELLAR=$HOMEBREW_PREFIX/Cellar
+		export HOMEBREW_REPOSITORY=$HOMEBREW_PREFIX
 	fi
-	fpath=($HOMEBREW_PREFIX/share/zsh-completions(N-/) $fpath)
+	path=($HOMEBREW_PREFIX/bin(N-/) $HOMEBREW_PREFIX/sbin(N-/) $path)
+	fpath=($HOMEBREW_PREFIX/share/zsh-completions(N-/) $HOMEBREW_PREFIX/share/zsh/site-functions(N-/) $fpath)
 fi
 # }}}
 
