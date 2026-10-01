@@ -42,7 +42,6 @@ vim.api.nvim_create_autocmd("FileType", {
     local parser = vim.treesitter.get_parser(nil, nil, { error = false })
     if parser ~= nil then
       vim.treesitter.start()
-      vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
     end
   end,
 })

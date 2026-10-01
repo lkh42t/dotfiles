@@ -79,9 +79,7 @@ Plug 'itchyny/lightline.vim'
 " language support
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'hashivim/vim-terraform'
-if !has('nvim')
-  Plug 'Vimjas/vim-python-pep8-indent'
-endif
+Plug 'Vimjas/vim-python-pep8-indent'
 
 " editor enhancement
 Plug 'airblade/vim-gitgutter'
@@ -94,7 +92,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 if has('nvim')
   Plug 'romus204/tree-sitter-manager.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' }
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 endif
 if !has('nvim-0.9')
   if has('patch-9.0.1799')
