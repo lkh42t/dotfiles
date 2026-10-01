@@ -15,7 +15,11 @@ fpath=(~/.zsh/functions $fpath)
 autoload -Uz ~/.zsh/functions/*(:t)
 __prepend_path() {
 	# shellcheck disable=SC1036
-	[[ ${path[(i)$1]} -gt ${#path} ]] && path=($1(N-/) $path)
+	local dirs=($@(N-/))
+	local d
+	for d in ${(aO)dirs}; do
+		[[ ${path[(i)$d]} -gt ${#path} ]] && path=($d $path)
+	done
 }
 __is_macos() {
 	[[ $OSTYPE = darwin* ]]
@@ -29,7 +33,7 @@ if __is_macos && [[ -d /opt/homebrew ]]; then
 		export HOMEBREW_CELLAR=$HOMEBREW_PREFIX/Cellar
 		export HOMEBREW_REPOSITORY=$HOMEBREW_PREFIX
 	fi
-	path=($HOMEBREW_PREFIX/bin(N-/) $HOMEBREW_PREFIX/sbin(N-/) $path)
+	__prepend_path "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
 	fpath=($HOMEBREW_PREFIX/share/zsh-completions(N-/) $HOMEBREW_PREFIX/share/zsh/site-functions(N-/) $fpath)
 fi
 # }}}
