@@ -21,9 +21,19 @@ __prepend_path() {
 		[[ ${path[(i)$d]} -gt ${#path} ]] && path=($d $path)
 	done
 }
+__prepend_fpath() {
+	# shellcheck disable=SC1036
+	local dirs=($@(N-/))
+	local d
+	for d in ${(aO)dirs}; do
+		[[ ${fpath[(i)$d]} -gt ${#fpath} ]] && fpath=($d $fpath)
+	done
+}
 __is_macos() {
 	[[ $OSTYPE = darwin* ]]
 }
+__prepend_fpath ~/.zsh/functions
+autoload -Uz ~/.zsh/functions/*(:t)
 # }}}
 
 # homebrew configuration {{{
@@ -34,7 +44,7 @@ if __is_macos && [[ -d /opt/homebrew ]]; then
 		export HOMEBREW_REPOSITORY=$HOMEBREW_PREFIX
 	fi
 	__prepend_path "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
-	fpath=($HOMEBREW_PREFIX/share/zsh-completions(N-/) $HOMEBREW_PREFIX/share/zsh/site-functions(N-/) $fpath)
+	__prepend_fpath "$HOMEBREW_PREFIX/share/zsh-completions" "$HOMEBREW_PREFIX/share/zsh/site-functions"
 fi
 # }}}
 
@@ -52,7 +62,7 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 # Completion
-fpath=(~/.zsh/completions $fpath)
+__prepend_fpath ~/.zsh/completions
 autoload -Uz compinit && compinit
 
 # Expansion and Globbing
@@ -199,5 +209,6 @@ unset zsh_highlight_src
 
 # unset utility functions {{{
 unset -f __prepend_path
+unset -f __prepend_fpath
 unset -f __is_macos
 # }}}
