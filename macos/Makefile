@@ -46,6 +46,7 @@ finder:
 	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 	defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
 	defaults write com.apple.finder ShowPathbar -bool true
+	defaults write com.apple.finder ShowSidebar -bool true
 	killall Finder
 
 launchd:
