@@ -164,7 +164,8 @@ elif whence vim >/dev/null; then
 fi
 
 # less(1)
-export LESS='-iFR -Dd+c -Du+gd -Dsybd'
+# shellcheck disable=SC2016
+export LESS='-iFR -Dd+c$Du+G$Ds+by'
 export LESSHISTFILE=- # disable history
 
 # GPG
