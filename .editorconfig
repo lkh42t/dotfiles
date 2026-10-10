@@ -25,11 +25,11 @@ indent_style = space
 indent_size = 2
 indent_style = space
 
-[fontconfig/**/*.conf]
+[fontconfig/**]
 indent_style = tab
 
-[git/**/*]
+[git/**]
 indent_style = tab
 
-[zsh/**/*]
+[zsh/**]
 indent_style = tab
