@@ -1,4 +1,4 @@
-# vi: ft=gitconfig noet sts& sw&
+# vi: ft=gitconfig
 [alias]
 	amend = commit --amend --no-edit
 [core]
