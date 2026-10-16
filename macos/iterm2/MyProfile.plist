@@ -17,22 +17,6 @@
 			</array>
 			<key>Guid</key>
 			<string>30FA1CF4-2F4D-498A-813D-1C6D1D93E4BF</string>
-			<key>Keyboard Map</key>
-			<dict>
-				<key>0x79-0x80000-0x10</key>
-				<dict>
-					<key>Action</key>
-					<integer>12</integer>
-					<key>Apply Mode</key>
-					<integer>0</integer>
-					<key>Escaping</key>
-					<integer>2</integer>
-					<key>Text</key>
-					<string>¥</string>
-					<key>Version</key>
-					<integer>2</integer>
-				</dict>
-			</dict>
 			<key>Name</key>
 			<string>MyProfile</string>
 			<key>Normal Font</key>
