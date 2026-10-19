@@ -99,10 +99,10 @@ prompt_mytheme_setup() {
 		fi
 		;;
 	linux*)
-		if [[ -f /etc/debian_version ]]; then
-			git_ps1_src=/usr/lib/git-core/git-sh-prompt
-		else
+		if [[ -f /etc/arch-release ]]; then
 			git_ps1_src=/usr/share/git/completion/git-prompt.sh
+		elif [[ -f /etc/debian_version ]]; then
+			git_ps1_src=/usr/lib/git-core/git-sh-prompt
 		fi
 		;;
 	esac

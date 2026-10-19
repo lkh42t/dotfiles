@@ -200,12 +200,10 @@ darwin*)
 	zsh_highlight_src=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	;;
 linux*)
-	if [[ -f /etc/debian_version ]]; then
-		# Debian
-		zsh_highlight_src=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-	else
-		# Arch Linux
+	if [[ -f /etc/arch-release ]]; then
 		zsh_highlight_src=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	elif [[ -f /etc/debian_version ]]; then
+		zsh_highlight_src=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	fi
 	;;
 esac
