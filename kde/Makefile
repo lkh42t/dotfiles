@@ -16,6 +16,7 @@ all: plasma $(APPS)
 
 plasma: config-home $(PLASMA_SETTINGS)
 	ln -sf $(abspath environment.d) $(XDG_CONFIG_HOME)
+	ln -sf $(abspath xdg-desktop-portal) $(XDG_CONFIG_HOME)
 	$(QDBUS) org.kde.KWin /KWin reconfigure
 
 baloofilerc:
