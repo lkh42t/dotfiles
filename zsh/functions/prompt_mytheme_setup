@@ -137,7 +137,10 @@ prompt_mytheme_setup() {
 	# OSC 133
 	PROMPT=$'%{\e]133;P;k=i\e\\%}'"$PROMPT"$'%{\e]133;B\e\\%}'
 	PROMPT2=$'%{\e]133;P;k=s\e\\%}'"$PROMPT2"$'%{\e]133;B\e\\%}'
-	RPROMPT=$'%{\e]133;P;k=r\e\\%}'"$RPROMPT"$'%{\e]133;B\e\\%}'
+	# tmux does not handle `P;k=r` correctly
+	if [[ -z $TMUX ]]; then
+		RPROMPT=$'%{\e]133;P;k=r\e\\%}'"$RPROMPT"$'%{\e]133;B\e\\%}'
+	fi
 	add-zsh-hook precmd osc133_precmd
 	add-zsh-hook preexec osc133_preexec
 	prompt_cleanup 'add-zsh-hook -D precmd osc133_precmd'
