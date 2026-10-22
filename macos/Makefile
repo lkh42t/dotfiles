@@ -3,6 +3,7 @@ TARGETS := \
 	clipboard \
 	dock \
 	finder \
+	inputmethod \
 	launchd \
 	loginwindow \
 	menubar \
@@ -18,19 +19,10 @@ hid:
 	defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 	defaults write NSGlobalDomain InitialKeyRepeat -int 15
 	defaults write NSGlobalDomain KeyRepeat -int 2
-	defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-	defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-	defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
-	defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-	defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 	defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 	defaults write NSGlobalDomain com.apple.mouse.scaling -float 3.0
 	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 	defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3.0
-	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForSlashKey -int 1
-	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForYenKey -int 1
-	defaults write com.apple.inputmethod.Kotoeri JIMPrefLiveConversionKey -bool false
-	defaults write com.apple.inputmethod.Kotoeri JIMPrefPunctuationTypeKey -int 0
 
 clipboard:
 	defaults write com.apple.Spotlight PasteboardHistoryEnabled -bool true
@@ -48,6 +40,17 @@ finder:
 	defaults write com.apple.finder ShowPathbar -bool true
 	defaults write com.apple.finder ShowSidebar -bool true
 	killall Finder
+
+inputmethod:
+	defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+	defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+	defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+	defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+	defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForSlashKey -int 1
+	defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForYenKey -int 1
+	defaults write com.apple.inputmethod.Kotoeri JIMPrefLiveConversionKey -bool false
+	defaults write com.apple.inputmethod.Kotoeri JIMPrefPunctuationTypeKey -int 0
 
 launchd:
 	mkdir -p $(HOME)/Library/LaunchAgents
