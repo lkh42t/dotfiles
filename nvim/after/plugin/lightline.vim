@@ -1,32 +1,32 @@
 let g:lightline = {
-\ 'colorscheme': 'ayu',
-\ 'active': {
-\   'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
-\ },
-\ 'component': {
-\   'lineinfo': '%3l:%-2v%<',
-\ },
-\ 'component_function': {
-\   'fileencoding': 'LightlineFileencoding',
-\   'fileformat': 'LightlineFileformat',
-\   'filename': 'LightlineFilename',
-\   'filetype': 'LightlineFiletype',
-\   'gitbranch': 'FugitiveHead',
-\ },
-\ 'mode_map': {
-\   'n': 'N',
-\   'i': 'I',
-\   'R': 'R',
-\   'v': 'V',
-\   'V': 'VL',
-\   "\<C-V>": 'VB',
-\   'c': 'C',
-\   's': 'S',
-\   'S': 'SL',
-\   "\<C-S>": 'SB',
-\   't': 'T',
-\ },
-\}
+      \ 'colorscheme': 'ayu',
+      \ 'active': {
+      \   'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']],
+      \ },
+      \ 'component': {
+      \   'lineinfo': '%3l:%-2v%<',
+      \ },
+      \ 'component_function': {
+      \   'fileencoding': 'LightlineFileencoding',
+      \   'fileformat': 'LightlineFileformat',
+      \   'filename': 'LightlineFilename',
+      \   'filetype': 'LightlineFiletype',
+      \   'gitbranch': 'FugitiveHead',
+      \ },
+      \ 'mode_map': {
+      \   'n': 'N',
+      \   'i': 'I',
+      \   'R': 'R',
+      \   'v': 'V',
+      \   'V': 'VL',
+      \   "\<C-V>": 'VB',
+      \   'c': 'C',
+      \   's': 'S',
+      \   'S': 'SL',
+      \   "\<C-S>": 'SB',
+      \   't': 'T',
+      \ },
+      \}
 
 function! s:is_window_narrow() abort
   return winwidth(0) <= 70
