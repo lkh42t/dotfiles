@@ -6,334 +6,278 @@ let g:lsp_diagnostics_float_cursor = 1
 " servers {{{
 " bashls {{{
 if executable('bash-language-server')
-  augroup lsp_bashls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'bashls',
-    \ 'cmd': {server_info->['bash-language-server', 'start']},
-    \ 'allowlist': ['bash', 'sh', 'zsh'],
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'bashls',
+        \ 'cmd': {server_info->['bash-language-server', 'start']},
+        \ 'allowlist': ['bash', 'sh', 'zsh'],
+        \})
 endif
 " }}}
 
 " clangd {{{
 if executable('clangd')
-  augroup lsp_clangd
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'clangd',
-    \ 'cmd': {server_info->['clangd']},
-    \ 'allowlist': ['c', 'cpp', 'objc', 'objcpp', 'cuda'],
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'allowlist': ['c', 'cpp', 'objc', 'objcpp', 'cuda'],
+        \})
 endif
 " }}}
 
 " cssls {{{
 if executable('vscode-css-language-server')
-  augroup lsp_eslint
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'eslint',
-    \ 'cmd': {server_info->['vscode-css-language-server', '--stdio']},
-    \ 'allowlist': ['css', 'scss', 'less'],
-    \ 'initialization_options': {
-    \   'provideFormatter': v:false,
-    \ },
-    \ 'workspace_config': {
-    \   'css': { 'validate': v:true },
-    \   'scss': { 'validate': v:true },
-    \   'less': { 'validate': v:true },
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'eslint',
+        \ 'cmd': {server_info->['vscode-css-language-server', '--stdio']},
+        \ 'allowlist': ['css', 'scss', 'less'],
+        \ 'initialization_options': {
+        \   'provideFormatter': v:false,
+        \ },
+        \ 'workspace_config': {
+        \   'css': { 'validate': v:true },
+        \   'scss': { 'validate': v:true },
+        \   'less': { 'validate': v:true },
+        \ },
+        \})
 endif
 " }}}
 
 " dartls {{{
 if executable('dart')
-  augroup lsp_dartls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'dartls',
-    \ 'cmd': {server_info->['dart', 'language-server', '--protocol=lsp']},
-    \ 'allowlist': ['dart'],
-    \ 'initialization_options': {
-    \   'onlyAnalyzeProjectsWithOpenFiles': v:true,
-    \   'suggestFromUnimportedLibraries': v:true,
-    \   'closingLabels': v:true,
-    \   'outline': v:true,
-    \   'flutterOutline': v:true,
-    \ },
-    \ 'workspace_config': {
-    \   'completeFunctionCalls': v:true,
-    \   'enableSnippets': v:true,
-    \   'showTodos': v:true,
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'dartls',
+        \ 'cmd': {server_info->['dart', 'language-server', '--protocol=lsp']},
+        \ 'allowlist': ['dart'],
+        \ 'initialization_options': {
+        \   'onlyAnalyzeProjectsWithOpenFiles': v:true,
+        \   'suggestFromUnimportedLibraries': v:true,
+        \   'closingLabels': v:true,
+        \   'outline': v:true,
+        \   'flutterOutline': v:true,
+        \ },
+        \ 'workspace_config': {
+        \   'completeFunctionCalls': v:true,
+        \   'enableSnippets': v:true,
+        \   'showTodos': v:true,
+        \ },
+        \})
 endif
 " }}}
 
 " dockerls {{{
 if executable('docker-langserver')
-  augroup lsp_dockerls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'dockerls',
-    \ 'cmd': {server_info->['docker-langserver', '--stdio']},
-    \ 'allowlist': ['dockerfile'],
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'dockerls',
+        \ 'cmd': {server_info->['docker-langserver', '--stdio']},
+        \ 'allowlist': ['dockerfile'],
+        \})
 endif
 " }}}
 
 " efm {{{
 if executable('efm-langserver')
-  augroup lsp_efm
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'efm',
-    \ 'cmd': {server_info->['efm-langserver']},
-    \ 'allowlist': [
-    \   'css',
-    \   'dockerfile',
-    \   'html',
-    \   'javascript',
-    \   'javascriptreact',
-    \   'json',
-    \   'jsonc',
-    \   'scss',
-    \   'typescript',
-    \   'typescriptreact',
-    \   'yaml',
-    \ ],
-    \ 'initialization_options': {
-    \   'documentFormatting': v:true,
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'efm',
+        \ 'cmd': {server_info->['efm-langserver']},
+        \ 'allowlist': [
+        \   'css',
+        \   'dockerfile',
+        \   'html',
+        \   'javascript',
+        \   'javascriptreact',
+        \   'json',
+        \   'jsonc',
+        \   'scss',
+        \   'typescript',
+        \   'typescriptreact',
+        \   'yaml',
+        \ ],
+        \ 'initialization_options': {
+        \   'documentFormatting': v:true,
+        \ },
+        \})
 endif
 " }}}
 
 " eslint {{{
 if executable('vscode-eslint-language-server')
-  augroup lsp_eslint
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'eslint',
-    \ 'cmd': {server_info->['vscode-eslint-language-server', '--stdio']},
-    \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-    \ 'workspace_config': {
-    \   'run': 'onType',
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'eslint',
+        \ 'cmd': {server_info->['vscode-eslint-language-server', '--stdio']},
+        \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+        \ 'workspace_config': {
+        \   'run': 'onType',
+        \ },
+        \})
 endif
 " }}}
 
 " gopls {{{
 if executable('gopls')
-  augroup lsp_gopls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'gopls',
-    \ 'cmd': {server_info->['gopls', '-remote=auto']},
-    \ 'allowlist': ['go', 'gomod', 'gowork', 'gotmpl'],
-    \ 'initialization_options': {
-    \   'gofumpt': v:true,
-    \   'staticcheck': v:true,
-    \   'usePlaceholders': v:true,
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-remote=auto']},
+        \ 'allowlist': ['go', 'gomod', 'gowork', 'gotmpl'],
+        \ 'initialization_options': {
+        \   'gofumpt': v:true,
+        \   'staticcheck': v:true,
+        \   'usePlaceholders': v:true,
+        \ },
+        \})
 endif
 " }}}
 
 " html {{{
 if executable('vscode-html-language-server')
-  augroup lsp_eslint
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'eslint',
-    \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
-    \ 'allowlist': ['html'],
-    \ 'initialization_options': {
-    \   'provideFormatter': v:false,
-    \   'embeddedLanguages': { 'css': v:true, 'javascript': v:true },
-    \   'configurationSection': ['html', 'css', 'javascript'],
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'eslint',
+        \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
+        \ 'allowlist': ['html'],
+        \ 'initialization_options': {
+        \   'provideFormatter': v:false,
+        \   'embeddedLanguages': { 'css': v:true, 'javascript': v:true },
+        \   'configurationSection': ['html', 'css', 'javascript'],
+        \ },
+        \})
 endif
 " }}}
 
 " jsonls {{{
 if executable('vscode-json-language-server')
-  augroup lsp_eslint
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'eslint',
-    \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
-    \ 'allowlist': ['json', 'jsonc'],
-    \ 'initialization_options': {
-    \   'provideFormatter': v:false,
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'eslint',
+        \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
+        \ 'allowlist': ['json', 'jsonc'],
+        \ 'initialization_options': {
+        \   'provideFormatter': v:false,
+        \ },
+        \})
 endif
 " }}}
 
 " neocmake {{{
 if executable('neocmakelsp')
-  augroup lsp_neocmake
-    autocmd! User lsp_setup call lsp#register_server({
-    \ 'name': 'neocmake',
-    \ 'cmd': {server_info->['neocmakelsp', 'stdio']},
-    \ 'allowlist': ['cmake'],
-    \})
-  augroup END
+  autocmd! User lsp_setup call lsp#register_server({
+        \ 'name': 'neocmake',
+        \ 'cmd': {server_info->['neocmakelsp', 'stdio']},
+        \ 'allowlist': ['cmake'],
+        \})
 endif
 " }}}
 
 " ruff {{{
 if executable('ruff')
-  augroup lsp_ruff
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'ruff',
-    \ 'cmd': {server_info->['ruff', 'server']},
-    \ 'allowlist': ['python'],
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info->['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \})
 endif
 " }}}
 
 " rust_analyzer {{{
 if executable('rust-analyzer')
-  augroup lsp_rust_analyzer
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'rust_analyzer',
-    \ 'cmd': {server_info->['rust-analyzer']},
-    \ 'allowlist': ['rust'],
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'rust_analyzer',
+        \ 'cmd': {server_info->['rust-analyzer']},
+        \ 'allowlist': ['rust'],
+        \})
 endif
 " }}}
 
 " terraformls {{{
 if executable('terraform-ls')
-  augroup lsp_terraformls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'terraformls',
-    \ 'cmd': {server_info->['terraform-ls', 'serve']},
-    \ 'allowlist': ['terraform', 'terraform-vars'],
-    \ 'initialization_options': {
-    \   'path': exepath('tofu'),
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'terraformls',
+        \ 'cmd': {server_info->['terraform-ls', 'serve']},
+        \ 'allowlist': ['terraform', 'terraform-vars'],
+        \ 'initialization_options': {
+        \   'path': exepath('tofu'),
+        \ },
+        \})
 endif
 " }}}
 
 " texlab {{{
 if executable('texlab')
-  augroup lsp_texlab
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'texlab',
-    \ 'cmd': {server_info->['texlab']},
-    \ 'allowlist': ['bib', 'plaintex', 'tex'],
-    \ 'workspace_config': {
-    \   'texlab': {
-    \     'build': {
-    \       'executable': 'llmk',
-    \       'args': [],
-    \     },
-    \     'chktex': {'onOpenAndSave': v:true},
-    \   },
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'texlab',
+        \ 'cmd': {server_info->['texlab']},
+        \ 'allowlist': ['bib', 'plaintex', 'tex'],
+        \ 'workspace_config': {
+        \   'texlab': {
+        \     'build': {
+        \       'executable': 'llmk',
+        \       'args': [],
+        \     },
+        \     'chktex': {'onOpenAndSave': v:true},
+        \   },
+        \ },
+        \})
 endif
 " }}}
 
 " tsc {{{
 if executable('tsc')
-  augroup lsp_tsc
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'tsc',
-    \ 'cmd': {server_info->['tsc', '--lsp', '--stdio']},
-    \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'tsc',
+        \ 'cmd': {server_info->['tsc', '--lsp', '--stdio']},
+        \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+        \})
 endif
 " }}}
 
 " ty {{{
 if executable('ty')
-  augroup lsp_ty
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'ty',
-    \ 'cmd': {server_info->['ty', 'server']},
-    \ 'allowlist': ['python'],
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'ty',
+        \ 'cmd': {server_info->['ty', 'server']},
+        \ 'allowlist': ['python'],
+        \})
 endif
 " }}}
 
 " vimls {{{
 if executable('vim-language-server')
-  augroup lsp_vimls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'vimls',
-    \ 'cmd': {server_info->['vim-language-server', '--stdio']},
-    \ 'allowlist': ['vim'],
-    \ 'initialization_options': {
-    \   'isNeovim': has('nvim'),
-    \   'iskeyword': &isk,
-    \   'vimruntime': $VIMRUNTIME,
-    \   'runtimepath': &rtp,
-    \   'diagnostic': {'enable': v:true},
-    \   'indexes': {
-    \     'runtimepath': v:true,
-    \     'gap': 100,
-    \     'count': 3,
-    \   },
-    \   'suggest': {
-    \     'fromVimruntime': v:true,
-    \     'fromRuntimepath': v:true,
-    \   },
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'vimls',
+        \ 'cmd': {server_info->['vim-language-server', '--stdio']},
+        \ 'allowlist': ['vim'],
+        \ 'initialization_options': {
+        \   'isNeovim': has('nvim'),
+        \   'iskeyword': &isk,
+        \   'vimruntime': $VIMRUNTIME,
+        \   'runtimepath': &rtp,
+        \   'diagnostic': {'enable': v:true},
+        \   'indexes': {
+        \     'runtimepath': v:true,
+        \     'gap': 100,
+        \     'count': 3,
+        \   },
+        \   'suggest': {
+        \     'fromVimruntime': v:true,
+        \     'fromRuntimepath': v:true,
+        \   },
+        \ },
+        \})
 endif
 " }}}
 
 " yamlls {{{
 if executable('yaml-language-server')
-  augroup lsp_yamlls
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'yamlls',
-    \ 'cmd': {server_info->['yaml-language-server', '--stdio']},
-    \ 'allowlist': ['yaml'],
-    \ 'workspace_config': {
-    \   'redhat': {
-    \     'telemetry': {'enabled': v:false},
-    \   },
-    \   'yaml': {
-    \     'format': {'enabled': v:true},
-    \   },
-    \ },
-    \})
-  augroup END
+  autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'yamlls',
+        \ 'cmd': {server_info->['yaml-language-server', '--stdio']},
+        \ 'allowlist': ['yaml'],
+        \ 'workspace_config': {
+        \   'redhat': {
+        \     'telemetry': {'enabled': v:false},
+        \   },
+        \   'yaml': {
+        \     'format': {'enabled': v:true},
+        \   },
+        \ },
+        \})
 endif
 " }}}
 " }}}
