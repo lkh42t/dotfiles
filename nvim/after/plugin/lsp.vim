@@ -192,7 +192,9 @@ if executable('terraform-ls')
         \ 'cmd': {server_info->['terraform-ls', 'serve']},
         \ 'allowlist': ['terraform', 'terraform-vars'],
         \ 'initialization_options': {
-        \   'path': exepath('tofu'),
+        \   'terraform': {
+        \     'path': exepath('tofu'),
+        \   },
         \ },
         \})
 endif
