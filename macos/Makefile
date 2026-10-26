@@ -62,6 +62,7 @@ loginwindow:
 menubar:
 	defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false
 	defaults write NSGlobalDomain _HIHideMenuBar -bool true
+	defaults -currentHost write com.apple.controlcenter BatteryShowPercentage -bool true
 
 screencapture:
 	defaults write com.apple.screencapture disable-shadow -bool true
