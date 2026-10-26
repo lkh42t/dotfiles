@@ -80,6 +80,7 @@ if executable('efm-langserver')
         \ 'name': 'efm',
         \ 'cmd': {server_info->['efm-langserver']},
         \ 'allowlist': [
+        \   'bash',
         \   'css',
         \   'dockerfile',
         \   'html',
@@ -88,9 +89,11 @@ if executable('efm-langserver')
         \   'json',
         \   'jsonc',
         \   'scss',
+        \   'sh',
         \   'typescript',
         \   'typescriptreact',
         \   'yaml',
+        \   'zsh',
         \ ],
         \ 'initialization_options': {
         \   'documentFormatting': v:true,
@@ -302,6 +305,13 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> ]d <Plug>(lsp-next-diagnostic)
   nnoremap <buffer> <expr><C-D> lsp#scroll(-4)
   nnoremap <buffer> <expr><C-F> lsp#scroll(+4)
+
+  for l:server in ['bashls', 'tsc']
+    let l:capabilities = lsp#get_server_capabilities(l:server)
+    if !empty(l:capabilities)
+      let l:capabilities.documentFormattingProvider = v:false
+    endif
+  endfor
 endfunction
 
 augroup lsp_install
