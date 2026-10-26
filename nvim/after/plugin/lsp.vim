@@ -27,7 +27,7 @@ endif
 " cssls {{{
 if executable('vscode-css-language-server')
   autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'eslint',
+        \ 'name': 'cssls',
         \ 'cmd': {server_info->['vscode-css-language-server', '--stdio']},
         \ 'allowlist': ['css', 'scss', 'less'],
         \ 'initialization_options': {
@@ -133,7 +133,7 @@ endif
 " html {{{
 if executable('vscode-html-language-server')
   autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'eslint',
+        \ 'name': 'html',
         \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
         \ 'allowlist': ['html'],
         \ 'initialization_options': {
@@ -148,7 +148,7 @@ endif
 " jsonls {{{
 if executable('vscode-json-language-server')
   autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'eslint',
+        \ 'name': 'jsonls',
         \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
         \ 'allowlist': ['json', 'jsonc'],
         \ 'initialization_options': {
@@ -160,7 +160,7 @@ endif
 
 " neocmake {{{
 if executable('neocmakelsp')
-  autocmd! User lsp_setup call lsp#register_server({
+  autocmd User lsp_setup call lsp#register_server({
         \ 'name': 'neocmake',
         \ 'cmd': {server_info->['neocmakelsp', 'stdio']},
         \ 'allowlist': ['cmake'],
