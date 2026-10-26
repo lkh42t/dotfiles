@@ -278,9 +278,6 @@ if executable('yaml-language-server')
         \   'redhat': {
         \     'telemetry': {'enabled': v:false},
         \   },
-        \   'yaml': {
-        \     'format': {'enabled': v:true},
-        \   },
         \ },
         \})
 endif
