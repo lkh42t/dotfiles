@@ -189,6 +189,7 @@ let g:tex_flavor = 'latex'
 set termguicolors " use 24-bit true color
 set background=dark
 let g:ayucolor = 'dark'
+let g:ayu_italic_comment = 1
 function! s:custom_ayu_colors()
   call ayu#hi('SpecialKey', 'editor_gutter_normal', '')
 endfunction
