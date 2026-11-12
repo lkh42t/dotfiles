@@ -304,9 +304,11 @@ function! s:on_lsp_buffer_enabled() abort
   nnoremap <buffer> <expr><C-F> lsp#scroll(+4)
 
   for l:server in ['bashls', 'tsc']
-    let l:capabilities = lsp#get_server_capabilities(l:server)
-    if !empty(l:capabilities)
-      let l:capabilities.documentFormattingProvider = v:false
+    if lsp#is_valid_server_name(l:server)
+      let l:capabilities = lsp#get_server_capabilities(l:server)
+      if !empty(l:capabilities)
+        let l:capabilities.documentFormattingProvider = v:false
+      endif
     endif
   endfor
 endfunction
